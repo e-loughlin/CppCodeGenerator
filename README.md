@@ -25,14 +25,14 @@ In progress:
 ` $ cd `
 ` $ go install`
 
-##Usage
+## Usage
 ` $ cd CppCodeGenerator/bin/`
 ` $ src.exe -type=<TYPE> -interface=<PATH_TO_INTERFACE>`
 
-###Arguments
-####Types
+### Arguments
+#### Types
 - `-type=interface` Creates a new interface
 - `-type=class` : Creates a new `.h` and `.cpp / .cxx` class file.
 
-####Path to Interface
+#### Path to Interface
 The interface from which the generated derived classes, if applicable, will inherit. Any pure virtual functions or signals (Qt) declared in the inherited interface will be declared and defined in the derived classes as appropriate.
