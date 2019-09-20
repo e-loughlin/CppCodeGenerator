@@ -14,10 +14,10 @@ In progress:
 
 ## Installation
 ### Windows
-` $ cd CppCodeGenerator/`
-` $ environment.bat`
-` $ cd src/`
-` $ go install`
+``` $ cd CppCodeGenerator/
+ $ environment.bat
+ $ cd src/
+ $ go install```
 
 ### Mac / Linux
 ` $ cd CppCodeGenerator/`
