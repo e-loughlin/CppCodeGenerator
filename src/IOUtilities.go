@@ -2,16 +2,17 @@ package main
 
 import (
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 )
 
-// isValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
-func isValidDirectory(directory string) bool {
+// IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
+func IsValidDirectory(directory string) bool {
 	fileName := "validity_test.txt"
 	filePath := filepath.Join(directory, fileName)
 
-	if fileExists(filePath) {
+	if FileExists(filePath) {
 		return true
 	}
 
@@ -24,23 +25,35 @@ func isValidDirectory(directory string) bool {
 	return false
 }
 
-// fileExists ... Returns whether a file exists at a given @filePath
-func fileExists(filePath string) bool {
+// FileExists ... Returns whether a file exists at a given @filePath
+func FileExists(filePath string) bool {
 	if _, err := os.Stat(filePath); err == nil {
 		return true
 	}
 	return false
 }
 
-// isValidInterface ...
-func isValidInterface(filePath string) bool {
-	return (fileExists(filePath) && (filepath.Ext(filePath) == ".h"))
+// IsValidInterface ...
+func IsValidInterface(filePath string) bool {
+	return (FileExists(filePath) && (filepath.Ext(filePath) == ".h"))
 }
 
-// writeToDisk ...
-func writeToDisk(fp string, data []byte) {
-	f, err := os.Create(fp)
+// ReadContents ...
+func ReadContents(filePath string) string {
+	file, err := os.Open(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	contents, err := ioutil.ReadAll(file)
+	return string(contents)
+}
+
+// WriteToDisk ...
+func WriteToDisk(filePath string, data []byte) {
+	file, err := os.Create(filePath)
 	check(err)
-	defer f.Close()
-	f.Write(data)
+	defer file.Close()
+	file.Write(data)
 }

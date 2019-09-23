@@ -16,8 +16,15 @@ type Interface struct {
 // NewInterface ... Constructor
 func NewInterface(filePath string) *Interface {
 
+	// interfaceContents := readContents(filePath)
+
 	i := Interface{}
 	i.name = strings.TrimSuffix(filePath, filepath.Ext(filePath))
 
 	return &i
 }
+
+// func (cppInterface Interface) parseFunctions() []Function {
+
+// 	return []
+// }

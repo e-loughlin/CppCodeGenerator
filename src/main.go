@@ -37,7 +37,7 @@ func main() {
 	var inheritedInterface *Interface
 	interfaceFilepath := *interfaceFilepathPtr
 	if interfaceFilepath != "" {
-		if !isValidInterface(interfaceFilepath) {
+		if !IsValidInterface(interfaceFilepath) {
 			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilepath)
 			os.Exit(0)
 		}
@@ -45,4 +45,7 @@ func main() {
 		fmt.Println(inheritedInterface.name)
 	}
 
+	testFunctionDeclaration := "QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) = 0"
+	f := NewFunction(testFunctionDeclaration)
+	fmt.Println(f.declaration())
 }
