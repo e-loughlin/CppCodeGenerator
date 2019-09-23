@@ -48,4 +48,5 @@ func main() {
 	testFunctionDeclaration := "QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) = 0"
 	f := NewFunction(testFunctionDeclaration)
 	fmt.Println(f.declaration())
+	fmt.Println(f.definition("AutonomousDrone"))
 }

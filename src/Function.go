@@ -32,7 +32,17 @@ func NewFunction(rawFunctionLine string) *Function {
 	return &f
 }
 
+/// TODO: Make \t resource configurable (3 spaces, 4 spaces?)
 func (f Function) declaration() string {
+	return fmt.Sprintf("\t%v %v(%v);", f.returnType, f.name, f.allParameters())
+}
+
+/// TODO: Allow for const function keyword
+func (f Function) definition(classScope string) string {
+	return fmt.Sprintf("%v %v::%v(%v)\n{\n}", f.returnType, classScope, f.name, f.allParameters())
+}
+
+func (f Function) allParameters() string {
 	parametersString := ""
 	separator := ""
 	for i, p := range f.parameters {
@@ -41,5 +51,5 @@ func (f Function) declaration() string {
 		}
 		parametersString += fmt.Sprintf("%v%v", separator, p.toString())
 	}
-	return fmt.Sprintf("\t%v %v(%v);", f.returnType, f.name, parametersString)
+	return parametersString
 }
