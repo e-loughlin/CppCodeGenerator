@@ -45,7 +45,7 @@ func main() {
 		fmt.Println(inheritedInterface.name)
 	}
 
-	testFunctionDeclaration := "QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) = 0"
+	testFunctionDeclaration := "virtual QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) const = 0"
 	f := NewFunction(testFunctionDeclaration)
 	fmt.Println(f.declaration())
 	fmt.Println(f.definition("AutonomousDrone"))
