@@ -3,10 +3,10 @@ package main
 // ClassHeader ... Implements File
 type ClassHeader struct {
 	inheritedInterface Interface
-	name string
-	
+	name               string
 }
 
-func (classHeader ClassHeader) generate() {
+func (c ClassHeader) newClassHeader() *ClassHeader {
 
+	return &c
 }
