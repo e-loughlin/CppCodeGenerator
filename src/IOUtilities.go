@@ -5,7 +5,14 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
+
+// List of all Qt Classes
+var allQtClasses = strings.Split(ReadContents("../resources/include-lists/qt-includes.txt"), "\n")
+
+// List of all C++ std data types
+var allStdTypes = strings.Split(ReadContents("../resources/include-lists/std-types.txt"), "\n")
 
 // IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
 func IsValidDirectory(directory string) bool {
@@ -56,4 +63,24 @@ func WriteToDisk(filePath string, data []byte) {
 	check(err)
 	defer file.Close()
 	file.Write(data)
+}
+
+// IsQtClass ... Returns whether a given string is a Qt class.
+func IsQtClass(className string) bool {
+	for _, qtClass := range allQtClasses {
+		if className == qtClass {
+			return true
+		}
+	}
+	return false
+}
+
+// IsStdDataType ... Returns whether a given string is a std C/C++ type
+func IsStdDataType(dataType string) bool {
+	for _, stdType := range allStdTypes {
+		if dataType == stdType {
+			return true
+		}
+	}
+	return false
 }
