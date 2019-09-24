@@ -1,0 +1,25 @@
+{{COPYRIGHT}}
+
+#ifndef {{HEADER_DEF}}
+#define {{HEADER_DEF}}
+
+#include "{{INTERFACE_NAME}}.h"
+
+#include <QObject>
+
+{{FORWARD_DECLARES}}
+class {{CLASS_NAME}} : public QObject, public {{INTERFACE_NAME}}
+{
+Q_OBJECT
+
+ public:
+    explicit {{CLASS_NAME}}();
+    virtual ~{{CLASS_NAME}}();
+
+ public:
+{{FUNCTION_DECLARATIONS}}
+ private:
+
+};
+
+#endif //{{HEADER_DEF}}

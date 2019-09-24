@@ -1,0 +1,15 @@
+{{COPYRIGHT}}
+
+#include "{{CLASS_NAME}}.h"
+
+{{INCLUDES}}
+
+{{CLASS_NAME}}::{{CLASS_NAME}}()
+{
+}
+
+{{CLASS_NAME}}::~{{CLASS_NAME}}()
+{
+}
+
+{{FUNCTION_DEFINITIONS}}

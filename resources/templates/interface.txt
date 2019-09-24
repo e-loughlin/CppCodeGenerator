@@ -1,0 +1,17 @@
+{{COPYRIGHT}}
+
+#ifndef {{INTERFACE_DEF}}
+#define {{INTERFACE_DEF}}
+
+class {{INTERFACE_NAME}} 
+{
+ public:
+    virtual ~{{INTERFACE_NAME}}(){}
+
+ public:
+
+ public signals:
+
+};
+
+#endif //{{INTERFACE_DEF}}
