@@ -68,6 +68,8 @@ func WriteToDisk(filePath string, data []byte) {
 // IsQtClass ... Returns whether a given string is a Qt class.
 func IsQtClass(className string) bool {
 	for _, qtClass := range allQtClasses {
+		qtClass = strings.TrimRight(qtClass, "\n")
+		qtClass = strings.TrimRight(qtClass, "\r")
 		if className == qtClass {
 			return true
 		}
@@ -78,6 +80,8 @@ func IsQtClass(className string) bool {
 // IsStdDataType ... Returns whether a given string is a std C/C++ type
 func IsStdDataType(dataType string) bool {
 	for _, stdType := range allStdTypes {
+		stdType = strings.TrimRight(stdType, "\n")
+		stdType = strings.TrimRight(stdType, "\r")
 		if dataType == stdType {
 			return true
 		}

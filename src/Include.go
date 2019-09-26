@@ -18,14 +18,20 @@ func NewInclude(dataType string) *Include {
 
 // toString ... Creates the `#include "MyType.h"` string
 func (i Include) toString() string {
+
+	if IsStdDataType(i.dependency) {
+		return ""
+	}
+
 	leftEnclosure := `"`
 	rightEnclosure := `"`
-	extension := ".h"
+	extension := `.h`
 	if IsQtClass(i.dependency) {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
+		extension = ""
 	}
-	return fmt.Sprintf(`#include %s%s%s%s`, leftEnclosure, i.dependency, rightEnclosure, extension)
+	return fmt.Sprintf(`#include %s%s%s%s`, leftEnclosure, i.dependency, extension, rightEnclosure)
 }
 
 // deriveDependency ... (Attempts to) convert a data type to its base type.
