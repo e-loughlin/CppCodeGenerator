@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Interface ...
+// Interface ... Implements File
 type Interface struct {
 	name      string
 	functions []Function
@@ -28,3 +28,7 @@ func NewInterface(filePath string) *Interface {
 
 // 	return []
 // }
+
+func (i Interface) generate() {
+
+}

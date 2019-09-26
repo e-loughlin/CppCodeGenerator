@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"path/filepath"
 )
 
@@ -38,6 +39,7 @@ func ReadTemplate(templateType Template) string {
 	case InterfaceTemplate:
 		return ReadContents(interfaceTemplatePath)
 	default:
+		log.Fatal("Attempted to read a non-existent template file.")
 		return ""
 	}
 }

@@ -1,0 +1,37 @@
+{
+    "user_info":
+    {
+        "name": "Circle Cardiovascular Imaging"
+    },
+
+    "qt_settings":
+    {
+        "enabled":true
+    },
+
+    "affixes":
+    {
+        "prefixes": 
+        {
+            "interface": "I",
+            "mock": "Mock",
+            "spyMock": "SpyMock",
+            "test": "Test"
+        },
+
+        "suffixes": 
+        {
+            "interface": "",
+            "mock": "",
+            "spyMock": "",
+            "test": ""
+        }
+    },
+
+    "file_extensions": 
+    {
+        "cppHeader": ".h",
+        "cppImplementation": ".cpp"
+    }
+
+}
