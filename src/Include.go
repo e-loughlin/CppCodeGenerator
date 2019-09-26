@@ -25,27 +25,26 @@ func (i Include) toString() string {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
 	}
-	return fmt.Sprintf(`#include %s%s%s`, leftEnclosure, i.dependency, rightEnclosure)
+	return fmt.Sprintf(`#include %s%s%s%s`, leftEnclosure, i.dependency, rightEnclosure, extension)
 }
 
 // deriveDependency ... (Attempts to) convert a data type to its base type.
 func deriveDependency(dataType string) string {
-	derivedType := dataType
 	for {
-		derivedType = strings.TrimLeft(dataType, "&")
-		derivedType = strings.TrimLeft(dataType, "*")
-		derivedType = strings.TrimLeft(dataType, " ")
-		derivedType = strings.TrimRight(dataType, "&")
-		derivedType = strings.TrimRight(dataType, "*")
-		derivedType = strings.TrimRight(dataType, " ")
+		dataType = strings.TrimLeft(dataType, "&")
+		dataType = strings.TrimLeft(dataType, "*")
+		dataType = strings.TrimLeft(dataType, " ")
+		dataType = strings.TrimRight(dataType, "&")
+		dataType = strings.TrimRight(dataType, "*")
+		dataType = strings.TrimRight(dataType, " ")
 
-		first := derivedType[0]
-		last := derivedType[len(derivedType)-1]
+		first := rune(dataType[0])
+		last := rune(dataType[len(dataType)-1])
 		if first != '&' && last != '&' &&
 			first != '*' && last != '*' &&
 			first != ' ' && last != ' ' {
 			break
 		}
 	}
-	return derivedType
+	return dataType
 }

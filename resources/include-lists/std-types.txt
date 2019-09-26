@@ -32,3 +32,4 @@ double
 long double
 wchar_t
 bool
+void
