@@ -18,10 +18,12 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 	f := Function{}
 
 	// Remove "virtual " from string
-	pureVirtualFunctionLine = strings.TrimLeft(pureVirtualFunctionLine, "virtual ")
+	pureVirtualFunctionLine = strings.TrimPrefix(pureVirtualFunctionLine, "virtual ")
+	fmt.Println(pureVirtualFunctionLine)
 
 	// Parse function name and return type
 	returnTypeAndName := strings.Split(pureVirtualFunctionLine, "(")[0]
+	fmt.Println(returnTypeAndName)
 	returnTypeAndNameSlice := strings.Split(returnTypeAndName, " ")
 
 	f.name = returnTypeAndNameSlice[len(returnTypeAndNameSlice)-1]
@@ -29,9 +31,13 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 
 	// Parse parameter list
 	rawParameters := strings.Split(strings.Split(pureVirtualFunctionLine, ")")[0], "(")[1]
-	rawParametersSlice := strings.Split(rawParameters, ",")
-	for _, rawParameterString := range rawParametersSlice {
-		f.parameters = append(f.parameters, *NewParameter(rawParameterString))
+	if len(rawParameters) > 0 {
+		//TODO: This comma won't work for templated arguments such as QMap<QString, QString>
+		rawParametersSlice := strings.Split(rawParameters, ",")
+		for _, rawParameterString := range rawParametersSlice {
+			fmt.Println("Does this exist?")
+			f.parameters = append(f.parameters, *NewParameter(rawParameterString))
+		}
 	}
 
 	// Parse function const-ness
@@ -63,4 +69,14 @@ func (f Function) allParameters() string {
 		parametersString += fmt.Sprintf("%v%v", separator, p.toString())
 	}
 	return parametersString
+}
+
+func splitParameters(rawParameterString string) string {
+	var commaIndices []int
+	// Template depth increases for each "<" found, and decreases for each ">"
+	templateDepth := 0
+	for pos, char := range rawParameterString {
+
+	}
+
 }
