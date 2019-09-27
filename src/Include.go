@@ -36,21 +36,7 @@ func (i Include) toString() string {
 
 // deriveDependency ... (Attempts to) convert a data type to its base type.
 func deriveDependency(dataType string) string {
-	for {
-		dataType = strings.TrimLeft(dataType, "&")
-		dataType = strings.TrimLeft(dataType, "*")
-		dataType = strings.TrimLeft(dataType, " ")
-		dataType = strings.TrimRight(dataType, "&")
-		dataType = strings.TrimRight(dataType, "*")
-		dataType = strings.TrimRight(dataType, " ")
-
-		first := rune(dataType[0])
-		last := rune(dataType[len(dataType)-1])
-		if first != '&' && last != '&' &&
-			first != '*' && last != '*' &&
-			first != ' ' && last != ' ' {
-			break
-		}
-	}
+	dataType = strings.TrimLeft(dataType, "&* ")
+	dataType = strings.TrimRight(dataType, "&* ")
 	return dataType
 }
