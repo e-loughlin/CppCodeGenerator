@@ -12,16 +12,16 @@ func Test_constructor(t *testing.T) {
 		actualParameters := newFunction.parameters
 		actualConstString := newFunction.constString
 		if tt.expectedName != actualName {
-			t.Errorf("NewFunction(%v): EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedName, actualName)
+			t.Errorf("NewFunction(%v): name: EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedName, actualName)
 		}
 		if tt.expectedReturnType != actualReturnType {
-			t.Errorf("NewFunction(%v): EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedReturnType, actualReturnType)
+			t.Errorf("NewFunction(%v): returnType: EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedReturnType, actualReturnType)
 		}
 		if !testEqualParameterSlices(tt.expectedParameters, actualParameters) {
-			t.Errorf("NewFunction(%v): EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedParameters, actualParameters)
+			t.Errorf("NewFunction(%v): parameters: EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedParameters, actualParameters)
 		}
 		if tt.expectedConstString != actualConstString {
-			t.Errorf("NewFunction(%v): EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedConstString, actualConstString)
+			t.Errorf("NewFunction(%v): constString: EXPECTED: %v, ACTUAL: %v", tt.pureVirtualFunctionLine, tt.expectedConstString, actualConstString)
 		}
 	}
 }
@@ -33,7 +33,17 @@ var Test_constructor_Data = []struct {
 	expectedParameters      []Parameter
 	expectedConstString     string
 }{
-	{"virtual void doSomething() = 0;", "doSomething", "void", []Parameter{}, ""},
+	// Void return type, no arguments
+	{"virtual void doSomething() = 0;", "doSomething", "void", nil, ""},
+
+	// QString return type, single argument
+	{"virtual QString name(int id) = 0", "name", "QString", []Parameter{{varType: "int", varName: "id"}}, ""},
+
+	// QString return type, two arguments
+	{"virtual QString name(int id, QString department) = 0", "name", "QString", []Parameter{{varType: "int", varName: "id"}, {varType: "QString", varName: "department"}}, ""},
+
+	// Const function
+	{"virtual QString name(int id) const = 0", "name", "QString", []Parameter{{varType: "int", varName: "id"}}, " const"},
 }
 
 // Helper functions

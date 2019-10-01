@@ -19,11 +19,9 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 
 	// Remove "virtual " from string
 	pureVirtualFunctionLine = strings.TrimPrefix(pureVirtualFunctionLine, "virtual ")
-	fmt.Println(pureVirtualFunctionLine)
 
 	// Parse function name and return type
 	returnTypeAndName := strings.Split(pureVirtualFunctionLine, "(")[0]
-	fmt.Println(returnTypeAndName)
 	returnTypeAndNameSlice := strings.Split(returnTypeAndName, " ")
 
 	f.name = returnTypeAndNameSlice[len(returnTypeAndNameSlice)-1]
@@ -35,7 +33,6 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 		//TODO: This comma won't work for templated arguments such as QMap<QString, QString>
 		rawParametersSlice := strings.Split(rawParameters, ",")
 		for _, rawParameterString := range rawParametersSlice {
-			fmt.Println("Does this exist?")
 			f.parameters = append(f.parameters, *NewParameter(rawParameterString))
 		}
 	}
@@ -54,7 +51,6 @@ func (f Function) declaration() string {
 	return fmt.Sprintf("\t%v %v(%v)%v override;", f.returnType, f.name, f.allParameters(), f.constString)
 }
 
-/// TODO: Allow for const function keyword
 func (f Function) definition(classScope string) string {
 	return fmt.Sprintf("%v %v::%v(%v)%v\n{\n}", f.returnType, classScope, f.name, f.allParameters(), f.constString)
 }
@@ -71,12 +67,14 @@ func (f Function) allParameters() string {
 	return parametersString
 }
 
-func splitParameters(rawParameterString string) string {
-	var commaIndices []int
-	// Template depth increases for each "<" found, and decreases for each ">"
-	templateDepth := 0
-	for pos, char := range rawParameterString {
+// func splitParameters(rawParameterString string) string {
+// 	var commaIndices []int
+// 	// Template depth increases for each "<" found, and decreases for each ">"
+// 	templateDepth := 0
+// 	for pos, char := range rawParameterString {
 
-	}
+// 	}
 
-}
+// 	return "butt"
+
+// }
