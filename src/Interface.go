@@ -19,7 +19,7 @@ func NewInterface(filePath string) *Interface {
 	// interfaceContents := readContents(filePath)
 
 	i := Interface{}
-	i.name = strings.TrimSuffix(filePath, filepath.Ext(filePath))
+	i.name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
 
 	return &i
 }

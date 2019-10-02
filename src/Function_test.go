@@ -4,8 +4,8 @@ import (
 	"testing"
 )
 
-func Test_constructor(t *testing.T) {
-	for _, tt := range Test_constructor_Data {
+func Test_FunctionConstructor(t *testing.T) {
+	for _, tt := range Test_FunctionConstructor_Data {
 		newFunction := NewFunction(tt.pureVirtualFunctionLine)
 		actualName := newFunction.name
 		actualReturnType := newFunction.returnType
@@ -26,7 +26,7 @@ func Test_constructor(t *testing.T) {
 	}
 }
 
-var Test_constructor_Data = []struct {
+var Test_FunctionConstructor_Data = []struct {
 	pureVirtualFunctionLine string
 	expectedName            string
 	expectedReturnType      string
