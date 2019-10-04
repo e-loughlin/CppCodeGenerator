@@ -22,6 +22,9 @@ import (
 	"flag"
 	"fmt"
 	"os"
+
+	"github.com/emloughl/CppCodeGenerator/cppcomponents"
+	"github.com/emloughl/CppCodeGenerator/util"
 )
 
 func main() {

@@ -3,9 +3,11 @@ package cppcomponents
 import (
 	"fmt"
 	"strings"
+
+	util "github.com/emloughl/CppCodeGenerator/util"
 )
 
-// Include ...
+// Include ... A C++ Include of the form `#include "MyClass.h"` or `#include  <CoreClass>`
 type Include struct {
 	dependency string
 }
@@ -19,14 +21,14 @@ func NewInclude(dataType string) *Include {
 // toString ... Creates the `#include "MyType.h"` string
 func (i Include) toString() string {
 
-	if IsStdDataType(i.dependency) {
+	if util.IsStdDataType(i.dependency) {
 		return ""
 	}
 
 	leftEnclosure := `"`
 	rightEnclosure := `"`
 	extension := `.h`
-	if IsQtClass(i.dependency) {
+	if util.IsQtClass(i.dependency) {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
 		extension = ""
