@@ -1,4 +1,4 @@
-package main
+package util
 
 /// securityToken ... Ensures that the server will not accept unauthorized POST requests,
 /// and the executable will not run without it as an argument.

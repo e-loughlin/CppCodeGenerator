@@ -1,4 +1,4 @@
-package main
+package cppcomponents_test
 
 import (
 	"testing"

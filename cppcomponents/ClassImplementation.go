@@ -1,4 +1,4 @@
-package main
+package cppcomponents
 
 // ClassImplementation ... Implements File
 type ClassImplementation struct {

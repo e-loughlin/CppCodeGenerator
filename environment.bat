@@ -1,4 +1,0 @@
-@ECHO OFF
-
-SET GOPATH=%~dp0
-SET GOBIN=%~dp0bin

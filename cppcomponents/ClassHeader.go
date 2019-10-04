@@ -1,4 +1,4 @@
-package main
+package cppcomponents
 
 // ClassHeader ... Implements File
 type ClassHeader struct {
