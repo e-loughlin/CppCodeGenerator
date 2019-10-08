@@ -1,5 +1,8 @@
 # CppCodeGenerator
 ## C++ Code Generation Tools
+
+# PROJECT STATUS: In Progress
+
 (In-progress re-write my python project [CplusplusCodeGenerators](https://github.com/emloughl/CplusplusCodeGenerators "CplusplusCodeGenerators") - in Golang)
 
 A project for generating boilerplate C++ code from user-provided template files (.txt).
