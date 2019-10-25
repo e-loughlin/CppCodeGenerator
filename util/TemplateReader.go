@@ -2,6 +2,7 @@ package util
 
 import (
 	"log"
+	"os"
 	"path/filepath"
 )
 
@@ -17,7 +18,8 @@ const (
 )
 
 // Filepaths for various templates
-var templateDir = filepath.Dir("../resources/templates/")
+var currentFileDir, _ = filepath.Abs(filepath.Dir(os.Args[0]))
+var templateDir = filepath.Join(currentFileDir, "../resources/templates/")
 var classImplementionTemplatePath = filepath.Join(templateDir, "class_cpp.txt")
 var classHeaderTemplatePath = filepath.Join(templateDir, "class_header.txt")
 var commentBlockTemplatePath = filepath.Join(templateDir, "comment_block_function.txt")
