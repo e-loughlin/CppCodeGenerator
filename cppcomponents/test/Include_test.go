@@ -2,19 +2,21 @@ package cppcomponents_test
 
 import (
 	"testing"
+
+	"github.com/emloughl/CppCodeGenerator/cppcomponents"
 )
 
-func Test_toString(t *testing.T) {
-	for _, tt := range Test_toString_Data {
-		newInclude := NewInclude(tt.dataType)
-		actualOutput := newInclude.toString()
+func Test_ToString(t *testing.T) {
+	for _, tt := range Test_ToString_Data {
+		newInclude := cppcomponents.NewInclude(tt.dataType)
+		actualOutput := newInclude.ToString()
 		if tt.expectedOutput != actualOutput {
-			t.Errorf("toString(): EXPECTED: %v, ACTUAL: %v", tt.expectedOutput, actualOutput)
+			t.Errorf("ToString(): EXPECTED: %v, ACTUAL: %v", tt.expectedOutput, actualOutput)
 		}
 	}
 }
 
-var Test_toString_Data = []struct {
+var Test_ToString_Data = []struct {
 	dataType       string
 	expectedOutput string
 }{
@@ -33,16 +35,16 @@ var Test_toString_Data = []struct {
 	{"void", ""},
 }
 
-func Test_deriveDependency_TypeContainsPointers_WillExtractBaseType(t *testing.T) {
-	for _, tt := range Test_deriveDependency_TypeContainsPointers_WillExtractBaseType_Data {
-		actualOutput := deriveDependency(tt.input)
+func Test_DeriveDependency_TypeContainsPointers_WillExtractBaseType(t *testing.T) {
+	for _, tt := range Test_DeriveDependency_TypeContainsPointers_WillExtractBaseType_Data {
+		actualOutput := cppcomponents.DeriveDependency(tt.input)
 		if tt.expectedOutput != actualOutput {
 			t.Errorf("DerivedDependency(%v): EXPECTED: %v, ACTUAL: %v", tt.input, tt.expectedOutput, actualOutput)
 		}
 	}
 }
 
-var Test_deriveDependency_TypeContainsPointers_WillExtractBaseType_Data = []struct {
+var Test_DeriveDependency_TypeContainsPointers_WillExtractBaseType_Data = []struct {
 	input          string
 	expectedOutput string
 }{

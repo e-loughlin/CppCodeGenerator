@@ -2,12 +2,14 @@ package cppcomponents_test
 
 import (
 	"testing"
+
+	"github.com/emloughl/CppCodeGenerator/cppcomponents"
 )
 
 func Test_InterfaceConstructorWillDeriveInterfaceNameFromFilepath(t *testing.T) {
 	for _, tt := range Test_InterfaceConstructorWillDeriveInterfaceNameFromFilepath_Data {
-		newInterface := NewInterface(tt.filepath)
-		actualName := newInterface.name
+		newInterface := cppcomponents.NewInterface(tt.filepath)
+		actualName := newInterface.Name
 		if tt.expectedName != actualName {
 			t.Errorf("NewFunction(%v): name: EXPECTED: %v, ACTUAL: %v", tt.filepath, tt.expectedName, actualName)
 		}

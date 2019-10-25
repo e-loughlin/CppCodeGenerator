@@ -37,19 +37,19 @@ func main() {
 		fmt.Println("Class!")
 	}
 
-	var inheritedInterface *Interface
+	var inheritedInterface *cppcomponents.Interface
 	interfaceFilepath := *interfaceFilepathPtr
 	if interfaceFilepath != "" {
-		if !IsValidInterface(interfaceFilepath) {
+		if !util.IsValidInterface(interfaceFilepath) {
 			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilepath)
 			os.Exit(0)
 		}
-		inheritedInterface = NewInterface(interfaceFilepath)
-		fmt.Println(inheritedInterface.name)
+		inheritedInterface = cppcomponents.NewInterface(interfaceFilepath)
+		fmt.Println(inheritedInterface.Name)
 	}
 
 	testFunctionDeclaration := "virtual QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) const = 0"
-	f := NewFunction(testFunctionDeclaration)
-	fmt.Println(f.declaration())
-	fmt.Println(f.definition("AutonomousDrone"))
+	f := cppcomponents.NewFunction(testFunctionDeclaration)
+	fmt.Println(f.Declaration())
+	fmt.Println(f.Definition("AutonomousDrone"))
 }

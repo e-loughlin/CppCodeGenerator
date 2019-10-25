@@ -7,10 +7,10 @@ import (
 
 // Interface ... Implements File
 type Interface struct {
-	name      string
-	functions []Function
-	signals   []Function
-	includes  []string
+	Name      string
+	Functions []Function
+	Signals   []Function
+	Includes  []string
 }
 
 // NewInterface ... Constructor
@@ -19,7 +19,7 @@ func NewInterface(filePath string) *Interface {
 	// interfaceContents := readContents(filePath)
 
 	i := Interface{}
-	i.name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
+	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
 
 	return &i
 }
