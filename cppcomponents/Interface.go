@@ -3,6 +3,7 @@ package cppcomponents
 import (
 	"path/filepath"
 	"strings"
+	"fmt"
 )
 
 // Interface ... Implements File
@@ -16,19 +17,28 @@ type Interface struct {
 // NewInterface ... Constructor
 func NewInterface(filePath string) *Interface {
 
-	// interfaceContents := readContents(filePath)
+	interfaceLines := util.ReadLines(filePath)
 
 	i := Interface{}
 	filePath = strings.Replace(filePath, ":", "", -1)
 	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
-
 	return &i
 }
 
-// func (cppInterface Interface) parseFunctions() []Function {
+func (cppInterface Interface) parseFunctions(contentLines string[]) []Function {
+	for _, line := range contentLines {
+		if(isVirtualFunctionLine(line)) {
+			newFunction := NewFunction(line)
+			cppInterface.Functions = append(cppInterface.Functions, newFunction)
+		}
+	}
 
-// 	return []
-// }
+}
+
+func (line string) isVirtualFunctionLine bool {
+	line = strings.Replace(line, " ", "", -1)
+	return (strings.Contains(line, "virtual") && strings.Contains(line, "=0;"))
+}
 
 func (i Interface) generate() {
 

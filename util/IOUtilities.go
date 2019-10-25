@@ -57,6 +57,12 @@ func ReadContents(filePath string) string {
 	return string(contents)
 }
 
+// ReadLines ...
+func ReadLines(filePath string) []string {
+	contents := ReadContents(filePath)
+	return strings.Split(contents, "\n")
+}
+
 // WriteToDisk ...
 func WriteToDisk(filePath string, data []byte) {
 	file, err := os.Create(filePath)

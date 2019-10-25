@@ -47,9 +47,4 @@ func main() {
 		inheritedInterface = cppcomponents.NewInterface(interfaceFilepath)
 		fmt.Println(inheritedInterface.Name)
 	}
-
-	testFunctionDeclaration := "virtual QString vehicleNumber(int id, std::string name, VehicleManufacturer manufacturer) const = 0"
-	f := cppcomponents.NewFunction(testFunctionDeclaration)
-	fmt.Println(f.Declaration())
-	fmt.Println(f.Definition("AutonomousDrone"))
 }
