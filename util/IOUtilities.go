@@ -9,10 +9,10 @@ import (
 )
 
 // List of all Qt Classes
-var allQtClasses = strings.Split(ReadContents("../../resources/include-lists/qt-includes.txt"), "\n")
+var allQtClasses = strings.Split(ReadContents(qtClassesPath), "\n")
 
 // List of all C++ std data types
-var allStdTypes = strings.Split(ReadContents("../../resources/include-lists/std-types.txt"), "\n")
+var allStdTypes = strings.Split(ReadContents(stdTypesPath), "\n")
 
 // IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
 func IsValidDirectory(directory string) bool {

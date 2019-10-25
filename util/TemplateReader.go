@@ -2,7 +2,6 @@ package util
 
 import (
 	"log"
-	"os"
 	"path/filepath"
 )
 
@@ -18,13 +17,11 @@ const (
 )
 
 // Filepaths for various templates
-var currentFileDir, _ = filepath.Abs(filepath.Dir(os.Args[0]))
-var templateDir = filepath.Join(currentFileDir, "../resources/templates/")
-var classImplementionTemplatePath = filepath.Join(templateDir, "class_cpp.txt")
-var classHeaderTemplatePath = filepath.Join(templateDir, "class_header.txt")
-var commentBlockTemplatePath = filepath.Join(templateDir, "comment_block_function.txt")
-var copyrightTemplatePath = filepath.Join(templateDir, "copyright.txt")
-var interfaceTemplatePath = filepath.Join(templateDir, "interface.txt")
+var classImplementionTemplatePath = filepath.Join(templatesDir, "class_cpp.txt")
+var classHeaderTemplatePath = filepath.Join(templatesDir, "class_header.txt")
+var commentBlockTemplatePath = filepath.Join(templatesDir, "comment_block_function.txt")
+var copyrightTemplatePath = filepath.Join(templatesDir, "copyright.txt")
+var interfaceTemplatePath = filepath.Join(templatesDir, "interface.txt")
 
 // ReadTemplate ... Returns the contents of a given template file
 func ReadTemplate(templateType Template) string {
