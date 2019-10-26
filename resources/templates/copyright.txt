@@ -1,9 +1,9 @@
 ///-----------------------------------------------------------------------------
 /// @file {{FILE_NAME}}
 ///
-/// Copyright (C) Circle Cardiovascular Imaging Inc. {{YEAR}}
+/// Copyright (C) {{UserInfo.Company}} {{YEAR}}
 ///
-/// Author: 
+/// Author: {{UserInfo.Name}}
 ///
-/// Description:
+/// Description: 
 ///-----------------------------------------------------------------------------

@@ -1,15 +1,16 @@
 {{COPYRIGHT}}
 
-#include "{{CLASS_NAME}}.h"
+#include "{{Class.Header.FileName}}"
 
-{{INCLUDES}}
+{{Class.Implementation.Includes}}
 
-{{CLASS_NAME}}::{{CLASS_NAME}}()
+{{Class.Name}}::{{Class.Name}}()
 {
 }
 
-{{CLASS_NAME}}::~{{CLASS_NAME}}()
+{{Class.Name}}::~{{Class.Name}}()
 {
 }
 
-{{FUNCTION_DEFINITIONS}}
+{{Class.Implementation.FunctionDefinitions}}
+{{Class.Implementation.QtSignalDefinitions}}

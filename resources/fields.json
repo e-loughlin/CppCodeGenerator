@@ -7,24 +7,31 @@
     "Interface":
     {
         "Name": "",
+        "FileName" :"",
         "Includes": "",
         "ForwardDeclares": "",
         "FunctionDeclarations": "",
         "QtSignalDeclarations": ""
     },
-    "Header":
+    "Class":
     {
         "Name": "",
-        "DefineName": "",
-        "Includes": "",
-        "ForwardDeclares": "",
-        "FunctionDeclarations": "",
-        "QtSignalDeclarations": ""
-    },
-    "Implementation": 
-    {
-        "Includes": "",
-        "FunctionDefinitions": ""
+        "Header":
+        {
+            "FileName": "",
+            "DefineName": "",
+            "Includes": "",
+            "ForwardDeclares": "",
+            "FunctionDeclarations": "",
+            "QtSignalDeclarations": ""
+        },
+        "Implementation": 
+        {
+            "FileName": "",
+            "Includes": "",
+            "FunctionDefinitions": "",
+            "QtSignalDefinitions": ""
+        }
     },
     "Mock":
     {

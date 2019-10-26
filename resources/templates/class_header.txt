@@ -1,25 +1,29 @@
-{{COPYRIGHT}}
+{{Copyright}}
 
-#ifndef {{HEADER_DEF}}
-#define {{HEADER_DEF}}
+#ifndef {{Class.Header.DefineName}}
+#define {{Class.Header.DefineName}}
 
-#include "{{INTERFACE_NAME}}.h"
+#include "{{Interface.FileName}}"
 
 #include <QObject>
 
-{{FORWARD_DECLARES}}
-class {{CLASS_NAME}} : public QObject, public {{INTERFACE_NAME}}
+{{Class.Header.ForwardDeclares}}
+class {{Class.Name}} : public QObject, public {{Interface.Name}}
 {
 Q_OBJECT
 
  public:
-    explicit {{CLASS_NAME}}();
-    virtual ~{{CLASS_NAME}}();
+    explicit {{Class.Name}}();
+    virtual ~{{Class.Name}}();
 
  public:
-{{FUNCTION_DECLARATIONS}}
+{{Class.Header.FunctionDeclarations}}
+ 
+ signals:
+{{Class.Header.QtSignalDeclarations}}
+
  private:
 
 };
 
-#endif //{{HEADER_DEF}}
+#endif //{{Class.Header.DefineName}}
