@@ -10,7 +10,3 @@ func (c ClassImplementation) newClassImplementation() *ClassImplementation {
 
 	return &c
 }
-
-func (c ClassImplementation) generate() {
-
-}

@@ -10,7 +10,3 @@ func (c ClassHeader) newClassHeader() *ClassHeader {
 
 	return &c
 }
-
-func (c ClassHeader) generate() {
-
-}

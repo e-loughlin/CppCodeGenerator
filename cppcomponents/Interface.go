@@ -4,6 +4,8 @@ import (
 	"path/filepath"
 	"strings"
 	"fmt"
+	
+	"github.com/emloughl/CppCodeGenerator/util"
 )
 
 // Interface ... Implements File
@@ -22,24 +24,23 @@ func NewInterface(filePath string) *Interface {
 	i := Interface{}
 	filePath = strings.Replace(filePath, ":", "", -1)
 	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
+	fmt.Println(i.Functions)
+	i.parseFunctions(interfaceLines)
+	fmt.Println(i.Functions)
 	return &i
 }
 
-func (cppInterface Interface) parseFunctions(contentLines string[]) []Function {
+func (cppInterface Interface) parseFunctions(contentLines []string) {
 	for _, line := range contentLines {
-		if(isVirtualFunctionLine(line)) {
+		if(isPureVirtualDefinition(line)) {
 			newFunction := NewFunction(line)
-			cppInterface.Functions = append(cppInterface.Functions, newFunction)
+			cppInterface.Functions = append(cppInterface.Functions, *newFunction)
 		}
 	}
-
 }
 
-func (line string) isVirtualFunctionLine bool {
+func isPureVirtualDefinition(line string) bool {
 	line = strings.Replace(line, " ", "", -1)
-	return (strings.Contains(line, "virtual") && strings.Contains(line, "=0;"))
+	return (strings.Contains(line, "virtual") && strings.Contains(line, ")=0;"))
 }
 
-func (i Interface) generate() {
-
-}
