@@ -1,37 +1,27 @@
 {
-    "file_documentation":
+    "Affixes":
     {
-        "date_format": "2006"
-    },
-
-    "qt_settings":
-    {
-        "enabled":true
-    },
-
-    "affixes":
-    {
-        "prefixes": 
+        "Prefixes": 
         {
-            "interface": "I",
-            "mock": "Mock",
-            "spyMock": "SpyMock",
-            "test": "Test"
+            "Interface": "I",
+            "Mock": "Mock",
+            "SpyMock": "SpyMock",
+            "Test": "Test"
         },
 
-        "suffixes": 
+        "Suffixes": 
         {
-            "interface": "",
-            "mock": "",
-            "spyMock": "",
-            "test": ""
+            "Interface": "",
+            "Mock": "",
+            "SpyMock": "",
+            "Test": ""
         }
     },
 
-    "file_extensions": 
+    "FileExtensions": 
     {
-        "cppHeader": ".h",
-        "cppImplementation": ".cpp"
+        "CppHeader": ".h",
+        "CppImplementation": ".cpp"
     }
 
 }
