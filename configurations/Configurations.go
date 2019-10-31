@@ -1,5 +1,7 @@
 package configurations
 
+var Config Configurations = readConfigurations()
+
 type Configurations struct {
 	Affixes Affixes
 	Suffixes Suffixes
@@ -13,6 +15,7 @@ type Affixes struct {
 
 type Prefixes struct {
 	Interface string
+	DefineName string
 	Mock string
 	SpyMock string
 	Test string
@@ -20,6 +23,7 @@ type Prefixes struct {
 
 type Suffixes struct {
 	Interface string
+	DefineName string
 	Mock string
 	SpyMock string
 	Test string

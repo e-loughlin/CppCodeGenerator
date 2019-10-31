@@ -6,7 +6,7 @@ import (
 	"github.com/emloughl/CppCodeGenerator/util"
 )
 
-func ReadConfigurations() Configurations {
+func readConfigurations() Configurations {
 	var config Configurations
 	jsonData := []byte(util.ReadContents(util.ConfigurationsPath))
 	err := json.Unmarshal(jsonData, &config)

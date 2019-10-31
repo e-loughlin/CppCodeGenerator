@@ -4,6 +4,7 @@
         "Prefixes": 
         {
             "Interface": "I_",
+            "DefineName": "",
             "Mock": "Mock",
             "SpyMock": "SpyMock",
             "Test": "Test"
@@ -12,6 +13,7 @@
         "Suffixes": 
         {
             "Interface": "",
+            "DefineName": "_H_",
             "Mock": "",
             "SpyMock": "",
             "Test": ""

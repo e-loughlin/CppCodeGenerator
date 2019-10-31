@@ -25,14 +25,22 @@ func main() {
 	}
 	flag.Parse()
 
-	// Read configurations
-	config := configurations.ReadConfigurations()
 
 	// 
 	if *typeFlagPtr == "interface" {
+		//TODO: Refactor templateType usage (enum)
+		var templateType util.Template = util.InterfaceTemplate
+		
 		interfaceName := *interfaceNameFlagPtr
-		interfaceName = config.Affixes.Prefixes.Interface + interfaceName + config.Affixes.Suffixes.Interface + config.FileExtensions.CppHeader
+		interfaceName = configurations.Config.Affixes.Prefixes.Interface +
+						interfaceName + 
+						configurations.Config.Affixes.Suffixes.Interface +
+						configurations.Config.FileExtensions.CppHeader
+
+		interfaceContents := util.ReadTemplate(templateType)
+		
 		fmt.Printf("Creating a new interface: %v\n", interfaceName)
+		fmt.Println(interfaceContents)
 	}
 
 	// Parse the Interface
