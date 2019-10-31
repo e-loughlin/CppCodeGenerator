@@ -9,10 +9,10 @@ import (
 )
 
 // List of all Qt Classes
-var allQtClasses = strings.Split(ReadContents(qtClassesPath), "\n")
+var allQtClasses = strings.Split(ReadContents(QtClassesPath), "\n")
 
 // List of all C++ std data types
-var allStdTypes = strings.Split(ReadContents(stdTypesPath), "\n")
+var allStdTypes = strings.Split(ReadContents(StdTypesPath), "\n")
 
 // IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
 func IsValidDirectory(directory string) bool {
@@ -66,7 +66,7 @@ func ReadLines(filePath string) []string {
 // WriteToDisk ...
 func WriteToDisk(filePath string, data []byte) {
 	file, err := os.Create(filePath)
-	check(err)
+	Check(err)
 	defer file.Close()
 	file.Write(data)
 }

@@ -14,9 +14,14 @@ func PrintUsage() {
 	NewClass.go: Generates a class of specified type from a given interface.
 	Or, if generating an interface, writes a new interface file with the given
 	INTERFACE_PATH as a filename.
+
+	If specifying 
    
 	Usage:
-	  NewClass.exe -type=<CLASS_TYPE> -interface=<INTERFACE_PATH>
+	  NewClass -type=<CLASS_TYPE> -interface=<INTERFACE_PATH>
+	
+	Optional:
+	  -iname=<CLASS_NAME>: Used when creating a new interface. Prefix of "I_" or "I" not required.
    
 	CLASS_TYPE   |                    Notes                    |
 	------------------------------------------------------------

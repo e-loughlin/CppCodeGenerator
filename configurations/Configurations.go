@@ -1,4 +1,4 @@
-package util
+package configurations
 
 type Configurations struct {
 	Affixes Affixes

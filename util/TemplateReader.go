@@ -17,11 +17,11 @@ const (
 )
 
 // Filepaths for various templates
-var classImplementionTemplatePath = filepath.Join(templatesDir, "class_cpp.txt")
-var classHeaderTemplatePath = filepath.Join(templatesDir, "class_header.txt")
-var commentBlockTemplatePath = filepath.Join(templatesDir, "comment_block_function.txt")
-var copyrightTemplatePath = filepath.Join(templatesDir, "copyright.txt")
-var interfaceTemplatePath = filepath.Join(templatesDir, "interface.txt")
+var classImplementionTemplatePath = filepath.Join(TemplatesDir, "class_cpp.txt")
+var classHeaderTemplatePath = filepath.Join(TemplatesDir, "class_header.txt")
+var commentBlockTemplatePath = filepath.Join(TemplatesDir, "comment_block_function.txt")
+var copyrightTemplatePath = filepath.Join(TemplatesDir, "copyright.txt")
+var interfaceTemplatePath = filepath.Join(TemplatesDir, "interface.txt")
 
 // ReadTemplate ... Returns the contents of a given template file
 func ReadTemplate(templateType Template) string {

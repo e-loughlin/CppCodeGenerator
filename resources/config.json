@@ -3,7 +3,7 @@
     {
         "Prefixes": 
         {
-            "Interface": "I",
+            "Interface": "I_",
             "Mock": "Mock",
             "SpyMock": "SpyMock",
             "Test": "Test"

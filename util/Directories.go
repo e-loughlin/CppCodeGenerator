@@ -8,10 +8,11 @@ import (
 // TODO: These directories break "go run" command. Find way to make it work.
 
 // Directories
-var executablePath, _ = filepath.Abs(filepath.Dir(os.Args[0]))
-var projectRoot = filepath.Join(executablePath, "../")
-var resourcesDir = filepath.Join(projectRoot, "resources")
-var templatesDir = filepath.Join(resourcesDir, "templates")
-var includeListsDir = filepath.Join(resourcesDir, "include-lists")
-var qtClassesPath = filepath.Join(includeListsDir, "qt-includes.txt")
-var stdTypesPath = filepath.Join(includeListsDir, "std-types.txt")
+var ExecutablePath, _ = filepath.Abs(filepath.Dir(os.Args[0]))
+var ProjectRoot = filepath.Join(ExecutablePath, "../")
+var ResourcesDir = filepath.Join(ProjectRoot, "resources")
+var TemplatesDir = filepath.Join(ResourcesDir, "templates")
+var IncludeListsDir = filepath.Join(ResourcesDir, "include-lists")
+var QtClassesPath = filepath.Join(IncludeListsDir, "qt-includes.txt")
+var StdTypesPath = filepath.Join(IncludeListsDir, "std-types.txt")
+var ConfigurationsPath = filepath.Join(ResourcesDir, "config.json")
