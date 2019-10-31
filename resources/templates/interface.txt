@@ -1,12 +1,12 @@
 {{COPYRIGHT}}
 
-#ifndef {{INTERFACE_DEF}}
-#define {{INTERFACE_DEF}}
+#ifndef {{Interface.DefineName}}
+#define {{Interface.DefineName}}
 
-class {{INTERFACE_NAME}} 
+class {{Interface.Name}} 
 {
  public:
-    virtual ~{{INTERFACE_NAME}}(){}
+    virtual ~{{Interface.Name}}(){}
 
  public:
 
@@ -14,4 +14,4 @@ class {{INTERFACE_NAME}}
 
 };
 
-#endif //{{INTERFACE_DEF}}
+#endif //{{Interface.DefineName}}
