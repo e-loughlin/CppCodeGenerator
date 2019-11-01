@@ -58,7 +58,10 @@ func (i Interface) parseDefineName(name string) string {
 	name = strings.Replace(name, "_", "", -1)
 	splitName := camelcase.Split(name)
 	name = strings.Join(splitName, configurations.Config.Policies.DefineNameCamelCaseSeparator)
-	name = strings.ToUpper(name)
+	
+	if(configurations.Config.Policies.DefineNameAllCapsEnabled) {
+		name = strings.ToUpper(name)
+	}
 
 	defineName := configurations.Config.Affixes.Prefixes.DefineName +
 	name +
