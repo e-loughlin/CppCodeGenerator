@@ -21,7 +21,7 @@ type Interface struct {
 	Includes  []string
 }
 
-// NewInterface ... Constructor taking in a filepath to an existing interface.
+// NewInterface ... 
 func NewInterface(filePath string) *Interface {
 	var interfaceLines []string
 
@@ -81,15 +81,6 @@ func isPureVirtualDefinition(line string) bool {
 	return (strings.Contains(line, "virtual") && strings.Contains(line, ")=0;"))
 }
 
-// Fields ... The fields within templates to be replaced.
-func (i Interface) Fields() map[string]string {
-	fields := make(map[string]string)
-	fields["{{Interface.Name}}"] = i.Name
-	fields["{{Interface.FileName}}"] = i.FileName
-	fields["{{Interface.DefineName}}"] = i.DefineName
-	return fields
-}
-
 // isValidInterfacePath ...
 func isValidInterfacePath(filePath string) bool {
 	filePath = strings.Replace(filePath, ":", "", -1)
@@ -97,7 +88,16 @@ func isValidInterfacePath(filePath string) bool {
 	fileName := strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
 	hasCorrectPrefix := strings.HasPrefix(fileName, configurations.Config.Prefixes.Interface)
 	hasCorrectSuffix := strings.HasSuffix(fileName, configurations.Config.Suffixes.Interface)
-
+	
 	isValid := hasCorrectExtension && hasCorrectPrefix && hasCorrectSuffix
 	return isValid
+}
+
+// Fields ... The fields within templates to be replaced.
+func (i Interface) Fields() map[string]string {
+	fields := make(map[string]string)
+	fields["{{Interface.Name}}"] = i.Name
+	fields["{{FileName}}"] = i.FileName
+	fields["{{Interface.DefineName}}"] = i.DefineName
+	return fields
 }

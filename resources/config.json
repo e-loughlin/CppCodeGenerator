@@ -1,4 +1,10 @@
 {
+    "UserInfo": 
+    {
+        "CompanyName": "Circle Cardiovascular Imaging",
+        "Author": "Evan Loughlin",
+    },
+    
     "Prefixes": 
     {
         "Interface": "I_",
@@ -7,7 +13,7 @@
         "SpyMock": "SpyMock",
         "Test": "Test"
     },
-
+    
     "Suffixes": 
     {
         "Interface": "",
@@ -16,11 +22,12 @@
         "SpyMock": "",
         "Test": ""
     },
-
+    
     "Policies":
     {
         "DefineNameAllCapsEnabled": true,
-        "DefineNameCamelCaseSeparator": ""
+        "DefineNameCamelCaseSeparator": "",
+        "DateFormat": "2006"
     },
 
     "FileExtensions": 

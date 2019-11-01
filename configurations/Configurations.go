@@ -3,10 +3,17 @@ package configurations
 var Config Configurations = readConfigurations()
 
 type Configurations struct {
+	UserInfo UserInfo
 	Prefixes Prefixes
 	Suffixes Suffixes
 	Policies Policies
 	FileExtensions FileExtensions
+
+}
+
+type UserInfo struct {
+	Author string
+	CompanyName string
 }
 
 type Prefixes struct {
@@ -28,6 +35,7 @@ type Suffixes struct {
 type Policies struct {
 	DefineNameAllCapsEnabled bool
 	DefineNameCamelCaseSeparator string
+	DateFormat string
 }
 
 type FileExtensions struct {

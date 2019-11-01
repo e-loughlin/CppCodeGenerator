@@ -1,9 +1,9 @@
 ///-----------------------------------------------------------------------------
 /// @file {{FileName}}
 ///
-/// Copyright (C) {{UserInfo.Company}} {{Year}}
+/// Copyright (C) {{UserInfo.Company}} {{Date}}
 ///
-/// Author: {{UserInfo.Name}}
+/// Author: {{UserInfo.Author}}
 ///
 /// Description: 
 ///-----------------------------------------------------------------------------
