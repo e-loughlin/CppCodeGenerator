@@ -1,7 +1,7 @@
 ///-----------------------------------------------------------------------------
-/// @file {{FILE_NAME}}
+/// @file {{FileName}}
 ///
-/// Copyright (C) {{UserInfo.Company}} {{YEAR}}
+/// Copyright (C) {{UserInfo.Company}} {{Year}}
 ///
 /// Author: {{UserInfo.Name}}
 ///
