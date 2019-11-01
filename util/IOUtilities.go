@@ -40,11 +40,6 @@ func FileExists(filePath string) bool {
 	return false
 }
 
-// IsValidInterface ...
-func IsValidInterface(filePath string) bool {
-	return (FileExists(filePath) && (filepath.Ext(filePath) == ".h"))
-}
-
 // ReadContents ...
 func ReadContents(filePath string) string {
 	file, err := os.Open(filePath)
