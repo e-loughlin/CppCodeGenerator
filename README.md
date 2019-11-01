@@ -50,10 +50,12 @@ The interface from which the generated derived classes, if applicable, will inhe
 ### Examples:
 
 ##### Creating a new (blank) interface:
-` NewClass.exe -type=interface -interface=<PATH_TO_NEW_INTERFACE>`
+```
+NewClass.exe -type=interface -interface=/path/to/I_MyNewClass.h
+```
 
-E.g.:
-``
+This will create a new interface with the name `I_MyNewClass.h` at the specified path. Note that the `I_` prefix must match what is specified in the configuration file `config.json`.
+
 
 ##### Creating a new class that inherits a given interface:
 ```
