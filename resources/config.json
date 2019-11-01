@@ -27,7 +27,7 @@
     {
         "DefineNameAllCapsEnabled": true,
         "DefineNameCamelCaseSeparator": "",
-        "DateFormat": "2006"
+        "DateFormat": "2006/01/02"
     },
 
     "FileExtensions": 

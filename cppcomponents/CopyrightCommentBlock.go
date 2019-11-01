@@ -24,6 +24,7 @@ func NewCopyrightCommentBlock() *CopyrightCommentBlock {
 	c.CompanyName = configurations.Config.UserInfo.CompanyName
 	c.Author = configurations.Config.UserInfo.Author
 	t := time.Now()
+	//TODO: Write documentation on how to format the config.json DateFormat configuration
 	c.Date = fmt.Sprintf(t.Format(configurations.Config.Policies.DateFormat))
 	return &c
 }
