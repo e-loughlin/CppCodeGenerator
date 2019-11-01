@@ -50,11 +50,22 @@ The interface from which the generated derived classes, if applicable, will inhe
 ### Examples:
 
 ##### Creating a new (blank) interface:
-` NewClass.exe -type=interface -name=`
+` NewClass.exe -type=interface -interface=<PATH_TO_NEW_INTERFACE>`
+
+E.g.:
+``
 
 ##### Creating a new class that inherits a given interface:
 ```
- $ NewClass.exe -type=class -interface=C:/ws/I_MyInterface.h -name=MyDerivedClass
+ $ NewClass.exe -type=class -interface=C:/ws/I_MyClass.h
 ```
-Note: If the `-name=` flag isn't given, the derived class will be named after the interface, excluding a configurable interface prefix (such as `I` or `I_`)
+Output:
+    Will create 2 files: `MyClass.h`, and `MyClass.cpp`. 
 
+
+### Configurations
+
+Modifying the `config.json` file allows you to alter your desired prefixes, suffixes, and other policies.
+
+#### Date Format: 
+Follow the Golang date format. Example here: https://stackoverflow.com/questions/20234104/how-to-format-current-time-using-a-yyyymmddhhmmss-format
