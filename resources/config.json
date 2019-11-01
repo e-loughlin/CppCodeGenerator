@@ -13,11 +13,17 @@
         "Suffixes": 
         {
             "Interface": "",
-            "DefineName": "_H_",
+            "DefineName": "_H",
             "Mock": "",
             "SpyMock": "",
             "Test": ""
         }
+    },
+
+    "Policies":
+    {
+        "DefineNameAllCapsEnabled": true,
+        "DefineNameCamelCaseSeparator": ""
     },
 
     "FileExtensions": 

@@ -5,6 +5,7 @@ var Config Configurations = readConfigurations()
 type Configurations struct {
 	Affixes Affixes
 	Suffixes Suffixes
+	Policies Policies
 	FileExtensions FileExtensions
 }
 
@@ -27,6 +28,11 @@ type Suffixes struct {
 	Mock string
 	SpyMock string
 	Test string
+}
+
+type Policies struct {
+	DefineNameAllCapsEnabled bool
+	DefineNameCamelCaseSeparator string
 }
 
 type FileExtensions struct {
