@@ -1,23 +1,20 @@
 {
-    "Affixes":
+    "Prefixes": 
     {
-        "Prefixes": 
-        {
-            "Interface": "I_",
-            "DefineName": "",
-            "Mock": "Mock",
-            "SpyMock": "SpyMock",
-            "Test": "Test"
-        },
+        "Interface": "I_",
+        "DefineName": "",
+        "Mock": "Mock",
+        "SpyMock": "SpyMock",
+        "Test": "Test"
+    },
 
-        "Suffixes": 
-        {
-            "Interface": "",
-            "DefineName": "_H",
-            "Mock": "",
-            "SpyMock": "",
-            "Test": ""
-        }
+    "Suffixes": 
+    {
+        "Interface": "",
+        "DefineName": "_H",
+        "Mock": "",
+        "SpyMock": "",
+        "Test": ""
     },
 
     "Policies":

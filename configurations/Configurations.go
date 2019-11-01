@@ -3,15 +3,10 @@ package configurations
 var Config Configurations = readConfigurations()
 
 type Configurations struct {
-	Affixes Affixes
+	Prefixes Prefixes
 	Suffixes Suffixes
 	Policies Policies
 	FileExtensions FileExtensions
-}
-
-type Affixes struct {
-	Prefixes Prefixes
-	Suffixes Suffixes
 }
 
 type Prefixes struct {

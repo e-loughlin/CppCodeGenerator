@@ -63,9 +63,9 @@ func (i Interface) parseDefineName(name string) string {
 		name = strings.ToUpper(name)
 	}
 
-	defineName := configurations.Config.Affixes.Prefixes.DefineName +
+	defineName := configurations.Config.Prefixes.DefineName +
 	name +
-	configurations.Config.Affixes.Suffixes.DefineName
+	configurations.Config.Suffixes.DefineName
 	return defineName
 }
 
@@ -95,8 +95,8 @@ func isValidInterfacePath(filePath string) bool {
 	filePath = strings.Replace(filePath, ":", "", -1)
 	hasCorrectExtension := (filepath.Ext(filePath) == ".h")
 	fileName := strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
-	hasCorrectPrefix := strings.HasPrefix(fileName, configurations.Config.Affixes.Prefixes.Interface)
-	hasCorrectSuffix := strings.HasSuffix(fileName, configurations.Config.Affixes.Suffixes.Interface)
+	hasCorrectPrefix := strings.HasPrefix(fileName, configurations.Config.Prefixes.Interface)
+	hasCorrectSuffix := strings.HasSuffix(fileName, configurations.Config.Suffixes.Interface)
 
 	isValid := hasCorrectExtension && hasCorrectPrefix && hasCorrectSuffix
 	return isValid
