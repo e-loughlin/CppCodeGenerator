@@ -8,7 +8,7 @@ import (
 
 func Test_InterfaceConstructorWillDeriveInterfaceNameFromFilepath(t *testing.T) {
 	for _, tt := range Test_InterfaceConstructorWillDeriveInterfaceNameFromFilepath_Data {
-		newInterface := cppcomponents.NewInterface(tt.filepath)
+		newInterface := cppcomponents.NewInterfaceFromExistingFile(tt.filepath)
 		actualName := newInterface.Name
 		if tt.expectedName != actualName {
 			t.Errorf("NewFunction(%v): name: EXPECTED: %v, ACTUAL: %v", tt.filepath, tt.expectedName, actualName)
