@@ -32,7 +32,7 @@ func main() {
 	if *typeFlagPtr == "interface" {
 		interfaceFilepath := *interfaceFilepathFlagPtr
 		if(interfaceFilepath == "") {
-			fmt.Println("You must specify either a path to an existing interface, or a path to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
+			fmt.Println("You must specify either a path to an existing interface, or a path (including name) to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
 			os.Exit(0)
 		}
 
@@ -43,12 +43,16 @@ func main() {
 		// Parse the existing interface and replace fields
 		i := cppcomponents.NewInterface(interfaceFilepath)
 
+		// Create a new Interface if one doesn't yet exist.
 		if(!util.FileExists(interfaceFilepath)) {
 			util.WriteToDisk(interfaceFilepath, []byte(interfaceContents))
 		}
 
+		// Fill the copyright block fields
 		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
 		util.ReplaceAllFields(interfaceFilepath, copyrightBlock.Fields())
+
+		// Fill the Interface fields
 		util.ReplaceAllFields(interfaceFilepath, i.Fields())
 		os.Exit(0)
 	}
