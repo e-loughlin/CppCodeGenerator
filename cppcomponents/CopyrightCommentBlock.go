@@ -2,6 +2,7 @@ package cppcomponents
 
 import (
 	"time"
+	"fmt"
 	
 	"github.com/emloughl/CppCodeGenerator/util"
 	"github.com/emloughl/CppCodeGenerator/configurations"
@@ -16,15 +17,14 @@ type CopyrightCommentBlock struct {
 }
 
 // NewCopyrightCommentBlock ...
-func NewCopyrightCommentBlock(templateFilePath string) *CopyrightCommentBlock {
+func NewCopyrightCommentBlock() *CopyrightCommentBlock {
 	c := CopyrightCommentBlock{}
-	var templateType util.Template = util.CommentBlockTemplate
+	var templateType util.Template = util.CopyrightTemplate
 	c.TemplateContents = util.ReadTemplate(templateType)
 	c.CompanyName = configurations.Config.UserInfo.CompanyName
 	c.Author = configurations.Config.UserInfo.Author
 	t := time.Now()
-	t.Format(configurations.Config.Policies.DateFormat)
-	c.Date = t.String()
+	c.Date = fmt.Sprintf(t.Format(configurations.Config.Policies.DateFormat))
 	return &c
 }
 

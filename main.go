@@ -47,6 +47,8 @@ func main() {
 			util.WriteToDisk(interfaceFilepath, []byte(interfaceContents))
 		}
 
+		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
+		util.ReplaceAllFields(interfaceFilepath, copyrightBlock.Fields())
 		util.ReplaceAllFields(interfaceFilepath, i.Fields())
 		os.Exit(0)
 	}
