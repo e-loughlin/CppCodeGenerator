@@ -42,3 +42,6 @@ func ReadTemplate(templateType Template) string {
 		return ""
 	}
 }
+
+
+// TODO: Refactor replacement of fields. Causes a race condition sometimes due to constantly reading/saving file in loop.
