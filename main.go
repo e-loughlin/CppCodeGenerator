@@ -45,20 +45,18 @@ func main() {
 		var templateType util.Template = util.InterfaceTemplate
 		interfaceContents := util.ReadTemplate(templateType)
 
-		// Parse the existing interface and replace fields
+		// TODO: Refactor Interface so that it takes contents rather than filepath
+		util.WriteToDisk(interfaceFilepath, interfaceContents)
 		i := cppcomponents.NewInterface(interfaceFilepath)
-
-		// Create a new Interface if one doesn't yet exist.
-		if !util.FileExists(interfaceFilepath) {
-			util.WriteToDisk(interfaceFilepath, []byte(interfaceContents))
-		}
 
 		// Fill the copyright block fields
 		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
-		util.ReplaceAllFields(interfaceFilepath, copyrightBlock.Fields())
+		interfaceContents = util.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
 
 		// Fill the Interface fields
-		util.ReplaceAllFields(interfaceFilepath, i.Fields())
+		interfaceContents = util.ReplaceAllFields(interfaceContents, i.Fields())
+		
+		util.WriteToDisk(interfaceFilepath, interfaceContents)
 		os.Exit(0)
 	}
 
@@ -93,7 +91,7 @@ func main() {
 		classHeaderContents := util.ReadTemplate(templateType)
 
 		// Write template to disk
-		util.WriteToDisk(classHeaderFilePath, []byte(classHeaderContents))
+		util.WriteToDisk(classHeaderFilePath, classHeaderContents)
 
 		// Fill the copyright block fields
 		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()

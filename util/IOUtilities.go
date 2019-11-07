@@ -59,11 +59,11 @@ func ReadLines(filePath string) []string {
 }
 
 // WriteToDisk ...
-func WriteToDisk(filePath string, data []byte) {
+func WriteToDisk(filePath string, data string) {
 	file, err := os.Create(filePath)
 	Check(err)
 	defer file.Close()
-	file.Write(data)
+	file.Write([]byte(data))
 }
 
 // IsQtClass ... Returns whether a given string is a Qt class.

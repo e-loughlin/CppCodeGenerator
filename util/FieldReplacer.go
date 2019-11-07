@@ -4,17 +4,15 @@ import (
 	"strings"
 )
 
-// ReplaceFields ... 
-func ReplaceFields(filePath string, key string, value string) {
-	contents := ReadContents(filePath)
-	contents = strings.Replace(contents, key, value, -1)
-	bytesToWrite := []byte(contents)
-	WriteToDisk(filePath, bytesToWrite)
-}
-
 // ReplaceAllFields ...
-func ReplaceAllFields(filePath string, keyValuesMap map[string]string) {
+func ReplaceAllFields(contents string, keyValuesMap map[string]string) string {
+	
+	// TODO Refactor so that this doesn't happen twice. (Stupid implementation due to nested structure of some fields.)
 	for key, value := range keyValuesMap {
-		ReplaceFields(filePath, key, value)
+		contents = strings.Replace(contents, key, value, -1)
 	}
+	for key, value := range keyValuesMap {
+		contents = strings.Replace(contents, key, value, -1)
+	}
+	return contents
 }
