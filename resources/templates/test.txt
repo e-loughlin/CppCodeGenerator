@@ -26,12 +26,14 @@ namespace
             mCollaborator2.reset();
             mCollaborator1.reset();
         }
+
+        QScopedPointer<{{Test.ConcreteName}}> mPatient;
+
+    };
+
+    TEST_F({{Test.Name}}, CanBeInstantiated)
+    {
+
     }
 
-    QScopedPointer<{{Test.ConcreteName}}> mPatient;
-}
-
-TEST_F({{Test.Name}}, CanBeInstantiated)
-{
-    
-}
+} //namespace
