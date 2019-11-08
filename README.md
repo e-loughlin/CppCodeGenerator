@@ -71,3 +71,6 @@ Modifying the `config.json` file allows you to alter your desired prefixes, suff
 
 #### Date Format: 
 Follow the Golang date format. Example here: https://stackoverflow.com/questions/20234104/how-to-format-current-time-using-a-yyyymmddhhmmss-format
+
+## TODO:
+Add list in README of all possible template parameters
