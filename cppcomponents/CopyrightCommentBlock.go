@@ -31,7 +31,7 @@ func NewCopyrightCommentBlock() *CopyrightCommentBlock {
 // Fields ... The fields within templates to be replaced.
 func (c CopyrightCommentBlock) Fields() map[string]string {
 	fields := make(map[string]string)
-	fields["{{COPYRIGHT}}"] = c.TemplateContents
+	fields["{{Copyright}}"] = c.TemplateContents
 	fields["{{UserInfo.Company}}"] = c.CompanyName
 	fields["{{UserInfo.Author}}"] = c.Author
 	fields["{{Date}}"] = c.Date

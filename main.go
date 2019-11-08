@@ -38,6 +38,9 @@ func main() {
 		fmt.Println("You must specify either a path to an existing interface, or a path (including name) to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
 		os.Exit(0)
 	}
+	
+	// Copyright Block
+	copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
 
 	//Interface
 	if generatedType == generatortypes.Interface {
@@ -50,7 +53,6 @@ func main() {
 		i := cppcomponents.NewInterface(interfaceFilepath)
 
 		// Fill the copyright block fields
-		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
 		interfaceContents = util.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
 
 		// Fill the Interface fields
@@ -82,20 +84,37 @@ func main() {
 			os.Exit(0)
 		}
 
+		// --------------
+		// CLASS HEADER 
+		// --------------
 		classHeader := cppcomponents.NewClassHeader(*inheritedInterface)
 		interfaceDir := filepath.Dir(interfaceFilepath)
 		classHeaderFilePath := filepath.Join(interfaceDir, classHeader.FileName)
 
 		// Read Template File
-		var templateType util.Template = util.ClassHeaderTemplate
-		classHeaderContents := util.ReadTemplate(templateType)
-
-		// Write template to disk
-		util.WriteToDisk(classHeaderFilePath, classHeaderContents)
+		classHeaderContents := util.ReadTemplate(util.ClassHeaderTemplate)
 
 		// Fill the copyright block fields
-		copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
-		util.ReplaceAllFields(interfaceFilepath, copyrightBlock.Fields())
-		util.ReplaceAllFields(interfaceFilepath, copyrightBlock.Fields())
+		classHeaderContents = util.ReplaceAllFields(classHeaderContents, copyrightBlock.Fields())
+		classHeaderContents = util.ReplaceAllFields(classHeaderContents, classHeader.Fields())
+
+		// Write to disk
+		util.WriteToDisk(classHeaderFilePath, classHeaderContents)
+
+		// ----------------------
+		// CLASS IMPLEMENTATION 
+		// ----------------------
+		classImplementation := cppcomponents.NewClassImplementation(*inheritedInterface)
+		classImplementationFilePath := filepath.Join(interfaceDir, classImplementation.FileName)
+		
+		// Read Template File
+		classImplementationContents := util.ReadTemplate(util.ClassImplementationTemplate)
+
+		// Fill the copyright block fields
+		classImplementationContents = util.ReplaceAllFields(classImplementationContents, copyrightBlock.Fields())
+		classImplementationContents = util.ReplaceAllFields(classImplementationContents, classImplementation.Fields())
+
+		// Write to disk
+		util.WriteToDisk(classImplementationFilePath, classImplementationContents)
 	}
 }

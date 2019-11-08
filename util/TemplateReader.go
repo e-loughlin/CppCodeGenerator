@@ -17,7 +17,7 @@ const (
 )
 
 // Filepaths for various templates
-var classImplementionTemplatePath = filepath.Join(TemplatesDir, "class_cpp.txt")
+var classImplementionTemplatePath = filepath.Join(TemplatesDir, "class_impl.txt")
 var classHeaderTemplatePath = filepath.Join(TemplatesDir, "class_header.txt")
 var commentBlockTemplatePath = filepath.Join(TemplatesDir, "comment_block_function.txt")
 var copyrightTemplatePath = filepath.Join(TemplatesDir, "copyright.txt")

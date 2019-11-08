@@ -32,6 +32,7 @@ func NewClassHeader(InheritedInterface Interface) *ClassHeader {
 func (c ClassHeader) Fields() map[string]string {
 	fields := make(map[string]string)
 	fields["{{Interface.FileName}}"] = c.InheritedInterface.FileName
+	fields["{{Interface.Name}}"] = c.InheritedInterface.Name
 	fields["{{FileName}}"] = c.FileName
 	fields["{{Class.Name}}"] = c.Name
 	fields["{{Class.Header.DefineName}}"] = c.DefineName
