@@ -23,8 +23,16 @@ func NewClassImplementation(InheritedInterface Interface) *ClassImplementation {
 	c.Name = strings.TrimSuffix(c.Name, configurations.Config.Suffixes.Interface)
 	c.HeaderFileName = c.Name + configurations.Config.FileExtensions.CppHeader
 	c.FileName = c.Name + configurations.Config.FileExtensions.CppImplementation
-
+	c.FunctionDefinitions = c.parseFunctionDefinitions()
 	return &c
+}
+
+func (c ClassImplementation) parseFunctionDefinitions() string {
+	functionDefinitions := ""
+	for _, function := range c.InheritedInterface.Functions {
+		functionDefinitions += function.Definition(c.Name)
+	}
+	return functionDefinitions
 }
 
 

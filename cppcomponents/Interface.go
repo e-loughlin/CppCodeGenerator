@@ -36,20 +36,22 @@ func NewInterface(filePath string) *Interface {
 	i := Interface{}
 	filePath = strings.Replace(filePath, ":", "", -1)
 	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
-	i.parseFunctions(interfaceLines)
+	i.Functions = i.parseFunctions(interfaceLines)
 	i.DefineName = i.parseDefineName(i.Name)
 	i.FileName = i.parseFileName(i.Name)
 	return &i
 }
 
 // parseFunctions ... Reads a slice of lines and parses Function structs from it.
-func (i Interface) parseFunctions(contentLines []string) {
+func (i Interface) parseFunctions(contentLines []string) []Function {
+	var functions []Function
 	for _, line := range contentLines {
 		if(isPureVirtualDefinition(line)) {
 			newFunction := NewFunction(line)
-			i.Functions = append(i.Functions, *newFunction)
+			functions = append(functions, *newFunction)
 		}
 	}
+	return functions
 }
 
 // parseDefineName ... 
