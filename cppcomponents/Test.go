@@ -25,6 +25,6 @@ func (t Test) Fields() map[string]string {
 	fields := make(map[string]string)
 	fields["{{Test.ConcreteFileName}}"] = t.ConcreteFileName
 	fields["{{Test.ConcreteName}}"] = t.ConcreteName
-	fields["{{Test.Name"] = t.TestName
+	fields["{{Test.Name}}"] = t.TestName
 	return fields
 }
