@@ -14,6 +14,7 @@ var classImplementionTemplatePath = filepath.Join(util.TemplatesDir, configurati
 var classHeaderTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.ClassHeader)
 var commentBlockTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.FunctionCommentBlock)
 var copyrightTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.CopyrightBlock)
+var testTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.Test)
 
 // ReadTemplate ... Returns the contents of a given template file
 func ReadTemplate(templateType Template) string {
@@ -29,6 +30,8 @@ func ReadTemplate(templateType Template) string {
 		return util.ReadContents(copyrightTemplatePath)
 	case Interface:
 		return util.ReadContents(interfaceTemplatePath)
+	case Test:
+		return util.ReadContents(testTemplatePath)
 	default:
 		log.Fatal("Attempted to read a non-existent template file.")
 		return ""

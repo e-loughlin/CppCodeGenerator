@@ -9,4 +9,5 @@ const (
 	CommentBlock
 	Copyright
 	Interface
+	Test
 )

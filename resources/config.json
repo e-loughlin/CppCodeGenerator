@@ -47,6 +47,7 @@
         "ClassHeader": "class_header.txt",
         "ClassImplementation": "class_impl.txt",
         "FunctionCommentBlock": "comment_block_function.txt",
-        "CopyrightBlock": "copyright.txt"
+        "CopyrightBlock": "copyright.txt",
+        "Test": "test.txt"
     }
 }

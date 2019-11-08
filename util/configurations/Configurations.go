@@ -54,4 +54,5 @@ type TemplateFileNames struct {
 	ClassImplementation string
 	FunctionCommentBlock string
 	CopyrightBlock string
+	Test string
 }
