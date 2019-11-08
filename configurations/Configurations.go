@@ -6,6 +6,7 @@ type Configurations struct {
 	UserInfo UserInfo
 	Prefixes Prefixes
 	Suffixes Suffixes
+	Syntax Syntax
 	Policies Policies
 	FileExtensions FileExtensions
 
@@ -30,6 +31,10 @@ type Suffixes struct {
 	Mock string
 	SpyMock string
 	Test string
+}
+
+type Syntax struct {
+	Tab string
 }
 
 type Policies struct {

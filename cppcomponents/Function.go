@@ -3,6 +3,8 @@ package cppcomponents
 import (
 	"fmt"
 	"strings"
+
+	"github.com/emloughl/CppCodeGenerator/configurations"
 )
 
 // Function ...
@@ -46,9 +48,8 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 	return &f
 }
 
-/// TODO: Make \t resource configurable (3 spaces, 4 spaces?)
 func (f Function) Declaration() string {
-	return fmt.Sprintf("\t%v %v(%v)%v override;", f.ReturnType, f.Name, f.allParameters(), f.ConstString)
+	return fmt.Sprintf("%v%v %v(%v)%v override;", configurations.Config.Syntax.Tab, f.ReturnType, f.Name, f.allParameters(), f.ConstString)
 }
 
 func (f Function) Definition(classScope string) string {

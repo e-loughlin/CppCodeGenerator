@@ -22,6 +22,11 @@
         "SpyMock": "",
         "Test": ""
     },
+
+    "Syntax":
+    {
+        "Tab": "   "
+    },
     
     "Policies":
     {
