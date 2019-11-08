@@ -118,3 +118,5 @@ func main() {
 		util.WriteToDisk(classImplementationFilePath, classImplementationContents)
 	}
 }
+
+//TODO: Consider creating a factory for each file type
