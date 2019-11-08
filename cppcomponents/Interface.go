@@ -7,7 +7,7 @@ import (
 	"fmt"
 	
 	"github.com/emloughl/CppCodeGenerator/util"
-	"github.com/emloughl/CppCodeGenerator/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 	"github.com/fatih/camelcase"
 )
 
@@ -18,7 +18,7 @@ type Interface struct {
 	DefineName string
 	Functions []Function
 	Signals   []Function
-	Includes  []string
+	Dependencies  []string
 }
 
 // NewInterface ... 
@@ -76,6 +76,13 @@ func (i Interface) parseFileName(name string) string {
 	fileName :=  i.Name + configurations.Config.FileExtensions.CppHeader
 	return fileName
 }
+
+// // parseDependencies ...
+// func (i Interface) parseDependencies(name string) []string {
+// 	var dependencies []string
+// 	fileName :=  i.Name + configurations.Config.FileExtensions.CppHeader
+// 	return fileName
+// }
 
 // isPureVirtualDefinition ... Returns whether a function is pure virtual.
 func isPureVirtualDefinition(line string) bool {

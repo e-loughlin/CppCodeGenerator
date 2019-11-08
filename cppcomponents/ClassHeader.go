@@ -4,7 +4,7 @@ import (
 	"strings"
 
 	// "github.com/emloughl/CppCodeGenerator/util"
-	"github.com/emloughl/CppCodeGenerator/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 // ClassHeader ... Implements File

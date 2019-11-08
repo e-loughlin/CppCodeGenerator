@@ -9,7 +9,7 @@ type Configurations struct {
 	Syntax Syntax
 	Policies Policies
 	FileExtensions FileExtensions
-
+	TemplateFileNames TemplateFileNames
 }
 
 type UserInfo struct {
@@ -46,4 +46,12 @@ type Policies struct {
 type FileExtensions struct {
 	CppHeader string
 	CppImplementation string
+}
+
+type TemplateFileNames struct {
+	Interface string
+	ClassHeader string
+	ClassImplementation string
+	FunctionCommentBlock string
+	CopyrightBlock string
 }

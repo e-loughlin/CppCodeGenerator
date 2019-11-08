@@ -11,6 +11,7 @@ import (
 
 	"github.com/emloughl/CppCodeGenerator/cppcomponents"
 	"github.com/emloughl/CppCodeGenerator/util"
+	"github.com/emloughl/CppCodeGenerator/util/templates"
 	"github.com/emloughl/CppCodeGenerator/generatortypes"
 )
 
@@ -45,8 +46,7 @@ func main() {
 	//Interface
 	if generatedType == generatortypes.Interface {
 		//TODO: Refactor templateType usage (enum)
-		var templateType util.Template = util.InterfaceTemplate
-		interfaceContents := util.ReadTemplate(templateType)
+		interfaceContents := templates.ReadTemplate(templates.Interface)
 
 		// TODO: Refactor Interface so that it takes contents rather than filepath
 		util.WriteToDisk(interfaceFilepath, interfaceContents)
@@ -92,7 +92,7 @@ func main() {
 		classHeaderFilePath := filepath.Join(interfaceDir, classHeader.FileName)
 
 		// Read Template File
-		classHeaderContents := util.ReadTemplate(util.ClassHeaderTemplate)
+		classHeaderContents := templates.ReadTemplate(templates.ClassHeader)
 
 		// Fill the copyright block fields
 		classHeaderContents = util.ReplaceAllFields(classHeaderContents, copyrightBlock.Fields())
@@ -108,7 +108,7 @@ func main() {
 		classImplementationFilePath := filepath.Join(interfaceDir, classImplementation.FileName)
 		
 		// Read Template File
-		classImplementationContents := util.ReadTemplate(util.ClassImplementationTemplate)
+		classImplementationContents := templates.ReadTemplate(templates.ClassImplementation)
 
 		// Fill the copyright block fields
 		classImplementationContents = util.ReplaceAllFields(classImplementationContents, copyrightBlock.Fields())

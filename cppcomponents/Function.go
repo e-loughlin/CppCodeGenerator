@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/emloughl/CppCodeGenerator/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 // Function ...
@@ -49,7 +49,7 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 }
 
 func (f Function) Declaration() string {
-	return fmt.Sprintf("%v%v %v(%v)%v override;", configurations.Config.Syntax.Tab, f.ReturnType, f.Name, f.allParameters(), f.ConstString)
+	return fmt.Sprintf("%v%v %v(%v)%v override;\n", configurations.Config.Syntax.Tab, f.ReturnType, f.Name, f.allParameters(), f.ConstString)
 }
 
 func (f Function) Definition(classScope string) string {
@@ -67,15 +67,3 @@ func (f Function) allParameters() string {
 	}
 	return parametersString
 }
-
-// func splitParameters(rawParameterString string) string {
-// 	var commaIndices []int
-// 	// Template depth increases for each "<" found, and decreases for each ">"
-// 	templateDepth := 0
-// 	for pos, char := range rawParameterString {
-
-// 	}
-
-// 	return "butt"
-
-// }

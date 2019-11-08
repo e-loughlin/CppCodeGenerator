@@ -2,7 +2,7 @@ package cppcomponents
 
 import (
 	"strings"
-	"github.com/emloughl/CppCodeGenerator/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 // ClassImplementation ... Implements File

@@ -4,8 +4,8 @@ import (
 	"time"
 	"fmt"
 	
-	"github.com/emloughl/CppCodeGenerator/util"
-	"github.com/emloughl/CppCodeGenerator/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/templates"
 )
 
 // CopyrightCommentBlock ... Implements File
@@ -19,8 +19,8 @@ type CopyrightCommentBlock struct {
 // NewCopyrightCommentBlock ...
 func NewCopyrightCommentBlock() *CopyrightCommentBlock {
 	c := CopyrightCommentBlock{}
-	var templateType util.Template = util.CopyrightTemplate
-	c.TemplateContents = util.ReadTemplate(templateType)
+	var templateType templates.Template = templates.Copyright
+	c.TemplateContents = templates.ReadTemplate(templateType)
 	c.CompanyName = configurations.Config.UserInfo.CompanyName
 	c.Author = configurations.Config.UserInfo.Author
 	t := time.Now()

@@ -39,6 +39,14 @@
     {
         "CppHeader": ".h",
         "CppImplementation": ".cpp"
-    }
+    },
 
+    "TemplateFileNames": 
+    {
+        "Interface": "interface.txt",
+        "ClassHeader": "class_header.txt",
+        "ClassImplementation": "class_impl.txt",
+        "FunctionCommentBlock": "comment_block_function.txt",
+        "CopyrightBlock": "copyright.txt"
+    }
 }
