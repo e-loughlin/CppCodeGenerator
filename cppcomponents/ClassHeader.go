@@ -24,8 +24,16 @@ func NewClassHeader(InheritedInterface Interface) *ClassHeader {
 	c.Name = strings.TrimPrefix(c.InheritedInterface.Name, configurations.Config.Prefixes.Interface)
 	c.Name = strings.TrimSuffix(c.Name, configurations.Config.Suffixes.Interface)
 	c.FileName = c.Name + configurations.Config.FileExtensions.CppHeader
-
+	c.FunctionDeclarations = c.parseFunctionDeclarations()
 	return &c
+}
+
+func (c ClassHeader) parseFunctionDeclarations() string {
+	functionDeclarations := ""
+	for _, function := range c.InheritedInterface.Functions {
+		functionDeclarations += function.Declaration()
+	}
+	return functionDeclarations
 }
 
 // Fields ... The fields within templates to be replaced.
