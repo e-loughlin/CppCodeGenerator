@@ -8,6 +8,7 @@ import (
 type Test struct {
 	ClassImplementation ClassImplementation
 	TestName          		string
+	FileName          		string
 	ConcreteName			string
 	ConcreteFileName		string
 }
@@ -15,6 +16,7 @@ type Test struct {
 func NewTestByConcreteName(concreteName string) *Test {
 	t := Test{}
 	t.TestName = configurations.Config.Prefixes.Test + concreteName + configurations.Config.Suffixes.Test
+	t.FileName = t.TestName + configurations.Config.FileExtensions.CppImplementation
 	t.ConcreteName = concreteName
 	t.ConcreteFileName = concreteName + configurations.Config.FileExtensions.CppHeader
 	return &t
@@ -24,6 +26,7 @@ func NewTestByConcreteName(concreteName string) *Test {
 func (t Test) Fields() map[string]string {
 	fields := make(map[string]string)
 	fields["{{Test.ConcreteFileName}}"] = t.ConcreteFileName
+	fields["{{FileName}}"] = t.FileName
 	fields["{{Test.ConcreteName}}"] = t.ConcreteName
 	fields["{{Test.Name}}"] = t.TestName
 	return fields

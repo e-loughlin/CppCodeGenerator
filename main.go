@@ -19,6 +19,7 @@ func main() {
 	// Command-line argument flags
 	typeFlagPtr := flag.String("type", "", "Type of file to generate (class, interface, mock, or test).")
 	interfaceFilepathFlagPtr := flag.String("interface", "", "Filepath of interface from which to base a generated derived class.")
+	namePtr := flag.String("name", "", "Name of concrete class.")
 
 	// If no arguments, print usage.
 	if len(os.Args) < 2 {
@@ -34,11 +35,12 @@ func main() {
 		os.Exit(0)
 	}
 
+	// TODO: Fix guards
 	interfaceFilepath := *interfaceFilepathFlagPtr
-	if interfaceFilepath == "" {
-		fmt.Println("You must specify either a path to an existing interface, or a path (including name) to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
-		os.Exit(0)
-	}
+	// if interfaceFilepath == "" {
+	// 	fmt.Println("You must specify either a path to an existing interface, or a path (including name) to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
+	// 	os.Exit(0)
+	// }
 	
 	// Copyright Block
 	copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
@@ -117,6 +119,23 @@ func main() {
 		// Write to disk
 		util.WriteToDisk(classImplementationFilePath, classImplementationContents)
 	}
+
+	// Test
+	if generatedType == generatortypes.Test {
+		if *namePtr == "" {
+			fmt.Println("Error: To create a test, you must specify the name of the concrete that it's testing.")
+			os.Exit(0)
+		}
+
+		test := cppcomponents.NewTestByConcreteName(*namePtr)
+		testContents := templates.ReadTemplate(templates.Test)
+		testContents = util.ReplaceAllFields(testContents, copyrightBlock.Fields())
+		testContents = util.ReplaceAllFields(testContents, test.Fields())
+		cwd, _ := os.Getwd()
+		testFilePath := filepath.Join(cwd, test.FileName)
+		util.WriteToDisk(testFilePath, testContents)
+	}
+
 }
 
 //TODO: Consider creating a factory for each file type
