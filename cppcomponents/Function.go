@@ -18,7 +18,7 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 	f := Function{}
 
 	// Remove "virtual " from string
-	pureVirtualFunctionLine = strings.TrimPrefix(pureVirtualFunctionLine, "virtual ")
+	pureVirtualFunctionLine = strings.Split(pureVirtualFunctionLine, "virtual ")[1]
 
 	// Parse function Name and return type
 	returnTypeAndName := strings.Split(pureVirtualFunctionLine, "(")[0]
@@ -52,7 +52,7 @@ func (f Function) Declaration() string {
 }
 
 func (f Function) Definition(classScope string) string {
-	return fmt.Sprintf("%v %v::%v(%v)%v\n{\n}", f.ReturnType, classScope, f.Name, f.allParameters(), f.ConstString)
+	return fmt.Sprintf("%v %v::%v(%v)%v\n{\n}\n\n", f.ReturnType, classScope, f.Name, f.allParameters(), f.ConstString)
 }
 
 func (f Function) allParameters() string {
