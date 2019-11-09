@@ -7,8 +7,8 @@ import (
 	"fmt"
 	
 	"github.com/emloughl/CppCodeGenerator/util"
+	"github.com/emloughl/CppCodeGenerator/util/parsers"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
-	"github.com/fatih/camelcase"
 )
 
 // Interface ... Implements File
@@ -37,7 +37,7 @@ func NewInterface(filePath string) *Interface {
 	filePath = strings.Replace(filePath, ":", "", -1)
 	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
 	i.Functions = i.parseFunctions(interfaceLines)
-	i.DefineName = i.parseDefineName(i.Name)
+	i.DefineName = parsers.GenerateDefineName(i.Name)
 	i.FileName = i.parseFileName(i.Name)
 	return &i
 }
@@ -52,23 +52,6 @@ func (i Interface) parseFunctions(contentLines []string) []Function {
 		}
 	}
 	return functions
-}
-
-// parseDefineName ... 
-func (i Interface) parseDefineName(name string) string {
-
-	name = strings.Replace(name, "_", "", -1)
-	splitName := camelcase.Split(name)
-	name = strings.Join(splitName, configurations.Config.Policies.DefineNameCamelCaseSeparator)
-	
-	if(configurations.Config.Policies.DefineNameAllCapsEnabled) {
-		name = strings.ToUpper(name)
-	}
-
-	defineName := configurations.Config.Prefixes.DefineName +
-	name +
-	configurations.Config.Suffixes.DefineName
-	return defineName
 }
 
 // parseFileName ...

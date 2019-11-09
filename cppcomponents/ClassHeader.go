@@ -4,6 +4,7 @@ import (
 	"strings"
 
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/parsers"
 )
 
 // ClassHeader ... Implements File
@@ -23,6 +24,7 @@ func NewClassHeader(InheritedInterface Interface) *ClassHeader {
 	c.Name = strings.TrimPrefix(c.InheritedInterface.Name, configurations.Config.Prefixes.Interface)
 	c.Name = strings.TrimSuffix(c.Name, configurations.Config.Suffixes.Interface)
 	c.FileName = c.Name + configurations.Config.FileExtensions.CppHeader
+	c.DefineName = parsers.GenerateDefineName(c.Name)
 	c.FunctionDeclarations = c.parseFunctionDeclarations()
 	return &c
 }
