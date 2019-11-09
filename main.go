@@ -136,6 +136,22 @@ func main() {
 		util.WriteToDisk(testFilePath, testContents)
 	}
 
+	// Mock
+	if generatedType == generatortypes.Mock {
+		if interfaceFilepath == "" {
+			fmt.Println("Error: To create a Mock, you must provide the path to an interface.")
+			os.Exit(0)
+		}
+
+		mock := cppcomponents.NewMock(*inheritedInterface)
+		mockContents := templates.ReadTemplate(templates.Mock)
+		mockContents = util.ReplaceAllFields(mockContents, copyrightBlock.Fields())
+		mockContents = util.ReplaceAllFields(mockContents, mock.Fields())
+		cwd, _ := os.Getwd()
+		mockFilePath := filepath.Join(cwd, mock.FileName)
+		util.WriteToDisk(mockFilePath, mockContents)
+	}
+
 }
 
 // TODO: Consider creating a factory for each file type
