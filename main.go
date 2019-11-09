@@ -138,4 +138,6 @@ func main() {
 
 }
 
-//TODO: Consider creating a factory for each file type
+// TODO: Consider creating a factory for each file type
+
+// TODO: Feature: Command-line arguments to modify settings (Such as username)
