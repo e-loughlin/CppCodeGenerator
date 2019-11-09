@@ -55,4 +55,5 @@ type TemplateFileNames struct {
 	FunctionCommentBlock string
 	CopyrightBlock string
 	Test string
+	Mock string
 }

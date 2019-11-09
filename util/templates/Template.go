@@ -10,4 +10,5 @@ const (
 	Copyright
 	Interface
 	Test
+	Mock
 )

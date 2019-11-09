@@ -7,7 +7,7 @@ import (
 
 // RunGMockGenerator ...
 func RunGMockGenerator(interfaceFilePath string) string {
-	runCommand := fmt.Sprintf("python %v %v", GmockGeneratorPath, interfaceFilePath)
+	runCommand := fmt.Sprintf("python %v %v", GMockGeneratorPath, interfaceFilePath)
 	cmd := exec.Command(runCommand)
 	output, _ := cmd.Output()
 	return string(output)

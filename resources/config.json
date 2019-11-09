@@ -48,6 +48,7 @@
         "ClassImplementation": "class_impl.txt",
         "FunctionCommentBlock": "comment_block_function.txt",
         "CopyrightBlock": "copyright.txt",
-        "Test": "test.txt"
+        "Test": "test.txt",
+        "Mock": "mock.txt"
     }
 }
