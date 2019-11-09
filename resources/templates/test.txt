@@ -28,7 +28,8 @@ namespace
         }
 
         QScopedPointer<{{Test.ConcreteName}}> mPatient;
-
+        QScopedPointer<MockCollaborator1> mCollaborator1;
+        QScopedPointer<MockCollaborator2> mCollaborator2;
     };
 
     TEST_F({{Test.Name}}, CanBeInstantiated)
