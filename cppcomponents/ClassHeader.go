@@ -3,19 +3,18 @@ package cppcomponents
 import (
 	"strings"
 
-	// "github.com/emloughl/CppCodeGenerator/util"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 // ClassHeader ... Implements File
 type ClassHeader struct {
 	InheritedInterface Interface
-	Name                 string
-	FileName             string
-	DefineName		     string
-	ForwardDeclares	     string
-	FunctionDeclarations string
-	QtSignalDeclarations string
+	Name                 	string
+	FileName             	string
+	DefineName		     	string
+	ForwardDeclares	     	string
+	FunctionDeclarations 	string
+	QtSignalDeclarations 	string
 }
 
 func NewClassHeader(InheritedInterface Interface) *ClassHeader {
