@@ -2,13 +2,11 @@ package util
 
 import (
 	"os/exec"
-	"fmt"
 )
 
 // RunGMockGenerator ...
 func RunGMockGenerator(interfaceFilePath string) string {
-	runCommand := fmt.Sprintf("python %v %v", GMockGeneratorPath, interfaceFilePath)
-	cmd := exec.Command(runCommand)
+	cmd := exec.Command("python", GMockGeneratorPath, interfaceFilePath)
 	output, _ := cmd.Output()
 	return string(output)
 }

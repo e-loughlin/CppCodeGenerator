@@ -17,6 +17,7 @@ type Mock struct {
 
 func NewMock(inheritedInterface Interface) *Mock {
 	m := Mock{}
+	m.InheritedInterface = inheritedInterface
 	m.Name = strings.TrimPrefix(m.InheritedInterface.Name, configurations.Config.Prefixes.Interface)
 	m.Name = strings.TrimSuffix(m.Name, configurations.Config.Suffixes.Interface)
 	m.Name = configurations.Config.Prefixes.Mock + m.Name + configurations.Config.Suffixes.Mock
@@ -27,7 +28,9 @@ func NewMock(inheritedInterface Interface) *Mock {
 
 // getGMockGeneratorContents ...
 func (m Mock) getGMockGeneratorContents() string {
-	return util.RunGMockGenerator(m.InheritedInterface.FileName)
+	gmockGeneratorContents := util.RunGMockGenerator(m.InheritedInterface.FileName)
+	mockNameGeneratedByGMock := configurations.Config.Prefixes.Mock + m.InheritedInterface.Name + configurations.Config.Suffixes.Mock
+	return strings.ReplaceAll(gmockGeneratorContents, mockNameGeneratedByGMock, m.Name)
 }
 
 // Fields ... The fields within templates to be replaced.

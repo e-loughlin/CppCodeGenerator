@@ -14,6 +14,7 @@ import (
 // Interface ... Implements File
 type Interface struct {
 	Name      string
+	FilePath string
 	FileName string
 	DefineName string
 	Functions []Function
@@ -34,6 +35,7 @@ func NewInterface(filePath string) *Interface {
 	}
 	
 	i := Interface{}
+	i.FilePath = filePath
 	filePath = strings.Replace(filePath, ":", "", -1)
 	i.Name = strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
 	i.Functions = i.parseFunctions(interfaceLines)
