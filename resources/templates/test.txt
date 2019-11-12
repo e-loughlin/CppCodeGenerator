@@ -5,6 +5,8 @@
 #include "MockCollaborator1.h"
 #include "MockCollaborator2.h"
 
+using ::testing::NiceMock;
+
 namespace
 {
     class {{Test.Name}} : public ::testing::Test
@@ -28,8 +30,8 @@ namespace
         }
 
         QScopedPointer<{{Test.ConcreteName}}> mPatient;
-        QScopedPointer<MockCollaborator1> mCollaborator1;
-        QScopedPointer<MockCollaborator2> mCollaborator2;
+        QScopedPointer<NiceMock<MockCollaborator1>> mCollaborator1;
+        QScopedPointer<NiceMock<MockCollaborator2>> mCollaborator2;
     };
 
     TEST_F({{Test.Name}}, CanBeInstantiated)
