@@ -10,5 +10,6 @@ const (
 	Copyright
 	Interface
 	Test
-	Mock
+	MockImplementation
+	MockHeader
 )

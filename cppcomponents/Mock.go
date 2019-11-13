@@ -2,7 +2,6 @@ package cppcomponents
 
 import (
 	"strings"
-	"fmt"
 
 	"github.com/emloughl/CppCodeGenerator/util"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
@@ -24,7 +23,6 @@ func NewMock(inheritedInterface Interface) *Mock {
 	m.Name = configurations.Config.Prefixes.Mock + m.Name + configurations.Config.Suffixes.Mock
 	m.FileName = m.Name + configurations.Config.FileExtensions.CppHeader
 	m.GMockMacros = util.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
-	fmt.Println(m.GMockMacros)
 	return &m
 }
 
@@ -32,5 +30,8 @@ func NewMock(inheritedInterface Interface) *Mock {
 func (m Mock) Fields() map[string]string {
 	fields := make(map[string]string)
 	fields["{{GMockMacros}}"] = m.GMockMacros
+	fields["{{Mock.Name}}"] = m.Name
+	fields["{{Mock.InheritedInterface.Name}}"] = m.InheritedInterface.Name
+	fields["{{Mock.InheritedInterface.FileName}}"] = m.InheritedInterface.FileName
 	return fields
 }

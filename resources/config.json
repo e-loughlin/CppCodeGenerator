@@ -32,7 +32,8 @@
     {
         "DefineNameAllCapsEnabled": true,
         "DefineNameCamelCaseSeparator": "",
-        "DateFormat": "2006/01/02"
+        "DateFormat": "2006/01/02",
+        "CreateMockHeaderFile": true
     },
 
     "FileExtensions": 
@@ -49,6 +50,9 @@
         "FunctionCommentBlock": "comment_block_function.txt",
         "CopyrightBlock": "copyright.txt",
         "Test": "test.txt",
-        "Mock": "mock.txt"
+        "MockHeader": "mock_header.txt",
+        "MockImplementation": "mock_implementation.txt",
+        "MockHelperDeclarations": ["mock_helper_function1_declaration.txt", "mock_helper_function2_declaration.txt"],
+        "MockHelperDefinitions": ["mock_helper_function1_definition.txt", "mock_helper_function2_definition.txt"]
     }
 }

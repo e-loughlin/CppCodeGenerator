@@ -144,7 +144,7 @@ func main() {
 		}
 
 		mock := cppcomponents.NewMock(*inheritedInterface)
-		mockContents := templates.ReadTemplate(templates.Mock)
+		mockContents := templates.ReadTemplate(templates.MockHeader)
 		mockContents = util.ReplaceAllFields(mockContents, copyrightBlock.Fields())
 		mockContents = util.ReplaceAllFields(mockContents, mock.Fields())
 		cwd, _ := os.Getwd()

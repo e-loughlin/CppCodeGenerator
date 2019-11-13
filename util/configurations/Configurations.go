@@ -55,5 +55,8 @@ type TemplateFileNames struct {
 	FunctionCommentBlock string
 	CopyrightBlock string
 	Test string
-	Mock string
+	MockHeader string
+	MockImplementation string
+	MockHelperDeclarations []string
+	MockHelperDefinitions []string
 }
