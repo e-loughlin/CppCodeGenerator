@@ -1,15 +1,15 @@
-package util
+package paths
 
 import (
 	"path/filepath"
-	"runtime"
+	"os"
 )
 
 // TODO: These directories break "go run" command. Find way to make it work.
 
 // Directories
-var _, b, _, _ = runtime.Caller(0)
-var ExecutablePath = filepath.Dir(b)
+var ex, _ = os.Executable()
+var ExecutablePath = filepath.Dir(ex)
 var ProjectRoot = filepath.Join(ExecutablePath, "../")
 var ResourcesDir = filepath.Join(ProjectRoot, "resources")
 var TemplatesDir = filepath.Join(ResourcesDir, "templates")

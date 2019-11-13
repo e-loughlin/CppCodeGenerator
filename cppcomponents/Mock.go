@@ -3,7 +3,7 @@ package cppcomponents
 import (
 	"strings"
 
-	"github.com/emloughl/CppCodeGenerator/util"
+	"github.com/emloughl/CppCodeGenerator/util/gmockgenrunner"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
@@ -11,8 +11,11 @@ import (
 type Mock struct {
 	InheritedInterface Interface
 	Name          			string
-	FileName          		string
+	HeaderFileName          string
+	ImplementationFileName  string
 	GMockMacros 			string
+	MockHelperFunctionDeclarations string
+	MockHelperFunctionDefinitions string
 }
 
 func NewMock(inheritedInterface Interface) *Mock {
@@ -21,17 +24,25 @@ func NewMock(inheritedInterface Interface) *Mock {
 	m.Name = strings.TrimPrefix(m.InheritedInterface.Name, configurations.Config.Prefixes.Interface)
 	m.Name = strings.TrimSuffix(m.Name, configurations.Config.Suffixes.Interface)
 	m.Name = configurations.Config.Prefixes.Mock + m.Name + configurations.Config.Suffixes.Mock
-	m.FileName = m.Name + configurations.Config.FileExtensions.CppHeader
-	m.GMockMacros = util.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
+	m.HeaderFileName = m.Name + configurations.Config.FileExtensions.CppHeader
+	m.ImplementationFileName = m.Name + configurations.Config.FileExtensions.CppImplementation
+	m.GMockMacros = gmockgenrunner.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
 	return &m
 }
+
+// func (m Mock) getMockHelperFunctionDeclarations string {
+	
+// }
 
 // Fields ... The fields within templates to be replaced.
 func (m Mock) Fields() map[string]string {
 	fields := make(map[string]string)
-	fields["{{GMockMacros}}"] = m.GMockMacros
 	fields["{{Mock.Name}}"] = m.Name
+	fields["{{Mock.Header.FileName}}"] = m.HeaderFileName
+	fields["{{GMockMacros}}"] = m.GMockMacros
 	fields["{{Mock.InheritedInterface.Name}}"] = m.InheritedInterface.Name
 	fields["{{Mock.InheritedInterface.FileName}}"] = m.InheritedInterface.FileName
+	fields["{{Mock.HelperFunctions.Declarations}}"] = m.MockHelperFunctionDeclarations
+	fields["{{Mock.HelperFunctions.Definition}}"] = m.MockHelperFunctionDefinitions
 	return fields
 }

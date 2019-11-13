@@ -1,14 +1,16 @@
-package util
+package gmockgenrunner
 
 import (
 	"os/exec"
 	"bufio"
 	"strings"
+	
+	"github.com/emloughl/CppCodeGenerator/util/paths"
 )
 
 // RunGMockGenerator ...
 func RunGMockGenerator(interfaceFilePath string) string {
-	cmd := exec.Command("python", GMockGeneratorPath, interfaceFilePath)
+	cmd := exec.Command("python", paths.GMockGeneratorPath, interfaceFilePath)
 	output, _ := cmd.Output()
 	return string(output)
 }

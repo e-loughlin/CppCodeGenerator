@@ -1,4 +1,4 @@
-package util
+package io
 
 import (
 	"io/ioutil"
@@ -6,13 +6,16 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/emloughl/CppCodeGenerator/util/paths"
+	"github.com/emloughl/CppCodeGenerator/util/errorhandler"
 )
 
 // List of all Qt Classes
-var allQtClasses = strings.Split(ReadContents(QtClassesPath), "\n")
+var allQtClasses = strings.Split(ReadContents(paths.QtClassesPath), "\n")
 
 // List of all C++ std data types
-var allStdTypes = strings.Split(ReadContents(StdTypesPath), "\n")
+var allStdTypes = strings.Split(ReadContents(paths.StdTypesPath), "\n")
 
 // IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
 func IsValidDirectory(directory string) bool {
@@ -61,7 +64,7 @@ func ReadLines(filePath string) []string {
 // WriteToDisk ...
 func WriteToDisk(filePath string, data string) {
 	file, err := os.Create(filePath)
-	Check(err)
+	errorhandler.Check(err)
 	defer file.Close()
 	file.Write([]byte(data))
 }

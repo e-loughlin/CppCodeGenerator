@@ -10,9 +10,11 @@ import (
 	"path/filepath"
 
 	"github.com/emloughl/CppCodeGenerator/cppcomponents"
-	"github.com/emloughl/CppCodeGenerator/util"
 	"github.com/emloughl/CppCodeGenerator/util/templates"
 	"github.com/emloughl/CppCodeGenerator/generatortypes"
+	"github.com/emloughl/CppCodeGenerator/util/io"
+	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 func main() {
@@ -23,10 +25,14 @@ func main() {
 
 	// If no arguments, print usage.
 	if len(os.Args) < 2 {
-		util.PrintUsage()
+		io.PrintUsage()
 		os.Exit(0)
 	}
 	flag.Parse()
+
+	// Load configurations
+	configurations.Config = configurations.ReadConfigurations()
+	configurations.SetTemplateFilePathsFromConfiguration()
 
 	generatedType := generatortypes.GetGeneratorType(*typeFlagPtr)
 
@@ -51,23 +57,23 @@ func main() {
 		interfaceContents := templates.ReadTemplate(templates.Interface)
 
 		// TODO: Refactor Interface so that it takes contents rather than filepath
-		util.WriteToDisk(interfaceFilepath, interfaceContents)
+		io.WriteToDisk(interfaceFilepath, interfaceContents)
 		i := cppcomponents.NewInterface(interfaceFilepath)
 
 		// Fill the copyright block fields
-		interfaceContents = util.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
+		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
 
 		// Fill the Interface fields
-		interfaceContents = util.ReplaceAllFields(interfaceContents, i.Fields())
+		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, i.Fields())
 		
-		util.WriteToDisk(interfaceFilepath, interfaceContents)
+		io.WriteToDisk(interfaceFilepath, interfaceContents)
 		os.Exit(0)
 	}
 
 	// Parse the Interface
 	var inheritedInterface *cppcomponents.Interface
 	if interfaceFilepath != "" {
-		if !util.FileExists(interfaceFilepath) {
+		if !io.FileExists(interfaceFilepath) {
 			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilepath)
 			os.Exit(0)
 		}
@@ -81,7 +87,7 @@ func main() {
 			fmt.Println("Error: To create a class, you must specify an interface.")
 			os.Exit(0)
 		}
-		if !util.FileExists(interfaceFilepath) {
+		if !io.FileExists(interfaceFilepath) {
 			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilepath)
 			os.Exit(0)
 		}
@@ -97,11 +103,11 @@ func main() {
 		classHeaderContents := templates.ReadTemplate(templates.ClassHeader)
 
 		// Fill the copyright block fields
-		classHeaderContents = util.ReplaceAllFields(classHeaderContents, copyrightBlock.Fields())
-		classHeaderContents = util.ReplaceAllFields(classHeaderContents, classHeader.Fields())
+		classHeaderContents = fieldreplacer.ReplaceAllFields(classHeaderContents, copyrightBlock.Fields())
+		classHeaderContents = fieldreplacer.ReplaceAllFields(classHeaderContents, classHeader.Fields())
 
 		// Write to disk
-		util.WriteToDisk(classHeaderFilePath, classHeaderContents)
+		io.WriteToDisk(classHeaderFilePath, classHeaderContents)
 
 		// ----------------------
 		// CLASS IMPLEMENTATION 
@@ -113,11 +119,11 @@ func main() {
 		classImplementationContents := templates.ReadTemplate(templates.ClassImplementation)
 
 		// Fill the copyright block fields
-		classImplementationContents = util.ReplaceAllFields(classImplementationContents, copyrightBlock.Fields())
-		classImplementationContents = util.ReplaceAllFields(classImplementationContents, classImplementation.Fields())
+		classImplementationContents = fieldreplacer.ReplaceAllFields(classImplementationContents, copyrightBlock.Fields())
+		classImplementationContents = fieldreplacer.ReplaceAllFields(classImplementationContents, classImplementation.Fields())
 
 		// Write to disk
-		util.WriteToDisk(classImplementationFilePath, classImplementationContents)
+		io.WriteToDisk(classImplementationFilePath, classImplementationContents)
 	}
 
 	// Test
@@ -129,11 +135,11 @@ func main() {
 
 		test := cppcomponents.NewTestByConcreteName(*namePtr)
 		testContents := templates.ReadTemplate(templates.Test)
-		testContents = util.ReplaceAllFields(testContents, copyrightBlock.Fields())
-		testContents = util.ReplaceAllFields(testContents, test.Fields())
+		testContents = fieldreplacer.ReplaceAllFields(testContents, copyrightBlock.Fields())
+		testContents = fieldreplacer.ReplaceAllFields(testContents, test.Fields())
 		cwd, _ := os.Getwd()
 		testFilePath := filepath.Join(cwd, test.FileName)
-		util.WriteToDisk(testFilePath, testContents)
+		io.WriteToDisk(testFilePath, testContents)
 	}
 
 	// Mock
@@ -145,11 +151,11 @@ func main() {
 
 		mock := cppcomponents.NewMock(*inheritedInterface)
 		mockContents := templates.ReadTemplate(templates.MockHeader)
-		mockContents = util.ReplaceAllFields(mockContents, copyrightBlock.Fields())
-		mockContents = util.ReplaceAllFields(mockContents, mock.Fields())
+		mockContents = fieldreplacer.ReplaceAllFields(mockContents, copyrightBlock.Fields())
+		mockContents = fieldreplacer.ReplaceAllFields(mockContents, mock.Fields())
 		cwd, _ := os.Getwd()
-		mockFilePath := filepath.Join(cwd, mock.FileName)
-		util.WriteToDisk(mockFilePath, mockContents)
+		mockFilePath := filepath.Join(cwd, mock.HeaderFileName)
+		io.WriteToDisk(mockFilePath, mockContents)
 	}
 
 }

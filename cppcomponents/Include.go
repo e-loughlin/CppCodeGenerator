@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/emloughl/CppCodeGenerator/util"
+	"github.com/emloughl/CppCodeGenerator/util/io"
 )
 
 // Include ... A C++ Include of the form `#include "MyClass.h"` or `#include  <CoreClass>`
@@ -21,14 +21,14 @@ func NewInclude(dataType string) *Include {
 // ToString ... Creates the `#include "MyType.h"` string
 func (i Include) ToString() string {
 
-	if util.IsStdDataType(i.Dependency) {
+	if io.IsStdDataType(i.Dependency) {
 		return ""
 	}
 
 	leftEnclosure := `"`
 	rightEnclosure := `"`
 	extension := `.h`
-	if util.IsQtClass(i.Dependency) {
+	if io.IsQtClass(i.Dependency) {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
 		extension = ""

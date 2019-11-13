@@ -6,7 +6,7 @@ import (
 	"os"
 	"fmt"
 	
-	"github.com/emloughl/CppCodeGenerator/util"
+	"github.com/emloughl/CppCodeGenerator/util/io"
 	"github.com/emloughl/CppCodeGenerator/util/parsers"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
@@ -26,8 +26,8 @@ type Interface struct {
 func NewInterface(filePath string) *Interface {
 	var interfaceLines []string
 
-	if(util.FileExists(filePath)) {
-		interfaceLines = util.ReadLines(filePath)
+	if(io.FileExists(filePath)) {
+		interfaceLines = io.ReadLines(filePath)
 	}
 	if(!isValidInterfacePath(filePath)) {
 		fmt.Println("Error: Interface does not have correct extension, prefix, or suffix. Refer to config.json for accepted formats.")

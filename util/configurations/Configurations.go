@@ -1,6 +1,6 @@
 package configurations
 
-var Config Configurations = readConfigurations()
+var Config Configurations
 
 type Configurations struct {
 	UserInfo UserInfo

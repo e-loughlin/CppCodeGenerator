@@ -2,42 +2,31 @@ package templates
 
 import (
 	"log"
-	"path/filepath"
 
-	"github.com/emloughl/CppCodeGenerator/util"
-	"github.com/emloughl/CppCodeGenerator/util/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/paths"
+	"github.com/emloughl/CppCodeGenerator/util/io"
 )
-
-// Filepaths for various templates
-var interfaceTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.Interface)
-var classImplementionTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.ClassImplementation)
-var classHeaderTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.ClassHeader)
-var commentBlockTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.FunctionCommentBlock)
-var copyrightTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.CopyrightBlock)
-var testTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.Test)
-var mockImplementationTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.MockImplementation)
-var mockHeaderTemplatePath = filepath.Join(util.TemplatesDir, configurations.Config.TemplateFileNames.MockHeader)
 
 // ReadTemplate ... Returns the contents of a given template file
 func ReadTemplate(templateType Template) string {
 
 	switch templateType {
 	case ClassImplementation:
-		return util.ReadContents(classImplementionTemplatePath)
+		return io.ReadContents(paths.ClassImplementionTemplatePath)
 	case ClassHeader:
-		return util.ReadContents(classHeaderTemplatePath)
+		return io.ReadContents(paths.ClassHeaderTemplatePath)
 	case CommentBlock:
-		return util.ReadContents(commentBlockTemplatePath)
+		return io.ReadContents(paths.CommentBlockTemplatePath)
 	case Copyright:
-		return util.ReadContents(copyrightTemplatePath)
+		return io.ReadContents(paths.CopyrightTemplatePath)
 	case Interface:
-		return util.ReadContents(interfaceTemplatePath)
+		return io.ReadContents(paths.InterfaceTemplatePath)
 	case Test:
-		return util.ReadContents(testTemplatePath)
+		return io.ReadContents(paths.TestTemplatePath)
 	case MockImplementation:
-		return util.ReadContents(mockImplementationTemplatePath)
+		return io.ReadContents(paths.MockImplementationTemplatePath)
 	case MockHeader:
-		return util.ReadContents(mockHeaderTemplatePath)
+		return io.ReadContents(paths.MockHeaderTemplatePath)
 	default:
 		log.Fatal("Attempted to read a non-existent template file.")
 		return ""
