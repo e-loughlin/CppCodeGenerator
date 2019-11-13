@@ -4,7 +4,6 @@ import (
 	"os/exec"
 	"bufio"
 	"strings"
-	"fmt"
 )
 
 // RunGMockGenerator ...
@@ -31,6 +30,5 @@ func GetGMockGeneratorFunctionRegistrations(interfaceFilePath string) string {
 			getLineCounter--
 		}
 	}
-	fmt.Println(gmockMacros)
 	return gmockContents
 }
