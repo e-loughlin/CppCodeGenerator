@@ -1,1 +1,10 @@
-{{GMockGeneratorContents}}
+
+#include "gtest/gmock.h"
+#include "{{Mock.InheritedInterface.FileName}}"
+
+class {{Mock.Name}} : public {{Mock.InheritedInterface.Name}}
+{
+ public:
+{{GMockMacros}}
+
+};

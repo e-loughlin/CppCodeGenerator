@@ -2,6 +2,7 @@ package cppcomponents
 
 import (
 	"strings"
+	"fmt"
 
 	"github.com/emloughl/CppCodeGenerator/util"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
@@ -12,7 +13,7 @@ type Mock struct {
 	InheritedInterface Interface
 	Name          			string
 	FileName          		string
-	GMockGeneratorContents  string
+	GMockMacros 			string
 }
 
 func NewMock(inheritedInterface Interface) *Mock {
@@ -22,20 +23,14 @@ func NewMock(inheritedInterface Interface) *Mock {
 	m.Name = strings.TrimSuffix(m.Name, configurations.Config.Suffixes.Interface)
 	m.Name = configurations.Config.Prefixes.Mock + m.Name + configurations.Config.Suffixes.Mock
 	m.FileName = m.Name + configurations.Config.FileExtensions.CppHeader
-	m.GMockGeneratorContents = m.getGMockGeneratorContents()
+	m.GMockMacros = util.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
+	fmt.Println(m.GMockMacros)
 	return &m
-}
-
-// getGMockGeneratorContents ...
-func (m Mock) getGMockGeneratorContents() string {
-	gmockGeneratorContents := util.RunGMockGenerator(m.InheritedInterface.FileName)
-	mockNameGeneratedByGMock := configurations.Config.Prefixes.Mock + m.InheritedInterface.Name + configurations.Config.Suffixes.Mock
-	return strings.ReplaceAll(gmockGeneratorContents, mockNameGeneratedByGMock, m.Name)
 }
 
 // Fields ... The fields within templates to be replaced.
 func (m Mock) Fields() map[string]string {
 	fields := make(map[string]string)
-	fields["{{GMockGeneratorContents}}"] = m.GMockGeneratorContents
+	fields["{{GMockMacros}}"] = m.GMockMacros
 	return fields
 }

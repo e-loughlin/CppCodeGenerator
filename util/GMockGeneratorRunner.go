@@ -30,5 +30,5 @@ func GetGMockGeneratorFunctionRegistrations(interfaceFilePath string) string {
 			getLineCounter--
 		}
 	}
-	return gmockContents
+	return gmockMacros
 }
