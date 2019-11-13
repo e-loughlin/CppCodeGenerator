@@ -14,7 +14,7 @@ func RunGMockGenerator(interfaceFilePath string) string {
 	return string(output)
 }
 
-// GetGMockGeneratorFunctionRegistrations ... Runs gmock_gen.py, 
+// GetGMockGeneratorFunctionRegistrations ... Runs gmock_gen_wrapper.py, 
 // but returns only the GoogleMock registration macros.
 func GetGMockGeneratorFunctionRegistrations(interfaceFilePath string) string {
 	gmockContents := RunGMockGenerator(interfaceFilePath)
