@@ -24,11 +24,15 @@ func GetGMockGeneratorFunctionRegistrations(interfaceFilePath string) string {
 	scanner := bufio.NewScanner(strings.NewReader(gmockContents))
 	getLineCounter := 0
 	for scanner.Scan() {
-		if(strings.Contains(scanner.Text(), "MOCK_METHOD")){
-			gmockMacros += scanner.Text() + "\n"
+		line := scanner.Text()
+		if(strings.Contains(line, "MOCK_METHOD")){
+			line = strings.ReplaceAll(line, "  ", "{{Config.Tab}}")
+			line += " "
+			gmockMacros += line
 			getLineCounter = 1
-		} else if getLineCounter > 0 {
-			gmockMacros += scanner.Text() + "\n"
+			} else if getLineCounter > 0 {
+			line = strings.ReplaceAll(line, "  ", "")
+			gmockMacros += line + "\n"
 			getLineCounter--
 		}
 	}

@@ -1,1 +1,1 @@
-void make{{Function.UppercaseName}}Return({{Function.ReturnType}} value);
+    void make{{Function.UppercaseName}}Return({{Function.ReturnType}} value);

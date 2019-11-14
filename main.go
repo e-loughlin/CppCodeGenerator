@@ -29,7 +29,7 @@ func main() {
 		os.Exit(0)
 	}
 	flag.Parse()
-
+	
 	// Load configurations
 	configurations.Config = configurations.ReadConfigurations()
 	configurations.SetTemplateFilePathsFromConfiguration()
@@ -149,13 +149,20 @@ func main() {
 			os.Exit(0)
 		}
 
-		mock := cppcomponents.NewMock(*inheritedInterface)
-		mockContents := templates.ReadTemplate(templates.MockHeader)
-		mockContents = fieldreplacer.ReplaceAllFields(mockContents, copyrightBlock.Fields())
-		mockContents = fieldreplacer.ReplaceAllFields(mockContents, mock.Fields())
 		cwd, _ := os.Getwd()
-		mockFilePath := filepath.Join(cwd, mock.HeaderFileName)
-		io.WriteToDisk(mockFilePath, mockContents)
+
+		mock := cppcomponents.NewMock(*inheritedInterface)
+		mockHeaderContents := templates.ReadTemplate(templates.MockHeader)
+		mockHeaderContents = fieldreplacer.ReplaceAllFields(mockHeaderContents, copyrightBlock.Fields())
+		mockHeaderContents = fieldreplacer.ReplaceAllFields(mockHeaderContents, mock.Fields())
+		mockHeaderFilePath := filepath.Join(cwd, mock.HeaderFileName)
+		io.WriteToDisk(mockHeaderFilePath, mockHeaderContents)
+
+		mockImplementationContents := templates.ReadTemplate(templates.MockImplementation)
+		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, copyrightBlock.Fields())
+		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, mock.Fields())
+		mockImplementationFilePath := filepath.Join(cwd, mock.ImplementationFileName)
+		io.WriteToDisk(mockImplementationFilePath, mockImplementationContents)
 	}
 
 }

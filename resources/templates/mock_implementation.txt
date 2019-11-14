@@ -1,4 +1,4 @@
 
-#include "{{Mock.FileName}}"
+#include "{{Mock.Header.FileName}}"
 
 {{Mock.HelperFunctions.Definitions}}
