@@ -6,6 +6,8 @@ import (
 	"strings"
 	
 	"github.com/emloughl/CppCodeGenerator/util/paths"
+	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
+	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
 // RunGMockGenerator ...
@@ -36,5 +38,10 @@ func GetGMockGeneratorFunctionRegistrations(interfaceFilePath string) string {
 			getLineCounter--
 		}
 	}
+
+	fields := make(map[string]string)
+	fields["{{Config.Tab}}"] = configurations.Config.Syntax.Tab
+	gmockMacros = fieldreplacer.ReplaceAllFields(gmockMacros, fields)
+	
 	return gmockMacros
 }
