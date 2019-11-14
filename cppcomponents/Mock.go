@@ -2,9 +2,13 @@ package cppcomponents
 
 import (
 	"strings"
+	"fmt"
 
 	"github.com/emloughl/CppCodeGenerator/util/gmockgenrunner"
+	"github.com/emloughl/CppCodeGenerator/util/io"
+	"github.com/emloughl/CppCodeGenerator/util/paths"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
 )
 
 // Test ... Implements File
@@ -27,12 +31,51 @@ func NewMock(inheritedInterface Interface) *Mock {
 	m.HeaderFileName = m.Name + configurations.Config.FileExtensions.CppHeader
 	m.ImplementationFileName = m.Name + configurations.Config.FileExtensions.CppImplementation
 	m.GMockMacros = gmockgenrunner.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
+	m.MockHelperFunctionDeclarations = m.getMockHelperFunctionDeclarations()
+	m.MockHelperFunctionDefinitions = m.getMockHelperFunctionDefinition()
+
+	fmt.Println(m.MockHelperFunctionDeclarations)
+	fmt.Println(m.MockHelperFunctionDefinitions)
 	return &m
 }
 
-// func (m Mock) getMockHelperFunctionDeclarations string {
-	
-// }
+func (m Mock) getMockHelperFunctionDeclarations() string {
+	var declarations string
+
+	for _, function := range (m.InheritedInterface.Functions) {
+		for _, declarationTemplatePath := range (paths.MockHelperFunctionDeclarationPaths) {
+			declarationTemplate := io.ReadContents(declarationTemplatePath)
+			fields := make(map[string]string)
+			fields["{{Mock.Name}}"] = m.Name
+			fields["{{Function.Name}}"] = function.Name
+			fields["{{Function.UppercaseName}}"] = strings.Title(function.Name)
+			fields["{{Function.ReturnType}}"] = function.ReturnType
+			parsedDeclarations := fieldreplacer.ReplaceAllFields(declarationTemplate, fields)
+			declarations += parsedDeclarations
+		}
+		declarations += "\n"
+	}
+	return declarations
+}
+
+func (m Mock) getMockHelperFunctionDefinition() string {
+	var definitions string
+
+	for _, function := range (m.InheritedInterface.Functions) {
+		for _, definitionTemplatePath := range (paths.MockHelperFunctionDefinitionPaths) {
+			definitionTemplate := io.ReadContents(definitionTemplatePath)
+			fields := make(map[string]string)
+			fields["{{Mock.Name}}"] = m.Name
+			fields["{{Function.Name}}"] = function.Name
+			fields["{{Function.UppercaseName}}"] = strings.Title(function.Name)
+			fields["{{Function.ReturnType}}"] = function.ReturnType
+			parsedDefinitions := fieldreplacer.ReplaceAllFields(definitionTemplate, fields)
+			definitions += parsedDefinitions
+		}
+		definitions += "\n"
+	}
+	return definitions
+}
 
 // Fields ... The fields within templates to be replaced.
 func (m Mock) Fields() map[string]string {

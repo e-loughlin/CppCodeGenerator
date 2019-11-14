@@ -2,3 +2,4 @@ void {{Mock.Name}}::make{{Function.UppercaseName}}Return({{Function.ReturnType}}
 {
     ON_CALL(*this, {{Function.Name}}()).WillByDefault(Return(value));
 }
+
