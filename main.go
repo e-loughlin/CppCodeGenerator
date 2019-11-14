@@ -130,6 +130,7 @@ func main() {
 	if generatedType == generatortypes.Test {
 		if *namePtr == "" {
 			fmt.Println("Error: To create a test, you must specify the name of the concrete that it's testing.")
+			fmt.Println("Use option -name=<CONCRETE_NAME>")
 			os.Exit(0)
 		}
 
