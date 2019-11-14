@@ -6,6 +6,8 @@ import (
 )
 
 // TODO: These directories break "go run" command. Find way to make it work.
+// Getting the Executable path directly in order to find relative paths is super 
+// hacky... This is a serious TODO.
 
 // Directories
 var ex, _ = os.Executable()
