@@ -169,5 +169,5 @@ func main() {
 }
 
 // TODO: Consider creating a factory for each file type
-
+// TODO: Use -t instead of -type, but use --type... etc
 // TODO: Feature: Command-line arguments to modify settings (Such as username)
