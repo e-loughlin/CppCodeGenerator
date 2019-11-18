@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/emloughl/CppCodeGenerator/util/paths"
-	"github.com/emloughl/CppCodeGenerator/util/errorhandler"
 )
 
 // List of all Qt Classes
@@ -63,10 +62,7 @@ func ReadLines(filePath string) []string {
 
 // WriteToDisk ...
 func WriteToDisk(filePath string, data string) {
-	file, err := os.Create(filePath)
-	errorhandler.Check(err)
-	defer file.Close()
-	file.Write([]byte(data))
+	ioutil.WriteFile(filePath, []byte(data), 0644)
 }
 
 // IsQtClass ... Returns whether a given string is a Qt class.
