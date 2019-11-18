@@ -6,5 +6,4 @@ class {{Mock.Name}} : public {{Mock.InheritedInterface.Name}}
 {
  public:
 {{GMockMacros}}
-{{Mock.HelperFunctions.Declarations}}
-};
+{{Mock.HelperFunctions.Declarations}}};
