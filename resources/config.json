@@ -7,7 +7,7 @@
     
     "Prefixes": 
     {
-        "Interface": "I_",
+        "Interface": "I",
         "DefineName": "",
         "Mock": "Mock",
         "SpyMock": "SpyMock",
@@ -32,7 +32,7 @@
     {
         "DefineNameAllCapsEnabled": true,
         "DefineNameCamelCaseSeparator": "",
-        "DateFormat": "2006/01/02",
+        "DateFormat": "2006",
         "CreateMockHeaderFile": true
     },
 

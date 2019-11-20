@@ -1,5 +1,3 @@
-{{Copyright}}
-
 #include "{{Class.Header.FileName}}"
 
 {{Class.Implementation.Includes}}
