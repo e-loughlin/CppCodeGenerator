@@ -17,17 +17,16 @@ import (
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 )
 
-
 func main() {
 	// Command-line argument flags
 	var codeType string
-	var interfacePath string
+	var interfaceFilePath string
 	var name string
 
 	flag.StringVar(&codeType, "type", "", "Type of file to generate (class, interface, mock, or test)")
 	flag.StringVar(&codeType, "t", "", "--type")
-	flag.StringVar(&interfacePath, "interface", "", "Filepath to interface")
-	flag.StringVar(&interfacePath, "i", "", "--interface")
+	flag.StringVar(&interfaceFilePath, "interface", "", "Filepath to interface")
+	flag.StringVar(&interfaceFilePath, "i", "", "--interface")
 	flag.StringVar(&name, "name", "", "Name of new class")
 	flag.StringVar(&name, "n", "", "--name")
 
@@ -45,7 +44,7 @@ func main() {
 	generatedType := generatortypes.GetGeneratorType(codeType)
 
 	if generatedType == generatortypes.Unknown {
-		fmt.Println("Invalid type! You must specify a type to generate. Use -type=<TYPE>")
+		fmt.Println("Invalid type! You must specify a type to generate. Use -type or -t. \n Valid types: Interface, Class, Test, and Mock.")
 		os.Exit(0)
 	}
 
@@ -62,12 +61,18 @@ func main() {
 	 	os.Exit(0)
 		}
 
+		interfaceFilePath = name
+		if(!cppcomponents.IsValidInterfaceFilePath(interfaceFilePath)) {
+			interfaceFilePath = configurations.Config.Prefixes.Interface + name + configurations.Config.Suffixes.Interface + configurations.Config.FileExtensions.CppHeader
+			fmt.Println(interfaceFilePath)
+		}
+
 		//TODO: Refactor templateType usage (enum)
 		interfaceContents := templates.ReadTemplate(templates.Interface)
 
 		// TODO: Refactor Interface so that it takes contents rather than filepath
-		io.WriteToDisk(interfacePath, interfaceContents)
-		i := cppcomponents.NewInterface(name)
+		io.WriteToDisk(interfaceFilePath, interfaceContents)
+		i := cppcomponents.NewInterface(interfaceFilePath)
 
 		// Fill the copyright block fields
 		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
@@ -75,29 +80,29 @@ func main() {
 		// Fill the Interface fields
 		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, i.Fields())
 		
-		io.WriteToDisk(interfacePath, interfaceContents)
+		io.WriteToDisk(interfaceFilePath, interfaceContents)
 		os.Exit(0)
 	}
 
 	// Parse the Interface
 	var inheritedInterface *cppcomponents.Interface
-	if interfacePath != "" {
-		if !io.FileExists(interfacePath) {
-			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfacePath)
+	if interfaceFilePath != "" {
+		if !io.FileExists(interfaceFilePath) {
+			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilePath)
 			os.Exit(0)
 		}
 
-		inheritedInterface = cppcomponents.NewInterface(interfacePath)
+		inheritedInterface = cppcomponents.NewInterface(interfaceFilePath)
 	}
 
 	// Class
 	if generatedType == generatortypes.Class {
-		if interfacePath == "" {
+		if interfaceFilePath == "" {
 			fmt.Println("Error: To create a class, you must provide the path to an interface. Use --interface or -i.")
 			os.Exit(0)
 		}
-		if !io.FileExists(interfacePath) {
-			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfacePath)
+		if !io.FileExists(interfaceFilePath) {
+			fmt.Fprintf(os.Stderr, "Invalid path to interface: %s\n", interfaceFilePath)
 			os.Exit(0)
 		}
 
@@ -105,7 +110,7 @@ func main() {
 		// CLASS HEADER 
 		// --------------
 		classHeader := cppcomponents.NewClassHeader(*inheritedInterface)
-		interfaceDir := filepath.Dir(interfacePath)
+		interfaceDir := filepath.Dir(interfaceFilePath)
 		classHeaderFilePath := filepath.Join(interfaceDir, classHeader.FileName)
 
 		// Read Template File
@@ -154,7 +159,7 @@ func main() {
 
 	// Mock
 	if generatedType == generatortypes.Mock {
-		if interfacePath == "" {
+		if interfaceFilePath == "" {
 			fmt.Println("Error: To create a Mock, you must provide the path to an interface. Use --interface or -i.")
 			os.Exit(0)
 		}

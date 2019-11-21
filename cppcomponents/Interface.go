@@ -29,7 +29,7 @@ func NewInterface(filePath string) *Interface {
 	if(io.FileExists(filePath)) {
 		interfaceLines = io.ReadLines(filePath)
 	}
-	if(!isValidInterfacePath(filePath)) {
+	if(!IsValidInterfaceFilePath(filePath)) {
 		fmt.Println("Error: Interface does not have correct extension, prefix, or suffix. Refer to config.json for accepted formats.")
 		os.Exit(0)
 	}
@@ -76,7 +76,7 @@ func isPureVirtualDefinition(line string) bool {
 }
 
 // isValidInterfacePath ...
-func isValidInterfacePath(filePath string) bool {
+func IsValidInterfaceFilePath(filePath string) bool {
 	filePath = strings.Replace(filePath, ":", "", -1)
 	hasCorrectExtension := (filepath.Ext(filePath) == ".h")
 	fileName := strings.TrimSuffix(filepath.Base(filePath), filepath.Ext(filePath))
