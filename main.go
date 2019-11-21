@@ -50,22 +50,24 @@ func main() {
 	}
 
 	// TODO: Fix guards
-	// if interfacePath == "" {
-	// 	fmt.Println("You must specify either a path to an existing interface, or a path (including name) to where you'd like a new interface to be created. Use option -interface=<PATH_TO_INTERFACE>")
-	// 	os.Exit(0)
-	// }
+
 	
 	// Copyright Block
 	copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
 
 	//Interface
 	if generatedType == generatortypes.Interface {
+		if(name == ""){
+	 	fmt.Println("Trying to generate a new interface, but no name was provided. Use --name or -n.")
+	 	os.Exit(0)
+		}
+
 		//TODO: Refactor templateType usage (enum)
 		interfaceContents := templates.ReadTemplate(templates.Interface)
 
 		// TODO: Refactor Interface so that it takes contents rather than filepath
 		io.WriteToDisk(interfacePath, interfaceContents)
-		i := cppcomponents.NewInterface(interfacePath)
+		i := cppcomponents.NewInterface(name)
 
 		// Fill the copyright block fields
 		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, copyrightBlock.Fields())
@@ -91,7 +93,7 @@ func main() {
 	// Class
 	if generatedType == generatortypes.Class {
 		if interfacePath == "" {
-			fmt.Println("Error: To create a class, you must specify an interface.")
+			fmt.Println("Error: To create a class, you must provide the path to an interface. Use --interface or -i.")
 			os.Exit(0)
 		}
 		if !io.FileExists(interfacePath) {
@@ -137,7 +139,7 @@ func main() {
 	if generatedType == generatortypes.Test {
 		if name == "" {
 			fmt.Println("Error: To create a test, you must specify the name of the concrete that it's testing.")
-			fmt.Println("Use option -name=<CONCRETE_NAME>")
+			fmt.Println("Use option -name or -n <CONCRETE_NAME>")
 			os.Exit(0)
 		}
 
@@ -153,7 +155,7 @@ func main() {
 	// Mock
 	if generatedType == generatortypes.Mock {
 		if interfacePath == "" {
-			fmt.Println("Error: To create a Mock, you must provide the path to an interface.")
+			fmt.Println("Error: To create a Mock, you must provide the path to an interface. Use --interface or -i.")
 			os.Exit(0)
 		}
 
