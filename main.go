@@ -64,7 +64,6 @@ func main() {
 		interfaceFilePath = name
 		if(!cppcomponents.IsValidInterfaceFilePath(interfaceFilePath)) {
 			interfaceFilePath = configurations.Config.Prefixes.Interface + name + configurations.Config.Suffixes.Interface + configurations.Config.FileExtensions.CppHeader
-			fmt.Println(interfaceFilePath)
 		}
 
 		//TODO: Refactor templateType usage (enum)
@@ -81,6 +80,9 @@ func main() {
 		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, i.Fields())
 		
 		io.WriteToDisk(interfaceFilePath, interfaceContents)
+
+		// Print Result
+		fmt.Printf("Generated new Interface: \n\t%v\n", interfaceFilePath)
 		os.Exit(0)
 	}
 
@@ -138,6 +140,9 @@ func main() {
 
 		// Write to disk
 		io.WriteToDisk(classImplementationFilePath, classImplementationContents)
+
+		// Print Result
+		fmt.Printf("Generated Class from Interface %v: \n\t%v\n\t%v\n", inheritedInterface.FileName, classHeader.FileName, classImplementation.FileName)
 	}
 
 	// Test
@@ -155,6 +160,9 @@ func main() {
 		cwd, _ := os.Getwd()
 		testFilePath := filepath.Join(cwd, test.FileName)
 		io.WriteToDisk(testFilePath, testContents)
+
+		// Print Result
+		fmt.Printf("Generated Test for concrete class %v: \n\t%v\n", name, test.FileName)
 	}
 
 	// Mock
@@ -172,12 +180,15 @@ func main() {
 		mockHeaderContents = fieldreplacer.ReplaceAllFields(mockHeaderContents, mock.Fields())
 		mockHeaderFilePath := filepath.Join(cwd, mock.HeaderFileName)
 		io.WriteToDisk(mockHeaderFilePath, mockHeaderContents)
-
+		
 		mockImplementationContents := templates.ReadTemplate(templates.MockImplementation)
 		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, copyrightBlock.Fields())
 		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, mock.Fields())
 		mockImplementationFilePath := filepath.Join(cwd, mock.ImplementationFileName)
 		io.WriteToDisk(mockImplementationFilePath, mockImplementationContents)
+
+		// Print Result
+		fmt.Printf("Generated Mock from Interface %v: \n\t%v\n\t%v\n", inheritedInterface.FileName, mock.HeaderFileName, mock.ImplementationFileName)
 	}
 
 }
