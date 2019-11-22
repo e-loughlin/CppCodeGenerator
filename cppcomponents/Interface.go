@@ -76,6 +76,7 @@ func (i *Interface) parseDependencies() {
 		}
 	}
 	i.Dependencies = slice.RemoveDuplicates(dependencies)
+	i.Dependencies = slice.RemoveStdDataTypes(dependencies)
 	sort.Strings(i.Dependencies)
 }
 
