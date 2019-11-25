@@ -26,6 +26,7 @@ func NewClassHeader(InheritedInterface Interface) *ClassHeader {
 	c.FileName = c.Name + configurations.Config.FileExtensions.CppHeader
 	c.DefineName = parsers.GenerateDefineName(c.Name)
 	c.FunctionDeclarations = c.parseFunctionDeclarations()
+	c.parseForwardDeclares();
 	return &c
 }
 
@@ -35,6 +36,12 @@ func (c ClassHeader) parseFunctionDeclarations() string {
 		functionDeclarations += function.Declaration()
 	}
 	return functionDeclarations
+}
+
+func (c *ClassHeader) parseForwardDeclares() {
+	for _, dependency := range c.InheritedInterface.Dependencies {
+		c.ForwardDeclares += "class " + dependency + ";\n"
+	}
 }
 
 // Fields ... The fields within templates to be replaced.
