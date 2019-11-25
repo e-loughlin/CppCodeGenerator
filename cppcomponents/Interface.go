@@ -70,9 +70,9 @@ func (i Interface) parseFileName(name string) string {
 func (i *Interface) parseDependencies() {
 	var dependencies []string
 	for _, function := range i.Functions {
-		dependencies = append(dependencies, function.ReturnType)
+		dependencies = append(dependencies, strings.TrimSpace(function.ReturnType))
 		for _, parameter := range function.Parameters {
-			dependencies = append(dependencies, parameter.VarType)
+			dependencies = append(dependencies, strings.TrimSpace(parameter.VarType))
 		}
 	}
 	i.Dependencies = slice.RemoveDuplicates(dependencies)
