@@ -17,11 +17,9 @@ func RemoveDuplicates(stringSlice []string) []string {
 }
 
 func RemoveStdDataTypes(stringSlice []string) []string {
-	keys := make(map[string]bool)
 	list := []string{}
 	for _, entry := range stringSlice {
 		if !io.IsStdDataType(entry) {
-			keys[entry] = true
 			list = append(list, entry)
 		}
 	}

@@ -44,7 +44,6 @@ func NewInterface(filePath string) *Interface {
 	i.DefineName = parsers.GenerateDefineName(i.Name)
 	i.FileName = i.parseFileName(i.Name)
 	i.parseDependencies()
-	fmt.Println(i.Dependencies)
 	return &i
 }
 
@@ -75,8 +74,9 @@ func (i *Interface) parseDependencies() {
 			dependencies = append(dependencies, strings.TrimSpace(parameter.VarType))
 		}
 	}
-	i.Dependencies = slice.RemoveDuplicates(dependencies)
-	i.Dependencies = slice.RemoveStdDataTypes(dependencies)
+	i.Dependencies = dependencies
+	i.Dependencies = slice.RemoveDuplicates(i.Dependencies)
+	i.Dependencies = slice.RemoveStdDataTypes(i.Dependencies)
 	sort.Strings(i.Dependencies)
 }
 
