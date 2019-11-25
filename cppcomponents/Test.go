@@ -6,7 +6,6 @@ import (
 
 // Test ... Implements File
 type Test struct {
-	ClassImplementation ClassImplementation
 	TestName          		string
 	FileName          		string
 	ConcreteName			string

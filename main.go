@@ -7,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 	"path/filepath"
 
 	"github.com/emloughl/CppCodeGenerator/cppcomponents"
@@ -108,19 +109,21 @@ func main() {
 			os.Exit(0)
 		}
 
+		class := cppcomponents.NewClass(*inheritedInterface)
+		interfaceDir := filepath.Dir(interfaceFilePath)
+
 		// --------------
 		// CLASS HEADER 
 		// --------------
-		classHeader := cppcomponents.NewClassHeader(*inheritedInterface)
-		interfaceDir := filepath.Dir(interfaceFilePath)
-		classHeaderFilePath := filepath.Join(interfaceDir, classHeader.FileName)
+		classHeaderFilePath := filepath.Join(interfaceDir, class.HeaderFileName)
 
 		// Read Template File
 		classHeaderContents := templates.ReadTemplate(templates.ClassHeader)
 
 		// Fill the copyright block fields
 		classHeaderContents = fieldreplacer.ReplaceAllFields(classHeaderContents, copyrightBlock.Fields())
-		classHeaderContents = fieldreplacer.ReplaceAllFields(classHeaderContents, classHeader.Fields())
+		classHeaderContents = strings.Replace(classHeaderContents, "{{FileName}}", "{{Class.Header.FileName}}", -1)
+		classHeaderContents = fieldreplacer.ReplaceAllFields(classHeaderContents, class.Fields())
 
 		// Write to disk
 		io.WriteToDisk(classHeaderFilePath, classHeaderContents)
@@ -128,21 +131,21 @@ func main() {
 		// ----------------------
 		// CLASS IMPLEMENTATION 
 		// ----------------------
-		classImplementation := cppcomponents.NewClassImplementation(*inheritedInterface)
-		classImplementationFilePath := filepath.Join(interfaceDir, classImplementation.FileName)
+		classImplementationFilePath := filepath.Join(interfaceDir, class.ImplementationFileName)
 		
 		// Read Template File
 		classImplementationContents := templates.ReadTemplate(templates.ClassImplementation)
 
 		// Fill the copyright block fields
 		classImplementationContents = fieldreplacer.ReplaceAllFields(classImplementationContents, copyrightBlock.Fields())
-		classImplementationContents = fieldreplacer.ReplaceAllFields(classImplementationContents, classImplementation.Fields())
+		classImplementationContents = strings.Replace(classImplementationContents, "{{FileName}}", "{{Class.Implementation.FileName}}", -1)
+		classImplementationContents = fieldreplacer.ReplaceAllFields(classImplementationContents, class.Fields())
 
 		// Write to disk
 		io.WriteToDisk(classImplementationFilePath, classImplementationContents)
 
 		// Print Result
-		fmt.Printf("Generated Class from Interface %v: \n\t%v\n\t%v\n", inheritedInterface.FileName, classHeader.FileName, classImplementation.FileName)
+		fmt.Printf("Generated Class from Interface %v: \n\t%v\n\t%v\n", inheritedInterface.FileName, class.HeaderFileName, class.ImplementationFileName)
 	}
 
 	// Test
