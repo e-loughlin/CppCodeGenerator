@@ -8,12 +8,12 @@ import (
 // ClassImplementation ... Implements File
 type ClassImplementation struct {
 	InheritedInterface Interface
-	Name                string
-	FileName		    string
-	HeaderFileName      string
-	Includes			string 
-	FunctionDefinitions string
-	QtSignalDefinitions string
+	Name               		string
+	FileName		 	   	string
+	HeaderFileName      	string
+	IncludesString			string 
+	FunctionDefinitions 	string
+	QtSignalDefinitions 	string
 }
 
 func NewClassImplementation(InheritedInterface Interface) *ClassImplementation {
@@ -24,6 +24,7 @@ func NewClassImplementation(InheritedInterface Interface) *ClassImplementation {
 	c.HeaderFileName = c.Name + configurations.Config.FileExtensions.CppHeader
 	c.FileName = c.Name + configurations.Config.FileExtensions.CppImplementation
 	c.FunctionDefinitions = c.parseFunctionDefinitions()
+	c.parseIncludes()
 	return &c
 }
 
@@ -35,6 +36,13 @@ func (c ClassImplementation) parseFunctionDefinitions() string {
 	return functionDefinitions
 }
 
+func (c *ClassImplementation) parseIncludes() {
+	for _, dependency := range c.InheritedInterface.Dependencies {
+		i := NewInclude(dependency)
+		c.IncludesString += i.ToString() + "\n"
+	}
+}
+
 
 // Fields ... The fields within templates to be replaced.
 func (c ClassImplementation) Fields() map[string]string {
@@ -42,7 +50,7 @@ func (c ClassImplementation) Fields() map[string]string {
 	fields["{{Class.Header.FileName}}"] = c.HeaderFileName
 	fields["{{FileName}}"] = c.FileName
 	fields["{{Class.Name}}"] = c.Name
-	fields["{{Class.Implementation.Includes}}"] = c.Includes
+	fields["{{Class.Implementation.Includes}}"] = c.IncludesString
 	fields["{{Class.Implementation.FunctionDefinitions}}"] = c.FunctionDefinitions
 	fields["{{Class.Implementation.QtSignalDefinitions}}"] = c.QtSignalDefinitions
 	return fields
