@@ -25,11 +25,11 @@ func main() {
 	var name string
 
 	flag.StringVar(&codeType, "type", "", "Type of file to generate (class, interface, mock, or test)")
-	flag.StringVar(&codeType, "t", "", "--type")
+	flag.StringVar(&codeType, "t", "", "Shorthand for --type")
 	flag.StringVar(&interfaceFilePath, "interface", "", "Filepath to interface")
-	flag.StringVar(&interfaceFilePath, "i", "", "--interface")
+	flag.StringVar(&interfaceFilePath, "i", "", "Shorthand for --interface")
 	flag.StringVar(&name, "name", "", "Name of new class")
-	flag.StringVar(&name, "n", "", "--name")
+	flag.StringVar(&name, "n", "", "Shorthand for --name")
 
 	// If no arguments, print usage.
 	if len(os.Args) < 2 {
