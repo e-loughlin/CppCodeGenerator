@@ -22,7 +22,7 @@ Generates a C++ class of specified type.
 	
 Configurations
 --------------
-Configurations to policies, prefixes, suffixes, and file extensions can be made in config.json.
+User specific changes to policies, prefixes, suffixes, and file extensions can be made in config.json.
 
 Templated Class Modifications
 -----------------------------
