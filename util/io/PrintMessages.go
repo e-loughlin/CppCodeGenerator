@@ -13,7 +13,7 @@ C++ Code Generator
 
 Generates a C++ class of specified type.
 
-        Type                       Notes                               Example Usage
+    Type (-t)                      Notes                                Example Usage
 ---------------------------------------------------------------------------------------------------
 	Interface  |  Requires --name of new class.          |    -t Interface -n MyNewClass
 	Class      |  Requires path to existing --interface  |    -t Class -i ./path/to/I_MyNewClass.h
