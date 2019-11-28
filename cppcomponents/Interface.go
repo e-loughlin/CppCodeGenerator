@@ -87,6 +87,7 @@ func (i *Interface) parseDependencies() {
 	i.Dependencies = dependencies
 	i.Dependencies = slice.RemoveConstSpecifiers(i.Dependencies)
 	i.Dependencies = slice.RemovePointersAndReferences(i.Dependencies)
+	//TODO: Convert user-configured mapped types to their respective library include
 	i.Dependencies = slice.RemoveStdDataTypes(i.Dependencies)
 	i.Dependencies = slice.RemoveDuplicates(i.Dependencies)
 	sort.Strings(i.Dependencies)
@@ -95,7 +96,7 @@ func (i *Interface) parseDependencies() {
 // isPureVirtualDefinition ... Returns whether a function is pure virtual.
 func isPureVirtualDefinition(line string) bool {
 	line = strings.Replace(line, " ", "", -1)
-	return (strings.Contains(line, "virtual") && strings.Contains(line, ")=0;"))
+	return (strings.Contains(line, "virtual") && strings.Contains(line, "=0;"))
 }
 
 // isValidInterfacePath ...
