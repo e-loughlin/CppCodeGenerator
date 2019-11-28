@@ -1,6 +1,8 @@
 package slice
 
 import (
+	"strings"
+
 	"github.com/emloughl/CppCodeGenerator/util/io"
 )
 
@@ -22,6 +24,24 @@ func RemoveStdDataTypes(stringSlice []string) []string {
 		if !io.IsStdDataType(entry) {
 			list = append(list, entry)
 		}
+	}
+	return list
+}
+
+func RemoveConstSpecifiers(stringSlice []string) []string {
+	list := []string{}
+	for _, entry := range stringSlice {
+		list = append(list, strings.TrimPrefix(entry, "const "))
+	}
+	return list
+}
+
+func RemovePointersAndReferences(stringSlice []string) []string {
+	list := []string{}
+	for _, entry := range stringSlice {
+		entry = strings.TrimLeft(entry, "&* ")
+		entry = strings.TrimRight(entry, "&* ")
+		list = append(list, entry)
 	}
 	return list
 }

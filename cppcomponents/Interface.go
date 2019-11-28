@@ -85,8 +85,10 @@ func (i *Interface) parseDependencies() {
 		}
 	}
 	i.Dependencies = dependencies
-	i.Dependencies = slice.RemoveDuplicates(i.Dependencies)
+	i.Dependencies = slice.RemoveConstSpecifiers(i.Dependencies)
+	i.Dependencies = slice.RemovePointersAndReferences(i.Dependencies)
 	i.Dependencies = slice.RemoveStdDataTypes(i.Dependencies)
+	i.Dependencies = slice.RemoveDuplicates(i.Dependencies)
 	sort.Strings(i.Dependencies)
 }
 
