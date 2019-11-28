@@ -65,13 +65,23 @@ func (i Interface) parseFileName(name string) string {
 	return fileName
 }
 
-// parseDependencies ...
+// parseDependencies ... The term "dependency" is used here to refer to any
+// data type that may require an include or forward declare. 
 func (i *Interface) parseDependencies() {
 	var dependencies []string
 	for _, function := range i.Functions {
-		dependencies = append(dependencies, strings.TrimSpace(function.ReturnType))
+
+		// "expanded" refers to creating a slice from a templated type, i.e "QMap <int, QString>" becomes [QMap int QString]
+		expandedReturnType := strings.FieldsFunc(function.ReturnType, templatedTypeSeparators) 
+		for _, dataType := range(expandedReturnType) {
+			dependencies = append(dependencies, strings.TrimSpace(dataType))
+		}
+
 		for _, parameter := range function.Parameters {
-			dependencies = append(dependencies, strings.TrimSpace(parameter.VarType))
+			expandedParameter := strings.FieldsFunc(parameter.Type, templatedTypeSeparators)
+			for _, innerParameter := range expandedParameter {
+				dependencies = append(dependencies, strings.TrimSpace(innerParameter))
+			} 
 		}
 	}
 	i.Dependencies = dependencies
@@ -105,4 +115,9 @@ func (i Interface) Fields() map[string]string {
 	fields["{{FileName}}"] = i.FileName
 	fields["{{Interface.DefineName}}"] = i.DefineName
 	return fields
+}
+
+// templatedTypeSeparators ... Used to expand templated types such as QMap<QString, QMap<QString, std::string>>
+func templatedTypeSeparators (r rune) bool {
+	return r == '<' || r == '>' || r == ','
 }

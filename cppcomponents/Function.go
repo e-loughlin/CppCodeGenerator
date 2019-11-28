@@ -31,21 +31,51 @@ func NewFunction(pureVirtualFunctionLine string) *Function {
 
 	// Parse parameter list
 	rawParameters := strings.Split(strings.Split(pureVirtualFunctionLine, ")")[0], "(")[1]
-	if len(rawParameters) > 0 {
-		//TODO: This comma won't work for templated arguments such as QMap<QString, QString>
-		rawParametersSlice := strings.Split(rawParameters, ",")
-		for _, rawParameterString := range rawParametersSlice {
-			f.Parameters = append(f.Parameters, *NewParameter(rawParameterString))
-		}
-	}
+	f.parseParameters(rawParameters)
 
 	// Parse function const-ness
-	f.ConstString = ""
 	if strings.Contains(strings.Split(pureVirtualFunctionLine, ")")[1], "const") {
 		f.ConstString = " const"
 	}
 
 	return &f
+}
+
+func (f *Function) parseParameters(rawParametersString string) {
+	var parameterStrings []string
+
+	// Split into individual parameters of format "varType varName"
+	if len(rawParametersString) > 0 {
+		bracketCount := 0
+		splitIndex := 0
+		for pos, char := range rawParametersString {
+			switch(char) {
+			case '<':
+				bracketCount++
+			case '>':
+				bracketCount--
+			case ',':
+				if bracketCount == 0 {
+					extractedParameter := rawParametersString[splitIndex:pos + 1]
+					extractedParameter = strings.TrimLeft(extractedParameter, ", ")
+					extractedParameter = strings.TrimRight(extractedParameter, ", ")
+					parameterStrings = append(parameterStrings, extractedParameter)
+					splitIndex = pos + 1
+				}
+			}
+
+			if pos == len(rawParametersString) - 1 {
+				extractedParameter := rawParametersString[splitIndex:]
+				extractedParameter = strings.TrimLeft(extractedParameter, ", ")
+				extractedParameter = strings.TrimRight(extractedParameter, ", ")
+				parameterStrings = append(parameterStrings, extractedParameter)
+			}
+		}
+
+		for _, parameterString := range(parameterStrings) {
+			f.Parameters = append(f.Parameters, *NewParameter(parameterString))
+		}
+	}
 }
 
 func (f Function) Declaration() string {
@@ -63,7 +93,7 @@ func (f Function) allParameters() string {
 		if i > 0 {
 			separator = ", "
 		}
-		parametersString += fmt.Sprintf("%v%v", separator, p.toString())
+		parametersString += fmt.Sprintf("%v%v", separator, p.ToString())
 	}
 	return parametersString
 }
