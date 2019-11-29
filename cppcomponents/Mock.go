@@ -48,7 +48,7 @@ func (m *Mock) setMockHelperFunctions() {
 		fields["{{Function.ReturnType}}"] = function.ReturnType
 		
 		for _, declarationTemplatePath := range (paths.MockHelperFunctionDeclarationPaths) {
-			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void.
+			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void. TODO: Find a cleaner way.
 			if(function.ReturnType == "void" && filepath.Base(declarationTemplatePath) == "mock_MakeFunctionReturn_declaration.txt") {
 				continue
 			}
@@ -56,10 +56,10 @@ func (m *Mock) setMockHelperFunctions() {
 			parsedDeclarations := fieldreplacer.ReplaceAllFields(declarationTemplate, fields)
 			declarations += parsedDeclarations
 		}
-		declarations += "\n"
+		declarations += "\n\n"
 
 		for _, definitionTemplatePath := range (paths.MockHelperFunctionDefinitionPaths) {
-			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void.
+			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void. TODO: Find a cleaner way.
 			if(function.ReturnType == "void" && filepath.Base(definitionTemplatePath) == "mock_MakeFunctionReturn_definition.txt") {
 				continue
 			}
@@ -67,7 +67,6 @@ func (m *Mock) setMockHelperFunctions() {
 			parsedDefinitions := fieldreplacer.ReplaceAllFields(definitionTemplate, fields)
 			definitions += parsedDefinitions
 		}
-
 	}
 	m.MockHelperFunctionDeclarations = declarations
 	m.MockHelperFunctionDefinitions = definitions
