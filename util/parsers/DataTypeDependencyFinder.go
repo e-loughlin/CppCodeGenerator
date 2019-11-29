@@ -40,6 +40,16 @@ func IsStdDataType(dataType string) bool {
 	return false
 }
 
+// IsMappedLibraryType ... Returns whether dependency is in the second column of listed mapped dependencies
+func IsMappedLibraryType(libraryDependency string) bool {
+	for dataType := range allMappedTypes {
+		if libraryDependency == allMappedTypes[dataType] {
+			return true
+		}
+	}
+	return false
+}
+
 // MapToListedDependency ... Maps a user-configured <data_type> to its <library_dependency>
 // If no mapping is found, the original dataType is returned.
 func MapToListedDependency(dataType string) string {
@@ -129,8 +139,8 @@ func loadMappedTypes() map[string]string {
 	mappedTypes = make(map[string]string)
 
 	for _, line := range(mappedTypesContents) {
-		line = strings.TrimRight(line, "\n")
-		line = strings.TrimRight(line, "\r")
+		line = strings.TrimRight(line, "\n\r")
+		line = strings.TrimSpace(line)
 		if len(line) < 4 {
 			continue
 		}

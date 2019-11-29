@@ -30,11 +30,12 @@ func (i Include) ToString() string {
 	leftEnclosure := `"`
 	rightEnclosure := `"`
 	extension := `.h`
-	if parsers.IsQtClass(i.Dependency) {
+	if parsers.IsQtClass(i.Dependency) || parsers.IsMappedLibraryType(i.Dependency) {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
 		extension = ""
 	}
+
 	return fmt.Sprintf(`#include %s%s%s%s`, leftEnclosure, i.Dependency, extension, rightEnclosure)
 }
 
