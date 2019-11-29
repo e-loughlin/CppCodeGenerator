@@ -2,6 +2,7 @@ package cppcomponents
 
 import (
 	"strings"
+	"path/filepath"
 
 	"github.com/emloughl/CppCodeGenerator/util/gmockgenrunner"
 	"github.com/emloughl/CppCodeGenerator/util/io"
@@ -47,6 +48,10 @@ func (m *Mock) setMockHelperFunctions() {
 		fields["{{Function.ReturnType}}"] = function.ReturnType
 		
 		for _, declarationTemplatePath := range (paths.MockHelperFunctionDeclarationPaths) {
+			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void.
+			if(function.ReturnType == "void" && filepath.Base(declarationTemplatePath) == "mock_MakeFunctionReturn_declaration.txt") {
+				continue
+			}
 			declarationTemplate := io.ReadContents(declarationTemplatePath)
 			parsedDeclarations := fieldreplacer.ReplaceAllFields(declarationTemplate, fields)
 			declarations += parsedDeclarations
@@ -54,6 +59,10 @@ func (m *Mock) setMockHelperFunctions() {
 		declarations += "\n"
 
 		for _, definitionTemplatePath := range (paths.MockHelperFunctionDefinitionPaths) {
+			// Hacky code: Prevent "makeFunctionReturn()" from being generated if function return type is void.
+			if(function.ReturnType == "void" && filepath.Base(definitionTemplatePath) == "mock_MakeFunctionReturn_definition.txt") {
+				continue
+			}
 			definitionTemplate := io.ReadContents(definitionTemplatePath)
 			parsedDefinitions := fieldreplacer.ReplaceAllFields(definitionTemplate, fields)
 			definitions += parsedDefinitions
