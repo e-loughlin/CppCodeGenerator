@@ -1,0 +1,9 @@
+# C++ Standard Library
+
+std::bitset bitset
+std::map map
+std::string string
+std::tuple tuple
+std::variant variant
+std::vector vector
+
