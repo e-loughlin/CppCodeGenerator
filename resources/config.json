@@ -52,7 +52,7 @@
         "Test": "test.txt",
         "MockHeader": "mock_header.txt",
         "MockImplementation": "mock_implementation.txt",
-        "MockHelperDeclarations": ["mock_helper_function1_declaration.txt", "mock_helper_function2_declaration.txt"],
-        "MockHelperDefinitions": ["mock_helper_function1_definition.txt", "mock_helper_function2_definition.txt"]
+        "MockHelperDeclarations": ["mock_MakeFunctionReturn_declaration.txt", "mock_ExpectFunctionNotCalled_declaration.txt"],
+        "MockHelperDefinitions": ["mock_MakeFunctionReturn_definition.txt", "mock_ExpectFunctionNotCalled_definition.txt"]
     }
 }
