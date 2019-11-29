@@ -1,3 +1,9 @@
+# mapped-includes.txt: 
+#######################################################################################
+# Add lines to this file of form "<data_type> <library_dependency>"
+# Instances of <data_type> will have their <library_dependency> in the #include string.
+#######################################################################################
+
 # C++ Standard Library
 
 std::bitset bitset
