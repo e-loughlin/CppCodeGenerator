@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/emloughl/CppCodeGenerator/util/io"
+	"github.com/emloughl/CppCodeGenerator/util/parsers"
 )
 
 // TODO: Implement for all dependencies
@@ -23,14 +23,14 @@ func NewInclude(dataType string) *Include {
 // ToString ... Creates the `#include "MyType.h"` string
 func (i Include) ToString() string {
 
-	if io.IsStdDataType(i.Dependency) {
+	if parsers.IsStdDataType(i.Dependency) {
 		return ""
 	}
 
 	leftEnclosure := `"`
 	rightEnclosure := `"`
 	extension := `.h`
-	if io.IsQtClass(i.Dependency) {
+	if parsers.IsQtClass(i.Dependency) {
 		leftEnclosure = `<`
 		rightEnclosure = `>`
 		extension = ""
