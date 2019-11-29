@@ -19,4 +19,5 @@ var GMockGeneratorPath = filepath.Join(ResourcesDir, "gmock_generator", "gmock_g
 var IncludeListsDir = filepath.Join(ResourcesDir, "include-lists")
 var QtClassesPath = filepath.Join(IncludeListsDir, "qt-includes.txt")
 var StdTypesPath = filepath.Join(IncludeListsDir, "std-types.txt")
+var MappedTypesPath = filepath.Join(IncludeListsDir, "mapped-includes.txt")
 var ConfigurationsPath = filepath.Join(ResourcesDir, "config.json")

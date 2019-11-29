@@ -10,7 +10,6 @@ import (
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 	"github.com/emloughl/CppCodeGenerator/util/io"
 	"github.com/emloughl/CppCodeGenerator/util/parsers"
-	"github.com/emloughl/CppCodeGenerator/util/slice"
 )
 
 // Interface ... Implements File
@@ -47,7 +46,7 @@ func NewInterface(filePath string) *Interface {
 	return &i
 }
 
-// parseFunctions ... Reads a slice of lines and parses Function structs from it.
+// parseFunctions ... Reads a parsers.of lines and parses Function structs from it.
 func (i Interface) parseFunctions(contentLines []string) []Function {
 	var functions []Function
 	for _, line := range contentLines {
@@ -71,7 +70,7 @@ func (i *Interface) parseDependencies() {
 	var dependencies []string
 	for _, function := range i.Functions {
 
-		// "expanded" refers to creating a slice from a templated type, i.e "QMap <int, QString>" becomes [QMap int QString]
+		// "expanded" refers to creating a parsers.from a templated type, i.e "QMap <int, QString>" becomes [QMap int QString]
 		expandedReturnType := strings.FieldsFunc(function.ReturnType, templatedTypeSeparators) 
 		for _, dataType := range(expandedReturnType) {
 			dependencies = append(dependencies, strings.TrimSpace(dataType))
@@ -85,11 +84,11 @@ func (i *Interface) parseDependencies() {
 		}
 	}
 	i.Dependencies = dependencies
-	i.Dependencies = slice.RemoveConstSpecifiers(i.Dependencies)
-	i.Dependencies = slice.RemovePointersAndReferences(i.Dependencies)
-	//TODO: Convert user-configured mapped types to their respective library include
-	i.Dependencies = slice.RemoveStdDataTypes(i.Dependencies)
-	i.Dependencies = slice.RemoveDuplicates(i.Dependencies)
+	i.Dependencies = parsers.RemoveConstSpecifiers(i.Dependencies)
+	i.Dependencies = parsers.RemovePointersAndReferences(i.Dependencies)
+	i.Dependencies = parsers.RemoveStdDataTypes(i.Dependencies)
+	i.Dependencies = parsers.MapDataTypesToLibraryDependencies(i.Dependencies)
+	i.Dependencies = parsers.RemoveDuplicates(i.Dependencies)
 	sort.Strings(i.Dependencies)
 }
 

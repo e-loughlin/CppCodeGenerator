@@ -6,15 +6,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-
-	"github.com/emloughl/CppCodeGenerator/util/paths"
 )
-
-// List of all Qt Classes
-var allQtClasses = strings.Split(ReadContents(paths.QtClassesPath), "\n")
-
-// List of all C++ std data types
-var allStdTypes = strings.Split(ReadContents(paths.StdTypesPath), "\n")
 
 // IsValidDirectory ... Checks whether a directory exists by creating and deleting a temporary file.
 func IsValidDirectory(directory string) bool {
@@ -63,28 +55,4 @@ func ReadLines(filePath string) []string {
 // WriteToDisk ...
 func WriteToDisk(filePath string, data string) {
 	ioutil.WriteFile(filePath, []byte(data), 0644)
-}
-
-// IsQtClass ... Returns whether a given string is a Qt class.
-func IsQtClass(className string) bool {
-	for _, qtClass := range allQtClasses {
-		qtClass = strings.TrimRight(qtClass, "\n")
-		qtClass = strings.TrimRight(qtClass, "\r")
-		if className == qtClass {
-			return true
-		}
-	}
-	return false
-}
-
-// IsStdDataType ... Returns whether a given string is a std C/C++ type
-func IsStdDataType(dataType string) bool {
-	for _, stdType := range allStdTypes {
-		stdType = strings.TrimRight(stdType, "\n")
-		stdType = strings.TrimRight(stdType, "\r")
-		if dataType == stdType {
-			return true
-		}
-	}
-	return false
 }
