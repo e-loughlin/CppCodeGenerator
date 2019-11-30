@@ -8,6 +8,8 @@ import os
 import sys
 import gmock_gen
 
+# TODO: Figure out why this isn't working. Try on I_SudokuPuzzle.h
+
 def removeSignalsFromInterface(interfaceContents):
     updatedContents = []
     withinSignalBlock = False
