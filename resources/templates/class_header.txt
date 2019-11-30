@@ -18,9 +18,6 @@ Q_OBJECT
 
  public:
 {{Class.Header.FunctionDeclarations}}
- 
- signals:
-{{Class.Header.QtSignalDeclarations}}
 
  private:
 

@@ -10,8 +10,6 @@ class {{Interface.Name}}
 
  public:
 
- public signals:
-
 };
 
 #endif //{{Interface.DefineName}}

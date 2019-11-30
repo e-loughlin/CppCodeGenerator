@@ -11,4 +11,3 @@
 }
 
 {{Class.Implementation.FunctionDefinitions}}
-{{Class.Implementation.QtSignalDefinitions}}
