@@ -109,7 +109,14 @@ func main() {
 			os.Exit(0)
 		}
 
-		class := cppcomponents.NewClass(*inheritedInterface)
+		// If no name provided, the the concrete class name will derive from the interface's name
+		if name == "" {
+			name = inheritedInterface.Name
+			name = strings.TrimPrefix(name, configurations.Config.Prefixes.Interface)
+			name = strings.TrimSuffix(name, configurations.Config.Suffixes.Interface)
+		}
+		class := cppcomponents.NewClass(*inheritedInterface, name)
+
 		interfaceDir := filepath.Dir(interfaceFilePath)
 
 		// --------------

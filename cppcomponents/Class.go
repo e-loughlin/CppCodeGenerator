@@ -1,7 +1,6 @@
 package cppcomponents
 
 import (
-	"strings"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 	"github.com/emloughl/CppCodeGenerator/util/parsers"
 )
@@ -25,11 +24,10 @@ type Class struct {
 	QtSignalDefinitions 	string
 }
 
-func NewClass(InheritedInterface Interface) *Class {
+func NewClass(InheritedInterface Interface, className string) *Class {
 	c := Class{}
 	c.InheritedInterface = InheritedInterface
-	c.Name = strings.TrimPrefix(c.InheritedInterface.Name, configurations.Config.Prefixes.Interface)
-	c.Name = strings.TrimSuffix(c.Name, configurations.Config.Suffixes.Interface)
+	c.Name = className
 
 	// Header
 	c.HeaderFileName = c.Name + configurations.Config.FileExtensions.CppHeader
