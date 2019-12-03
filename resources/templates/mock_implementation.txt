@@ -1,4 +1,6 @@
 
 #include "{{Mock.Header.FileName}}"
 
+using ::testing::Return;
+
 {{Mock.HelperFunctions.Definitions}}
