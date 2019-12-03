@@ -1,4 +1,8 @@
-#include "gtest/gtest.h"
+{{Copyright}}
+
+#include <gtest/gtest.h>
+#include <gmock/gmock.h>
+
 #include <QScopedPointer>
 
 #include "{{Test.ConcreteFileName}}"
@@ -13,7 +17,7 @@ namespace
     {
      protected:
         {{Test.Name}}(){}
-        ~{{Test.Name}} override {}
+        ~{{Test.Name}}() override {}
 
         void SetUp() override
         {
