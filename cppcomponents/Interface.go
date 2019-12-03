@@ -21,6 +21,10 @@ type Interface struct {
 	Functions    []Function
 	Signals      []Function
 	Dependencies []string
+
+	// For base classes
+	ForwardDeclaresString string
+	IncludesString string
 }
 
 // NewInterface ...
@@ -43,6 +47,8 @@ func NewInterface(filePath string) *Interface {
 	i.DefineName = parsers.GenerateDefineName(i.Name)
 	i.FileName = i.parseFileName(i.Name)
 	i.parseDependencies()
+	i.parseIncludes()
+	i.parseForwardDeclares()
 	return &i
 }
 
@@ -90,6 +96,21 @@ func (i *Interface) parseDependencies() {
 	i.Dependencies = parsers.MapDataTypesToLibraryDependencies(i.Dependencies)
 	i.Dependencies = parsers.RemoveDuplicates(i.Dependencies)
 	sort.Strings(i.Dependencies)
+}
+
+// parseIncludes .. Parses dependencies to create an #include string for each.
+func (i *Interface) parseIncludes() {
+	for _, dependency := range i.Dependencies {
+		include := NewInclude(dependency)
+		i.IncludesString += include.ToString() + "\n"
+	}
+}
+
+// parseForwardDeclares .. Parses dependencies to create an foward declare string for each.
+func (i *Interface) parseForwardDeclares() {
+	for _, dependency := range i.Dependencies {
+		i.ForwardDeclaresString += "class " + dependency + ";\n"
+	}
 }
 
 // isPureVirtualDefinition ... Returns whether a function is pure virtual.

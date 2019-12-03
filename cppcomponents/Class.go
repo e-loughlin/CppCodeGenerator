@@ -13,7 +13,7 @@ type Class struct {
 	// Header
 	HeaderFileName      	string
 	DefineName		     	string
-	ForwardDeclares	     	string
+	ForwardDeclares		  	string
 	FunctionDeclarations 	string
 	QtSignalDeclarations 	string
 
@@ -33,12 +33,12 @@ func NewClass(InheritedInterface Interface, className string) *Class {
 	c.HeaderFileName = c.Name + configurations.Config.FileExtensions.CppHeader
 	c.DefineName = parsers.GenerateDefineName(c.Name)
 	c.FunctionDeclarations = c.parseFunctionDeclarations()
-	c.parseForwardDeclares();
+	c.ForwardDeclares = c.InheritedInterface.ForwardDeclaresString
 	
 	//Implementation
 	c.ImplementationFileName = c.Name + configurations.Config.FileExtensions.CppImplementation
 	c.FunctionDefinitions = c.parseFunctionDefinitions()
-	c.parseIncludes()
+	c.IncludesString = c.InheritedInterface.IncludesString
 	return &c
 }
 
@@ -50,25 +50,12 @@ func (c Class) parseFunctionDefinitions() string {
 	return functionDefinitions
 }
 
-func (c *Class) parseIncludes() {
-	for _, dependency := range c.InheritedInterface.Dependencies {
-		i := NewInclude(dependency)
-		c.IncludesString += i.ToString() + "\n"
-	}
-}
-
 func (c Class) parseFunctionDeclarations() string {
 	functionDeclarations := ""
 	for _, function := range c.InheritedInterface.Functions {
 		functionDeclarations += function.Declaration()
 	}
 	return functionDeclarations
-}
-
-func (c *Class) parseForwardDeclares() {
-	for _, dependency := range c.InheritedInterface.Dependencies {
-		c.ForwardDeclares += "class " + dependency + ";\n"
-	}
 }
 
 // Fields ... The fields within templates to be replaced.
