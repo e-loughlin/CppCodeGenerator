@@ -4,6 +4,8 @@
 #include <gtest/gmock.h>
 #include "{{Mock.InheritedInterface.FileName}}"
 
+{{Mock.ForwardDeclares}}
+
 class {{Mock.Name}} : public {{Mock.InheritedInterface.Name}}
 {
  public:
