@@ -1,7 +1,7 @@
 # CppCodeGenerator
 ## C++ Code Generation Tools
 
-# PROJECT STATUS: In Progress
+# PROJECT STATUS: Beta Testing
 
 (In-progress re-write my python project [CplusplusCodeGenerators](https://github.com/emloughl/CplusplusCodeGenerators "CplusplusCodeGenerators") - in Golang)
 
