@@ -5,3 +5,4 @@ build/
 *.cpp
 *.cxx
 *.pyc
+resources/config.json
