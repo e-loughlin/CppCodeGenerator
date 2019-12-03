@@ -1,3 +1,6 @@
+# All types in this list will be ignored when
+# parsing includes / forward declares from interfaces
+
 short
 short int
 signed short
@@ -33,3 +36,25 @@ long double
 wchar_t
 bool
 void
+
+# Qt types from <QtGlobal>
+
+qint8
+qint16
+qint32
+qint64
+qintptr
+qlonglong
+qptrdiff
+qreal
+qsizetype
+quint8
+quint16
+quint32
+quint64
+quintptr
+qulonglong
+uchar
+uint
+ulong
+ushort
