@@ -58,8 +58,22 @@ Now, we'll generate a class that inherits `IMyFirstClass.h`:
 #### Output:
  ![Generating a new class from an existing interface](documentation/readme_resources/05_generated_class.gif)
  
-##### Notes:
- - The program isn't perfect, and tries to handle dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>.
+##### Some Cleanup Required
+The program isn't perfect, and handles dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>.
+ 
+ #### Class Naming
+By default, the program generates a class name based on the interface's name. To specify a different name, use the `-n` or `--name` option. 
+ ![Generating a new class from an existing interface](documentation/readme_resources/06_new_class_unique_name.gif)
+
+ 
+
+## Generating a Mock
+#### First Complete your Interface
+Just like generating a class, a completed interface is required. As an example, we'll use the same `IMyNewClass.h` interface previously defined.
+
+
+
+
 
 ### Configurations
 
