@@ -40,7 +40,7 @@ go build ..
 CppCodeGenerator -t interface -n MyFirstClass
 ```
 ##### Output:
- ![Generating a new interface](documentation/readme_resources/01_readme_resources.gif)
+ ![Generating a new interface](documentation/readme_resources/01_new_interface.gif)
 
 ##### Creating a new (blank) interface:
 ```
