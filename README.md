@@ -75,6 +75,14 @@ Just like generating a class, a completed interface is required. As an example, 
 #### Output:
  ![Generating a new mock](documentation/readme_resources/08_mock_output.gif)
 
+## Generating a Test
+Generating a test requires only the name (not the path) of the desired concrete class to test.
+#### Command:
+ ![Generating a new test](documentation/readme_resources/09_new_test.gif)
+ 
+#### Output:
+ ![Generating a new test](documentation/readme_resources/10_test_output.gif)
+
 ### Configurations
 
 Modifying the `config.json` file allows you to alter your desired prefixes, suffixes, and other policies.
