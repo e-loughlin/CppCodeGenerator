@@ -1,14 +1,14 @@
 # CppCodeGenerator
 ## C++ Code Generation Tools
 
-A project for generating boilerplate C++ code from user-provided template files (.txt).
+A project for generating boilerplate C++ code from user-provided template files (.txt), and user-defined configurations (config.json).
 
 ### Files that can be generated:
 - Interfaces
-- Class Headers (.h)
+- Class Headers (.h / .hpp)
 - Class Implementations (.cpp / .cxx)
-- Mock Classes
-- Test Classes
+- Mock Classes (GoogleMock)
+- Test Classes (GoogleTest)
 
 ## Dependencies
 - Go 1.13 +
@@ -63,17 +63,17 @@ The program isn't perfect, and handles dependencies by placing all required type
  
  #### Class Naming
 By default, the program generates a class name based on the interface's name. To specify a different name, use the `-n` or `--name` option. 
- ![Generating a new class from an existing interface](documentation/readme_resources/06_new_class_unique_name.gif)
-
- 
+ ![Generating a new class with a unique name](documentation/readme_resources/06_new_class_unique_name.gif)
 
 ## Generating a Mock
 #### First Complete your Interface
 Just like generating a class, a completed interface is required. As an example, we'll use the same `IMyNewClass.h` interface previously defined.
 
+#### Command:
+ ![Generating a new mock](documentation/readme_resources/07_new_mock.gif)
 
-
-
+#### Output:
+ ![Generating a new mock](documentation/readme_resources/08_mock_output.gif)
 
 ### Configurations
 
