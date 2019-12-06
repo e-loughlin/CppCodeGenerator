@@ -55,6 +55,11 @@ Now, we'll generate a class that inherits `IMyFirstClass.h`:
 #### Command:
  ![Generating a new class from an existing interface](documentation/readme_resources/04_new_class.gif)
 
+#### Output:
+ ![Generating a new class from an existing interface](documentation/readme_resources/05_generated_class.gif)
+ 
+##### Notes:
+ - The program isn't perfect, and tries to handle dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>.
 
 ### Configurations
 
