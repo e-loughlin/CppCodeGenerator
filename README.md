@@ -23,34 +23,37 @@ go build ..
 
 ## Usage
 ### Arguments
-##### Class Type
+#### Class Type
 ` -t ` or `--type`: Specifies the type of class to be generated. 
  - Allowed values: `interface`, `class`, `mock`, or `test`.
 
-##### Path to Existing Interface
+#### Path to Existing Interface
 ` -i` or `--interface`: Specifies the path to a user's existing C++ interface from which to generate another class.
 
-##### Class Name
+#### Class Name
 ` -n` or `--class`: Specifies the name of the class to be generated.
 
 ## Generating an Interface
-##### Command:
+#### Command:
 
 ```
 CppCodeGenerator -t interface -n MyFirstClass
 ```
  ![Generating a new interface](documentation/readme_resources/01_new_interface.gif)
  
-##### Output:
+#### Output:
 ![Generated blank interface](documentation/readme_resources/02_generated_interface.GIF)
 
 ## Generating a Class (Header and Implementation)
-#### Prerequisite
+#### First Complete your Interface
 To generate a class, you require an interface from which to implement. The first step is to define your interface's pure virtual functions. In this example, we'll define three pure virtual functions, `foo`, `bar`, and `baz`. Each of them with intentionally convoluted signatures to demonstrate the generator's capabilities.
 
 ![Interface with completed pure virtual function definitions](documentation/readme_resources/03_completed_interface.gif)
 
+Now, we'll generate a class that inherits `IMyFirstClass.h`:
 
+#### Command:
+ ![Generating a new class from an existing interface](documentation/readme_resources/04_new_class.gif)
 
 
 ### Configurations
