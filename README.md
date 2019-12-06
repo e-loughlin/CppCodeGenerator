@@ -45,7 +45,7 @@ CppCodeGenerator -t interface -n MyFirstClass
 ![Generated blank interface](documentation/readme_resources/02_generated_interface.GIF)
 
 ## Generating a Class (Header and Implementation)
-##### Prerequisite
+#### Prerequisite
 To generate a class, you require an interface from which to implement. The first step is to define your interface's pure virtual functions. In this example, we'll define three pure virtual functions, `foo`, `bar`, and `baz`. Each of them with intentionally convoluted signatures to demonstrate the generator's capabilities.
 
 ![Interface with completed pure virtual function definitions](documentation/readme_resources/03_completed_interface.gif)
