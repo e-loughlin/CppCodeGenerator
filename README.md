@@ -1,53 +1,46 @@
 # CppCodeGenerator
 ## C++ Code Generation Tools
 
-# PROJECT STATUS: Beta Testing
-
-(In-progress re-write my python project [CplusplusCodeGenerators](https://github.com/emloughl/CplusplusCodeGenerators "CplusplusCodeGenerators") - in Golang)
-
 A project for generating boilerplate C++ code from user-provided template files (.txt).
 
-Files that can be generated:
+### Files that can be generated:
 - Interfaces
 - Class Headers (.h)
 - Class Implementations (.cpp / .cxx)
+- Mock Classes
+- Test Classes
 
-In progress: 
-- Mocks / SpyMocks
-- Tests
+## Dependencies
+- Go 1.13 +
 
 ## Installation
-### Windows
-``` 
- $ cd CppCodeGenerator/
- $ environment.bat
- $ cd src/
- $ go install
 ```
-
-### Mac / Linux
-```
- $ cd CppCodeGenerator/
- $ source environment.sh
- $ cd
- $ go install
+git clone https://github.com/emloughl/CppCodeGenerator.git
+cd CppCodeGenerator
+mkdir build && cd build
+go build ..
 ```
 
 ## Usage
-```
- $ cd CppCodeGenerator/bin/
- $ src.exe -type=<TYPE> -interface=<PATH_TO_INTERFACE>
-```
-
 ### Arguments
-#### Types
-- `-type=interface` Creates a new interface
-- `-type=class` : Creates a new `.h` and `.cpp / .cxx` class file.
+##### Class Type
+` -t ` or `--type`: Specifies the type of class to be generated. 
+ - Allowed values: `interface`, `class`, `mock`, or `test`.
 
-#### Path to Interface to Implement
-The interface from which the generated derived classes, if applicable, will inherit. Any pure virtual functions or signals (Qt) declared in the inherited interface will be declared and defined in the derived classes as appropriate. The path to this inherited interface is set using the `-interface=` flag.
+##### Path to Existing Interface
+` -i` or `--interface`: Specifies the path to a user's existing C++ interface from which to generate another class.
 
-### Examples:
+##### Class Name
+` -n` or `--class`: Specifies the name of the class to be generated.
+
+## Generating an Interface
+##### Command:
+
+```
+CppCodeGenerator -t interface -n MyFirstClass
+```
+##### Output:
+ ![Generating a new interface](documentation/readme_resources/01_readme_resources.gif)
 
 ##### Creating a new (blank) interface:
 ```
