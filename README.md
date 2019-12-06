@@ -67,7 +67,7 @@ By default, the program generates a class name based on the interface's name. To
 
 ## Generating a Mock
 #### First Complete your Interface
-Just like generating a class, a completed interface is required. As an example, we'll use the same `IMyNewClass.h` interface previously defined.
+Just like generating a class, a completed interface is required. As an example, we'll use the same `IMyFirstClass.h` interface previously defined.
 
 #### Command:
  ![Generating a new mock](documentation/readme_resources/07_new_mock.gif)
