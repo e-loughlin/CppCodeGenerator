@@ -134,6 +134,9 @@ Users are free to modify existing templates, or create their own. If a user crea
 Within template files, fields are indicated by the presence of curly braces, e.g. `{{Class.Header.DefineName}}`. During generation, the program identifies these fields and replaces them accordingly. 
 
 #### General
+<p align="center">
+
 Field | Gets Replaced With 
 --- | --- 
 `{{Copyright}}` | Contents of `copyright.txt`
+</p>
