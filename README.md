@@ -134,9 +134,68 @@ Users are free to modify existing templates, or create their own. If a user crea
 Within template files, fields are indicated by the presence of curly braces, e.g. `{{Class.Header.DefineName}}`. During generation, the program identifies these fields and replaces them accordingly. 
 
 #### General
-<p align="center">
 
-Field | Gets Replaced With 
+Field | Gets Replaced With
 --- | --- 
 `{{Copyright}}` | Contents of `copyright.txt`
-</p>
+`{{FileName}}` | Generated filename
+`{{UserInfo.Author}}` | Author as configured in `config.json`
+`{{UserInfo.Company}}` | Company as configured in `config.json`
+`{{Date}}` | Current date of file being generated, as formatted in `config.json`
+
+#### Interface
+
+Field | Gets Replaced With
+--- | --- 
+`{{Interface.DefineName}}` | Define name of interface
+`{{Interface.Name}}` | Interface name
+
+#### Class
+
+Field | Gets Replaced With
+--- | --- 
+`{{Class.Header.DefineName}}` | Class header's define name
+`{{Class.Header.ForwardDeclares}}` | Sorted forward declares of all types used within the inherited interface
+`{{Class.Name}}` | Class name
+`{{Interface.Name}}` | Name of interface that the class is inheriting
+`{{Interface.FileName}}` | Filename of interface that the class is inheriting
+`{{Class.Header.FileName}}` | Filename of class header
+`{{Class.Header.FunctionDeclarations}}` | Function declarations (as per the pure virtual functions declared in the interface)
+`{{Class.Implementation.FunctionDefinitions}}` | Function definitions (as per the pure virtual functions declared in the interface)
+
+#### Mock
+
+Field | Gets Replaced With
+--- | --- 
+`{{Mock.InheritedInterface.FileName}}` | Name of interface that the mock is inheriting
+`{{Mock.ForwardDeclares}}` | Sorted forward declares of all types used within the inherited interface
+`{{Mock.Includes}}` || Sorted includes of all types used within the inherited interface
+`{{Mock.Name}}` | Mock name
+`{{Mock.Header.FileName}}` | Mock header filename
+`{{Mock.InheritedInterface.Name}}` | Name of interface that the class is inheriting
+`{{GMockMacros}}` | Result of GoogleMock gmock_gen.py, formatted. Refer to GoogleMock documentation: https://github.com/google/googletest/blob/master/googlemock/docs/for_dummies.md
+`{{Mock.HelperFunctions.Declarations}}` | Mock helper functions, as defined in `config.json`'s reference to helper function templates.
+`{{Class.Header.FunctionDeclarations}}` | Function declarations (as per the pure virtual functions declared in the interface)
+`{{Class.Implementation.FunctionDefinitions}}` | Function definitions (as per the pure virtual functions declared in the interface)
+`{{Mock.HelperFunctions.Definitions}}` | Helper function definitions
+
+#### Test
+`{{Test.ConcreteFileName}}` | The tested class' filename
+`{{Test.Name}}` | Name of test harness
+
+## Include Lists
+The `.txt` files located in https://github.com/emloughl/CppCodeGenerator/tree/master/resources/include-lists, help improve the mapping of data types from pure virtual functions declared in interfaces, to forward declares and includes. 
+
+### Qt Classes
+The `qt-includes.txt` file lists all Qt classes. Any class in this file, if used in an interface, will be included with `<` and `>`, such as `#include <QObject>`. User-defined types would be included with `"`, such as `#include "MyNewClass.h"`.
+
+### Std Types
+The `std-types.txt` file lists all standard types, for which no include or forward declare is necessary.
+
+### Mapped Includes
+The `mapped-includes.txt` file lists a dictionary of key-value pairs, such that if the parsing of an interface encounters the key, it will include or forward declare the corresponding value.
+
+For example:
+`std::vector vector` will cause the use of `std::vector` in a pure virtual function to create an include of `#include <vector>`. Without this key-value pair, the result would erroneously be `#include "std::vector.h"`.
+
+This file allows users to add types as required to improve the utility of the generator.
