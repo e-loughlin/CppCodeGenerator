@@ -37,7 +37,7 @@ go build ..
 #### Command:
 
 ```
-CppCodeGenerator -t interface -n MyFirstClass
+CppCodeGenerator --type interface --name MyFirstClass
 ```
  ![Generating a new interface](documentation/readme_resources/01_new_interface.gif)
  
@@ -53,6 +53,10 @@ To generate a class, you require an interface from which to implement. The first
 Now, we'll generate a class that inherits `IMyFirstClass.h`:
 
 #### Command:
+```
+CppCodeGenerator --type class --interface ./path/to/interface/IMyFirstClass.h
+```
+
  ![Generating a new class from an existing interface](documentation/readme_resources/04_new_class.gif)
 
 #### Output:
@@ -62,6 +66,9 @@ Now, we'll generate a class that inherits `IMyFirstClass.h`:
 The program isn't perfect, and handles dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>.
  
  #### Class Naming
+ ```
+ CppCodeGenerator --type class --interface ./path/to/interface/IMyFirstClass.h --name UniqueClass
+ ```
 By default, the program generates a class name based on the interface's name. To specify a different name, use the `-n` or `--name` option. 
  ![Generating a new class with a unique name](documentation/readme_resources/06_new_class_unique_name.gif)
 
@@ -70,6 +77,9 @@ By default, the program generates a class name based on the interface's name. To
 Just like generating a class, a completed interface is required. As an example, we'll use the same `IMyFirstClass.h` interface previously defined.
 
 #### Command:
+```
+CppCodeGenerator --type mock --interface ./path/to/interface/IMyFirstClass.h
+```
  ![Generating a new mock](documentation/readme_resources/07_new_mock.gif)
 
 #### Output:
@@ -78,17 +88,51 @@ Just like generating a class, a completed interface is required. As an example, 
 ## Generating a Test
 Generating a test requires only the name (not the path) of the desired concrete class to test.
 #### Command:
+```
+CppCodeGenerator --type test --name MyConcreteClass
+```
  ![Generating a new test](documentation/readme_resources/09_new_test.gif)
  
 #### Output:
- ![Generating a new test](documentation/readme_resources/10_test_output.gif)
+ ![New Test output](documentation/readme_resources/10_test_output.gif)
 
-### Configurations
+## Configurations
 
 Modifying the `config.json` file allows you to alter your desired prefixes, suffixes, and other policies.
 
-#### Date Format: 
+#### Prefixes, Suffixes, Formatting Syntax, and File Extensions
+The following fields can be modified:
+ ![Configuring prefixes, suffixes, syntax, and file extensions.](documentation/readme_resources/10_test_output.gif)
+ 
+#### Policies
+Currently the following policies can be modified:
+##### DefineNameAllCapsEnabled
+Sets whether a define name, such as `#ifndef MYCLASS_H`, will be capitalized.
+
+##### DefineNameCamelCaseSeparator
+Define names are generated based on the class name. The DefineNameCamelCaseSeparator describes the separator characters that will be placed between words of a camel-case class.
+
+Example:
+With `"DefineNameCamelCaseSeparator": "_"`, and a DefineName Suffix = `"_H`, a class named `MyNewClass` will have a generated define name of `MY_NEW_CLASS_H`.
+
+##### Date Format: 
 Follow the Golang date format. Example here: https://stackoverflow.com/questions/20234104/how-to-format-current-time-using-a-yyyymmddhhmmss-format
 
-## TODO:
-Add list in README of all possible template parameters
+#### Template File Names
+The program relies on user-defined template .txt files to generated classes. The `config.json` file describes the names of the templates to use. These templates must be located within the Templates Directory.
+
+## Modifying Template Files
+All the generated classes are derived from user-defined templates in .txt format. 
+
+#### Templates Directory
+All templates must be located here:
+https://github.com/emloughl/CppCodeGenerator/tree/master/resources/templates
+
+Users are free to modify existing templates, or create their own. If a user creates their own, the new template file name must be populated in `config.json`, and located within the templates directory.
+
+### Fields
+Within template files, fields are indicated by the presence of curly braces, e.g. `{{Class.Header.DefineName}}`. During generation, the program identifies these fields and replaces them accordingly. 
+
+Attempt | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 | #11
+--- | --- | --- | --- |--- |--- |--- |--- |--- |--- |--- |---
+Seconds | 301 | 283 | 290 | 286 | 289 | 285 | 287 | 287 | 272 | 276 | 269
