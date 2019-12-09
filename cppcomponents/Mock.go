@@ -7,6 +7,7 @@ import (
 	"github.com/emloughl/CppCodeGenerator/util/gmockgenrunner"
 	"github.com/emloughl/CppCodeGenerator/util/io"
 	"github.com/emloughl/CppCodeGenerator/util/paths"
+	"github.com/emloughl/CppCodeGenerator/util/parsers"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
 	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
 )
@@ -16,6 +17,7 @@ type Mock struct {
 	InheritedInterface Interface
 	Name          			string
 	HeaderFileName          string
+	HeaderDefineName		string
 	ImplementationFileName  string
 	GMockMacros 			string
 	MockHelperFunctionDeclarations string
@@ -29,6 +31,7 @@ func NewMock(inheritedInterface Interface) *Mock {
 	m.Name = strings.TrimSuffix(m.Name, configurations.Config.Suffixes.Interface)
 	m.Name = configurations.Config.Prefixes.Mock + m.Name + configurations.Config.Suffixes.Mock
 	m.HeaderFileName = m.Name + configurations.Config.FileExtensions.CppHeader
+	m.HeaderDefineName = parsers.GenerateDefineName(m.Name)
 	m.ImplementationFileName = m.Name + configurations.Config.FileExtensions.CppImplementation
 	m.GMockMacros = gmockgenrunner.GetGMockGeneratorFunctionRegistrations(m.InheritedInterface.FileName)
 	m.setMockHelperFunctions()
@@ -77,6 +80,7 @@ func (m Mock) Fields() map[string]string {
 	fields := make(map[string]string)
 	fields["{{Mock.Name}}"] = m.Name
 	fields["{{Mock.Header.FileName}}"] = m.HeaderFileName
+	fields["{{Mock.Header.DefineName}}"] = m.HeaderDefineName
 	fields["{{GMockMacros}}"] = m.GMockMacros
 	fields["{{Mock.InheritedInterface.Name}}"] = m.InheritedInterface.Name
 	fields["{{Mock.InheritedInterface.FileName}}"] = m.InheritedInterface.FileName

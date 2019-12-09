@@ -1,6 +1,8 @@
 
 {{Copyright}}
 
+#pragma once
+
 #include <gtest/gmock.h>
 #include "{{Mock.InheritedInterface.FileName}}"
 

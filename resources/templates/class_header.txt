@@ -1,7 +1,6 @@
 {{Copyright}}
 
-#ifndef {{Class.Header.DefineName}}
-#define {{Class.Header.DefineName}}
+#pragma once
 
 #include "{{Interface.FileName}}"
 {{Class.Header.Includes}}
@@ -22,5 +21,3 @@ Q_OBJECT
  private:
 
 };
-
-#endif //{{Class.Header.DefineName}}

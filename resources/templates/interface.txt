@@ -1,7 +1,6 @@
 {{Copyright}}
 
-#ifndef {{Interface.DefineName}}
-#define {{Interface.DefineName}}
+#pragma once
 
 class {{Interface.Name}} 
 {
@@ -11,5 +10,3 @@ class {{Interface.Name}}
  public:
 
 };
-
-#endif //{{Interface.DefineName}}
