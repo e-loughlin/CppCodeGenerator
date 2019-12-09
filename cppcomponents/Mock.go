@@ -81,7 +81,8 @@ func (m Mock) Fields() map[string]string {
 	fields["{{Mock.InheritedInterface.Name}}"] = m.InheritedInterface.Name
 	fields["{{Mock.InheritedInterface.FileName}}"] = m.InheritedInterface.FileName
 	fields["{{Mock.ForwardDeclares}}"] = m.InheritedInterface.ForwardDeclaresString
-	fields["{{Mock.Includes}}"] = m.InheritedInterface.IncludesString
+	fields["{{Mock.Header.Includes}}"] = m.InheritedInterface.HeaderIncludesString
+	fields["{{Mock.Implementation.Includes}}"] = m.InheritedInterface.ImplementationIncludesString
 	fields["{{Mock.HelperFunctions.Declarations}}"] = m.MockHelperFunctionDeclarations
 	fields["{{Mock.HelperFunctions.Definitions}}"] = m.MockHelperFunctionDefinitions
 	return fields

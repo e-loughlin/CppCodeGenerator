@@ -24,7 +24,8 @@ type Interface struct {
 
 	// For base classes
 	ForwardDeclaresString string
-	IncludesString string
+	HeaderIncludesString string
+	ImplementationIncludesString string
 }
 
 // NewInterface ...
@@ -102,14 +103,20 @@ func (i *Interface) parseDependencies() {
 func (i *Interface) parseIncludes() {
 	for _, dependency := range i.Dependencies {
 		include := NewInclude(dependency)
-		i.IncludesString += include.ToString() + "\n"
+		if parsers.ShouldBeIncludedInHeader(dependency) {
+			i.HeaderIncludesString += include.ToString() + "\n"
+		} else {
+			i.ImplementationIncludesString += include.ToString() + "\n"
+		}
 	}
 }
 
 // parseForwardDeclares .. Parses dependencies to create an foward declare string for each.
 func (i *Interface) parseForwardDeclares() {
 	for _, dependency := range i.Dependencies {
-		i.ForwardDeclaresString += "class " + dependency + ";\n"
+		if !parsers.ShouldBeIncludedInHeader(dependency) {
+			i.ForwardDeclaresString += "class " + dependency + ";\n"
+		} 
 	}
 }
 

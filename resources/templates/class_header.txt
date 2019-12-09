@@ -4,7 +4,7 @@
 #define {{Class.Header.DefineName}}
 
 #include "{{Interface.FileName}}"
-
+{{Class.Header.Includes}}
 #include <QObject>
 
 {{Class.Header.ForwardDeclares}}

@@ -49,9 +49,6 @@ func main() {
 		os.Exit(0)
 	}
 
-	// TODO: Fix guards
-
-	
 	// Copyright Block
 	copyrightBlock := cppcomponents.NewCopyrightCommentBlock()
 
@@ -67,10 +64,8 @@ func main() {
 			interfaceFilePath = configurations.Config.Prefixes.Interface + name + configurations.Config.Suffixes.Interface + configurations.Config.FileExtensions.CppHeader
 		}
 
-		//TODO: Refactor templateType usage (enum)
 		interfaceContents := templates.ReadTemplate(templates.Interface)
 
-		// TODO: Refactor Interface so that it takes contents rather than filepath
 		io.WriteToDisk(interfaceFilePath, interfaceContents)
 		i := cppcomponents.NewInterface(interfaceFilePath)
 

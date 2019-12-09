@@ -1,0 +1,13 @@
+# include-in-header.txt: 
+#######################################################################################
+# Dependencies in this file will be included in the header,
+# rather than forward declared and included in the implementation.
+# 
+# For items in mapped-includes.txt, use the mapped value.
+
+bitset
+map
+string
+tuple
+variant
+vector

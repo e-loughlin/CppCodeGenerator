@@ -13,14 +13,16 @@ var allQtClasses []string = loadQtClasses()
 // List of all C++ std data types
 var allStdTypes []string = loadStdClasses()
 
+// List of all types that should be included in header rather than forward declared
+var allIncludeInHeaderTypes []string = loadIncludeInHeaderClasses()
+
 // Map of data types to dependencies as per mapped-includes.txt
 var allMappedTypes map[string]string = loadMappedTypes()
 
 // IsQtClass ... Returns whether a given string is a Qt class.
 func IsQtClass(className string) bool {
 	for _, qtClass := range allQtClasses {
-		qtClass = strings.TrimRight(qtClass, "\n")
-		qtClass = strings.TrimRight(qtClass, "\r")
+		qtClass = strings.TrimRight(qtClass, "\n\r")
 		if className == qtClass {
 			return true
 		}
@@ -31,8 +33,7 @@ func IsQtClass(className string) bool {
 // IsStdDataType ... Returns whether a given string is a std C/C++ type
 func IsStdDataType(dataType string) bool {
 	for _, stdType := range allStdTypes {
-		stdType = strings.TrimRight(stdType, "\n")
-		stdType = strings.TrimRight(stdType, "\r")
+		stdType = strings.TrimRight(stdType, "\n\r")
 		if dataType == stdType {
 			return true
 		}
@@ -58,6 +59,17 @@ func MapToListedDependency(dataType string) string {
 		returnValue = libraryDependency
 	}
 	return returnValue
+}
+
+// ShouldBeIncludedInHeader .. Determines whether a type is configured to be included in header rather than forward declared
+func ShouldBeIncludedInHeader(dataType string) bool {
+	for _, includeInHeaderType:= range allIncludeInHeaderTypes {
+		includeInHeaderType = strings.TrimRight(includeInHeaderType, "\n\r")
+		if dataType == includeInHeaderType{
+			return true
+		}
+	}
+	return false
 }
 
 func RemoveDuplicates(stringSlice []string) []string {
@@ -129,6 +141,13 @@ func loadQtClasses() []string {
 	qtClasses := strings.Split(io.ReadContents(paths.QtClassesPath), "\n")
 	qtClasses = filter(qtClasses, isNotCommentLine)
 	return qtClasses
+}
+
+// loadIncludeInHeaderClasses ... Loads classes from file that should be included in header instead of forward declared
+func loadIncludeInHeaderClasses() []string {
+	includeInHeaderClasses := strings.Split(io.ReadContents(paths.IncludeInHeaderPath), "\n")
+	includeInHeaderClasses = filter(includeInHeaderClasses, isNotCommentLine)
+	return includeInHeaderClasses
 }
 
 func loadMappedTypes() map[string]string {

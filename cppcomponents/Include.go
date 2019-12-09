@@ -7,8 +7,6 @@ import (
 	"github.com/emloughl/CppCodeGenerator/util/parsers"
 )
 
-// TODO: Implement for all dependencies
-
 // Include ... A C++ Include of the form `#include "MyClass.h"` or `#include  <CoreClass>`
 type Include struct {
 	Dependency string

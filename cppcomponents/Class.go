@@ -14,12 +14,13 @@ type Class struct {
 	HeaderFileName      	string
 	DefineName		     	string
 	ForwardDeclares		  	string
+	HeaderIncludesString    string
 	FunctionDeclarations 	string
 	QtSignalDeclarations 	string
 
 	// Implementation
 	ImplementationFileName	string
-	IncludesString			string 
+	ImplementationIncludesString			string 
 	FunctionDefinitions 	string
 	QtSignalDefinitions 	string
 }
@@ -34,11 +35,12 @@ func NewClass(InheritedInterface Interface, className string) *Class {
 	c.DefineName = parsers.GenerateDefineName(c.Name)
 	c.FunctionDeclarations = c.parseFunctionDeclarations()
 	c.ForwardDeclares = c.InheritedInterface.ForwardDeclaresString
+	c.HeaderIncludesString = c.InheritedInterface.HeaderIncludesString
 	
 	//Implementation
 	c.ImplementationFileName = c.Name + configurations.Config.FileExtensions.CppImplementation
 	c.FunctionDefinitions = c.parseFunctionDefinitions()
-	c.IncludesString = c.InheritedInterface.IncludesString
+	c.ImplementationIncludesString = c.InheritedInterface.ImplementationIncludesString
 	return &c
 }
 
@@ -71,13 +73,14 @@ func (c Class) Fields() map[string]string {
 	// Header
 	fields["{{Class.Header.FileName}}"] = c.HeaderFileName
 	fields["{{Class.Header.DefineName}}"] = c.DefineName
+	fields["{{Class.Header.Includes}}"] = c.HeaderIncludesString
 	fields["{{Class.Header.ForwardDeclares}}"] = c.ForwardDeclares
 	fields["{{Class.Header.FunctionDeclarations}}"] = c.FunctionDeclarations
 	fields["{{Class.Header.QtSignalDeclarations}}"] = c.QtSignalDeclarations
 
 	//Implementation
 	fields["{{Class.Implementation.FileName}}"] = c.ImplementationFileName
-	fields["{{Class.Implementation.Includes}}"] = c.IncludesString
+	fields["{{Class.Implementation.Includes}}"] = c.ImplementationIncludesString
 	fields["{{Class.Implementation.FunctionDefinitions}}"] = c.FunctionDefinitions
 	fields["{{Class.Implementation.QtSignalDefinitions}}"] = c.QtSignalDefinitions
 	return fields

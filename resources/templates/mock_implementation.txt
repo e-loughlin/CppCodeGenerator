@@ -1,7 +1,7 @@
 
 #include "{{Mock.Header.FileName}}"
 
-{{Mock.Includes}}
+{{Mock.Implementation.Includes}}
 
 using ::testing::Return;
 
