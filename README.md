@@ -122,6 +122,8 @@ Follow the Golang date format. Example here: https://stackoverflow.com/questions
 #### Template File Names
 The program relies on user-defined template .txt files to generated classes. The `config.json` file describes the names of the templates to use. These templates must be located within the Templates Directory.
 
+![Template filenames](documentation/readme_resources/12_template_filenames.GIF)
+
 ## Modifying Template Files
 All the generated classes are derived from user-defined templates in .txt format. 
 
