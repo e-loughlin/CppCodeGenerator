@@ -188,6 +188,8 @@ Field | Gets Replaced With
 `{{Mock.HelperFunctions.Definitions}}` | Helper function definitions
 
 #### Test
+Field | Gets Replaced With
+--- | ---
 `{{Test.ConcreteFileName}}` | The tested class' filename
 `{{Test.Name}}` | Name of test harness
 
