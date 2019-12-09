@@ -225,7 +225,7 @@ An an interface with the following pure virtual interface:
  virtual std::vector<std::string> foo(std::map<int, std::string>) = 0;
 ```
 
-The includes in the generated class would be:
+The includes in the generated header would be:
 ```
  #include <vector>
  #include <string>
