@@ -102,6 +102,7 @@ Modifying the `config.json` file allows you to alter your desired prefixes, suff
 
 #### Prefixes, Suffixes, Formatting Syntax, and File Extensions
 The following fields can be modified:
+
  ![Configuring prefixes, suffixes, syntax, and file extensions.](documentation/readme_resources/11_configurations_1.gif)
  
 #### Policies
