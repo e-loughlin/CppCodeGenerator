@@ -173,6 +173,7 @@ Field | Gets Replaced With
 `{{Mock.InheritedInterface.FileName}}` | Name of interface that the mock is inheriting
 `{{Mock.ForwardDeclares}}` | Sorted forward declares of all types used within the inherited interface
 `{{Mock.Header.Includes}}` || Sorted includes for the Mock header
+`{{Mock.Header.DefineName}}` || Define name for Mock Header
 `{{Mock.Implementation.Includes}}` || Sorted includes for the Mock implementation
 `{{Mock.Name}}` | Mock name
 `{{Mock.Header.FileName}}` | Mock header filename
