@@ -4,15 +4,15 @@
 
 A project for generating boilerplate C++ code from user-provided template files (.txt), and user-defined configurations (config.json).
 
-### Status 
-Complete (but accepting feedback and making changes as required)
-
 ### Files that can be generated:
 - Interfaces
 - Class Headers (.h / .hpp)
 - Class Implementations (.cpp / .cxx)
 - Mock Classes (GoogleMock)
 - Test Classes (GoogleTest)
+
+### Status 
+Complete (but accepting feedback and making changes as required)
 
 ## Dependencies
 - Go 1.13 +
