@@ -209,14 +209,14 @@ The `include-in-header.txt` file lists data types that should be included in the
 
 For example, consider the following items in `include-in-header.txt`:
 ```
-vector
-string
-map
+ vector
+ string
+ map
 ```
 
 An an interface with the following pure virtual interface:
 ```
-  virtual std::vector<std::string> foo(std::map<int, std::string>) = 0;
+ virtual std::vector<std::string> foo(std::map<int, std::string>) = 0;
 ```
 
 The includes in the generated class would be:
