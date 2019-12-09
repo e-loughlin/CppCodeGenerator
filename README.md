@@ -62,8 +62,8 @@ CppCodeGenerator --type class --interface ./path/to/interface/IMyFirstClass.h
 #### Output:
  ![Generating a new class from an existing interface](documentation/readme_resources/05_generated_class.gif)
  
-##### Include / Forward Declare Cleanup May be Required
-The program isn't perfect, and handles dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>. Additionally, the current version attempts to forward declare classes like std::string and std::vector, when they should be included instead.
+##### Cleanup May Be Required!
+The program doesn't handle including and forward declaring of all types perfectly! Some cleanup may be required, particularly for templated types like QMap<> and QHash<>.
  
  #### Class Naming
  ```
@@ -199,3 +199,25 @@ For example:
 `std::vector vector` will cause the use of `std::vector` in a pure virtual function to create an include of `#include <vector>`. Without this key-value pair, the result would erroneously be `#include "std::vector.h"`.
 
 This file allows users to add types as required to improve the utility of the generator.
+
+### Types to Include in Header
+The `include-in-header.txt` file lists data types that should be included in the header, rather than forward declared, when that type is detected within the interface. Add data types to this file as needed.
+
+For example, consider the following items in `include-in-header.txt`:
+```
+vector
+string
+map
+```
+
+An an interface with the following pure virtual interface:
+```
+  virtual std::vector<std::string> foo(std::map<int, std::string>) = 0;
+```
+
+The includes in the generated class would be:
+```
+ #include <vector>
+ #include <string>
+ #include <map>
+```
