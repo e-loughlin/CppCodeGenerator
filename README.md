@@ -6,8 +6,7 @@ A project for generating boilerplate C++ code from user-provided template files 
 
 ### Files that can be generated:
 - Interfaces
-- Class Headers (.h / .hpp)
-- Class Implementations (.cpp / .cxx)
+- Class Headers (.h / .hpp) and Implementations (.cpp / .cxx)
 - Mock Classes (GoogleMock)
 - Test Classes (GoogleTest)
 
