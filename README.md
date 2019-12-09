@@ -62,8 +62,8 @@ CppCodeGenerator --type class --interface ./path/to/interface/IMyFirstClass.h
 #### Output:
  ![Generating a new class from an existing interface](documentation/readme_resources/05_generated_class.gif)
  
-##### Some Cleanup Required
-The program isn't perfect, and handles dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>.
+##### Include / Forward Declare Cleanup May be Required
+The program isn't perfect, and handles dependencies by placing all required types as forward declares in the header, and including them in the implementation. Some cleanup may be required for templated types like QMap<> and QHash<>. Additionally, the current version attempts to forward declare classes like std::string and std::vector, when they should be included instead.
  
  #### Class Naming
  ```
