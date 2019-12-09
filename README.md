@@ -186,14 +186,14 @@ Field | Gets Replaced With
 `{{Test.ConcreteFileName}}` | The tested class' filename
 `{{Test.Name}}` | Name of test harness
 
-## Include Lists
+## Modifying Include / Forward Declare Types
 The `.txt` files located in https://github.com/emloughl/CppCodeGenerator/tree/master/resources/include-lists, help improve the mapping of data types from pure virtual functions declared in interfaces, to forward declares and includes. 
 
 ### Qt Classes
 The `qt-includes.txt` file lists all Qt classes. Any class in this file, if used in an interface, will be included with `<` and `>`, such as `#include <QObject>`. User-defined types would be included with `"`, such as `#include "MyNewClass.h"`.
 
 ### Std Types
-The `std-types.txt` file lists all standard types, for which no include or forward declare is necessary.
+The `std-types.txt` file lists all standard types (i.e. int, char, etc.), for which no include or forward declare is necessary.
 
 ### Mapped Includes
 The `mapped-includes.txt` file lists a dictionary of key-value pairs, such that if the parsing of an interface encounters the key, it will include or forward declare the corresponding value.
