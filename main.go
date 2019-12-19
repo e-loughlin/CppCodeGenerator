@@ -1,5 +1,6 @@
-/// Author: Evan Loughlin
-/// Date: 2019
+// Copyright (c) 2019 Evan Loughlin
+//
+// MIT License
 
 package main
 
