@@ -1,0 +1,21 @@
+///-----------------------------------------------------------------------------
+/// @file IHelloWorld.h
+///
+/// Copyright (C) Circle Cardiovascular Imaging 2019
+///
+/// Author: Evan Loughlin
+///
+/// Description: 
+///-----------------------------------------------------------------------------
+
+
+#pragma once
+
+class IHelloWorld 
+{
+ public:
+    virtual ~IHelloWorld(){}
+
+ public:
+    virtual int function1(bool thing) = 0;
+};

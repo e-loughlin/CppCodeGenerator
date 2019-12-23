@@ -65,7 +65,6 @@ def main(argv=sys.argv):
     # Fix the docstring in case they require the usage.
     gmock_class.__doc__ = gmock_class.__doc__.replace('gmock_class.py', __file__)
     gmock_class.main()
-    os.remove(tempFilePath)
 
 if __name__ == '__main__':
     main()
