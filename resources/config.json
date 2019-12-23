@@ -7,7 +7,7 @@
     
     "Prefixes": 
     {
-        "Interface": "I",
+        "Interface": "I_",
         "DefineName": "",
         "Mock": "Mock",
         "Test": "Test"
