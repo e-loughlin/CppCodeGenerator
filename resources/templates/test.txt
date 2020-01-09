@@ -2,8 +2,7 @@
 
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-
-#include <QScopedPointer>
+#include <memory>
 
 #include "{{Test.ConcreteFileName}}"
 #include "MockCollaborator1.h"
@@ -33,9 +32,9 @@ namespace
             mCollaborator1.reset();
         }
 
-        QScopedPointer<{{Test.ConcreteName}}> mPatient;
-        QScopedPointer<NiceMock<MockCollaborator1>> mCollaborator1;
-        QScopedPointer<NiceMock<MockCollaborator2>> mCollaborator2;
+        std::unique_ptr<{{Test.ConcreteName}}> mPatient;
+        std::unique_ptr<NiceMock<MockCollaborator1>> mCollaborator1;
+        std::unique_ptr<NiceMock<MockCollaborator2>> mCollaborator2;
     };
 
     TEST_F({{Test.Name}}, CanBeInstantiated)
