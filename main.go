@@ -8,15 +8,15 @@ import (
 	"flag"
 	"fmt"
 	"os"
-	"strings"
 	"path/filepath"
+	"strings"
 
 	"github.com/emloughl/CppCodeGenerator/cppcomponents"
-	"github.com/emloughl/CppCodeGenerator/util/templates"
 	"github.com/emloughl/CppCodeGenerator/generatortypes"
-	"github.com/emloughl/CppCodeGenerator/util/io"
-	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
 	"github.com/emloughl/CppCodeGenerator/util/configurations"
+	"github.com/emloughl/CppCodeGenerator/util/fieldreplacer"
+	"github.com/emloughl/CppCodeGenerator/util/io"
+	"github.com/emloughl/CppCodeGenerator/util/templates"
 )
 
 func main() {
@@ -24,6 +24,7 @@ func main() {
 	var codeType string
 	var interfaceFilePath string
 	var name string
+	var author string
 
 	flag.StringVar(&codeType, "type", "", "Type of file to generate (class, interface, mock, or test)")
 	flag.StringVar(&codeType, "t", "", "Shorthand for --type")
@@ -31,6 +32,8 @@ func main() {
 	flag.StringVar(&interfaceFilePath, "i", "", "Shorthand for --interface")
 	flag.StringVar(&name, "name", "", "Name of new class")
 	flag.StringVar(&name, "n", "", "Shorthand for --name")
+	flag.StringVar(&author, "author", "", "Author (overrides default value in config.json)")
+	flag.StringVar(&author, "a", "", "Author (overrides default value in config.json)")
 
 	// If no arguments, print usage.
 	if len(os.Args) < 2 {
@@ -38,10 +41,15 @@ func main() {
 		os.Exit(0)
 	}
 	flag.Parse()
-	
+
 	// Load configurations
 	configurations.Config = configurations.ReadConfigurations()
 	configurations.SetTemplateFilePathsFromConfiguration()
+
+	// Overrides author default configuration in config.json
+	if author != "" {
+		configurations.Config.UserInfo.Author = author
+	}
 
 	generatedType := generatortypes.GetGeneratorType(codeType)
 
@@ -55,13 +63,13 @@ func main() {
 
 	//Interface
 	if generatedType == generatortypes.Interface {
-		if(name == ""){
-	 	fmt.Println("Trying to generate a new interface, but no name was provided. Use --name or -n.")
-	 	os.Exit(0)
+		if name == "" {
+			fmt.Println("Trying to generate a new interface, but no name was provided. Use --name or -n.")
+			os.Exit(0)
 		}
 
 		interfaceFilePath = name
-		if(!cppcomponents.IsValidInterfaceFilePath(interfaceFilePath)) {
+		if !cppcomponents.IsValidInterfaceFilePath(interfaceFilePath) {
 			interfaceFilePath = configurations.Config.Prefixes.Interface + name + configurations.Config.Suffixes.Interface + configurations.Config.FileExtensions.CppHeader
 		}
 
@@ -75,7 +83,7 @@ func main() {
 
 		// Fill the Interface fields
 		interfaceContents = fieldreplacer.ReplaceAllFields(interfaceContents, i.Fields())
-		
+
 		io.WriteToDisk(interfaceFilePath, interfaceContents)
 
 		// Print Result
@@ -116,7 +124,7 @@ func main() {
 		interfaceDir := filepath.Dir(interfaceFilePath)
 
 		// --------------
-		// CLASS HEADER 
+		// CLASS HEADER
 		// --------------
 		classHeaderFilePath := filepath.Join(interfaceDir, class.HeaderFileName)
 
@@ -132,10 +140,10 @@ func main() {
 		io.WriteToDisk(classHeaderFilePath, classHeaderContents)
 
 		// ----------------------
-		// CLASS IMPLEMENTATION 
+		// CLASS IMPLEMENTATION
 		// ----------------------
 		classImplementationFilePath := filepath.Join(interfaceDir, class.ImplementationFileName)
-		
+
 		// Read Template File
 		classImplementationContents := templates.ReadTemplate(templates.ClassImplementation)
 
@@ -186,7 +194,7 @@ func main() {
 		mockHeaderContents = fieldreplacer.ReplaceAllFields(mockHeaderContents, mock.Fields())
 		mockHeaderFilePath := filepath.Join(cwd, mock.HeaderFileName)
 		io.WriteToDisk(mockHeaderFilePath, mockHeaderContents)
-		
+
 		mockImplementationContents := templates.ReadTemplate(templates.MockImplementation)
 		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, copyrightBlock.Fields())
 		mockImplementationContents = fieldreplacer.ReplaceAllFields(mockImplementationContents, mock.Fields())

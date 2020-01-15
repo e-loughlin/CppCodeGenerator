@@ -36,6 +36,9 @@ go build ..
 #### Class Name
 ` -n` or `--class`: Specifies the name of the class to be generated.
 
+#### Author Name (Optional)
+` -a` or `--author`: Specifies the author's name (overrides the default value in config.json)
+
 ## Generating an Interface
 #### Command:
 
