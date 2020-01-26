@@ -62,7 +62,7 @@ func (c Class) parseFunctionDeclarations() string {
 		functionDeclarations += function.Declaration()
 	}
 	return functionDeclarations
-}
+}  
 
 // Fields ... The fields within templates to be replaced.
 func (c Class) Fields() map[string]string {
