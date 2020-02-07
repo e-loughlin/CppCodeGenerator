@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include <gtest/gmock.h>
+#include <gmock/gmock.h>
 #include "{{Mock.InheritedInterface.FileName}}"
 
 {{Mock.Header.Includes}}
