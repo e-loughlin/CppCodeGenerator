@@ -1,5 +1,5 @@
 void {{Mock.Name}}::make{{Function.UppercaseName}}Return({{Function.ReturnType}} value)
 {
-    ON_CALL(*this, {{Function.Name}}()).WillByDefault(Return(value));
+    ON_CALL(*this, {{Function.Name}}).WillByDefault(Return(value));
 }
 
