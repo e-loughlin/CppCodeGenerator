@@ -1,5 +1,5 @@
 void {{Mock.Name}}::expect{{Function.UppercaseName}}NotCalled()
 {
-    EXPECT_CALL(*this, {{Function.Name}}()).Times(0);
+    EXPECT_CALL(*this, {{Function.Name}}).Times(0);
 }
 
